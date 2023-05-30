@@ -1,0 +1,235 @@
+.home_container {
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 15vh;
+    transition: all 1s;
+}
+
+.home_container .template_container {
+    max-height: 26vh;
+    transition: all 1s;
+    overflow: hidden;
+}
+
+.template_container .menu_container{
+    font-size: 1.3vw;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.survey_container .menu_container{
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-bottom: 3vh;
+}
+
+.menu_container{
+    font-size: 2.5vw;
+    color: #1b0278;
+    align-items: center;
+}
+
+.home_container .survey_container {
+    padding: 1vh 0 0 0;
+    align-items: center;
+    height: auto;
+}
+
+.center_line{
+    height: 1px;
+    box-shadow: 0 10px 20px rgba(2, 4, 142, 0.15);
+    border: solid 0.5px #1b0278;
+}
+
+.more_template{
+    padding: 1%;
+    margin-right: 1%;
+    border-radius: 10px;
+    transition: all 0.5s;
+}
+
+.more_template:hover {
+    box-shadow: 0 5px 20px rgba(2, 4, 142, 0.3);
+}
+
+.grid_container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    transition: all 0.5s;
+}
+
+.home_container .create_survey {
+    width: 14vw;
+    height: 15vh;
+    background-color: #fff;
+    box-shadow: 0 10px 20px rgba(2, 4, 142, 0.15);
+    font-size: 10vw;
+    font-weight: 300;
+    line-height : 16.5vh;
+    color: #1b0278;
+    border-radius: 16px;
+    margin: 2% 2% 2% 2%;
+}
+
+.home_container .create_survey:hover {
+    box-shadow: 0 10px 20px rgba(2, 4, 142, 0.5);
+    transition: all 0.5s;
+}
+
+.grid_box {
+    width: 14vw;
+    height: 15vh;
+    background-color: #fff;
+    box-shadow: 0 10px 20px rgba(2, 4, 142, 0.15);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 16px;
+    margin: 1.5vw;
+    transition: all 0.5s;
+    position: relative;
+}
+
+.grid_box:hover {
+    border: #1b0278;
+}
+
+.grid_box:hover .line {
+    opacity: 0.8;
+}
+
+.grid_box:hover .line::before {
+    width: 80%;
+}
+
+.grid_box:hover .line::after {
+    width: 80%;
+}
+
+.grid_box:hover .line span::before {
+    height: 80%;
+}
+
+.grid_box:hover .line span::after {
+    height: 80.5%;
+}
+
+.line {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    font-size: 2.5vh;
+    color: #1b0278;
+    background-color: #fff;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s;
+}
+
+.line::before {
+    content: "";
+    position: absolute;
+    background: #1b0278;
+    display: inline-block;
+    transition: all 0.5s;
+    left: 10%;
+    top: 10%;
+    width: 0%;
+    height: 2px;
+}
+
+.line::after {
+    content: "";
+    position: absolute;
+    background: #1b0278;
+    display: inline-block;
+    transition: all 0.5s;
+    left: 10%;
+    top: 90%;
+    width: 0%;
+    height: 2px;
+}
+
+.line span::before {
+    content: "";
+    position: absolute;
+    background: #1b0278;
+    display: inline-block;
+    transition: all 0.5s;
+    left: 10%;
+    top: 10%;
+    width: 2px;
+    height: 0%;
+}
+
+.line span::after {
+    content: "";
+    position: absolute;
+    background: #1b0278;
+    display: inline-block;
+    transition: all 0.5s;
+    left: 90%;
+    top: 10%;
+    width: 2px;
+    height: 0%;
+}
+
+.icon_container{
+    width: 15vw;
+    text-align: center;
+}
+
+.icon_img{
+    width: 3vw;
+    height: 3vw;
+    background-color: #fff;
+    box-shadow: 0 10px 20px rgba(2, 4, 142, 0.15);
+    padding: 0.3vw 0.3vw 0.3vw 0.3vw;
+    border-radius: 5px;
+    margin: 2%;
+    transition: all 0.5s;
+}
+
+.icon_img:hover{    
+    box-shadow: 0 10px 20px rgba(2, 4, 142, 0.5);
+}
+
+.dropdown{
+    position: absolute;
+    max-height: 100vh;
+    left: 9vw;
+    top: 11vh;
+    overflow: hidden;
+    z-index: 10;
+    margin: 0;
+    padding-bottom: 20px;
+    text-align: left;
+    list-style: none;
+    transition: all 1s;
+}
+
+.dropdown_item{
+    text-align: center;
+    width: 5rem;
+    padding: 0.5vw;
+    background: #fff;
+    color: #1b0278 ;
+    box-shadow: 0 10px 20px rgba(2, 4, 142, 0.15);
+    margin: 0 20px 0 10px ;
+    z-index: 1000;
+}
+
+.dropdown_item:hover{
+    font-weight: bold;
+}
+
+.setting_icon{
+    width: 1.5vw;
+    height: 1.5vw;
+    box-shadow: 0 10px 20px rgba(2, 4, 142, 0.15);
+    z-index: 10;
+}

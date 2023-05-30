@@ -1,0 +1,196 @@
+.area {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  top: 15vh;
+  bottom: 0;
+  right: 0;
+  transition: 0.25s ease;
+  color: #202020;
+  height: 80vh;
+  width: 35vw;
+  z-index: 99;
+}
+
+.icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 6vw;
+  height : 100%;
+}
+
+.icon_img{
+  width: 3vw;
+  height : 3vw;
+  cursor: pointer;
+}
+
+.icon_img:hover{
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(2, 4, 142, 0.15);
+}
+
+.container {
+  width: 30vw;
+}
+
+.sidebar {
+  background-color: #fff;
+  border-radius: 16px;
+  height: 100%;
+  margin-right: 5%;
+  margin-left: 5%;
+  box-shadow: 0 10px 20px rgba(2, 4, 142, 0.15);
+}
+
+.content {
+  position: relative;
+  padding: 5% 5% 0 5%;
+  width: 100%;
+  height: 100%;
+}
+
+.content h1 {
+  width: 100%;
+  text-align: center;
+  color: #1b0278;
+}
+
+.menu{
+  width: 100%;
+  text-align: center;
+  margin:0 0 0 0 ;
+  color: #1b0278;
+}
+
+.menu:after{
+  display:block;
+  content: '';
+  margin-top: 5%;
+  border-bottom: solid 3px #1b0278;  
+  transform: scaleX(0);  
+  transition: transform 250ms ease-in-out;
+}
+
+.menu_selected{
+  width: 100%;
+  text-align: center;
+  margin:0 0 0 0 ;
+  color: #1b0278;
+}
+
+.menu_selected:after{
+  display:block;
+  content: '';
+  margin-top: 5%;
+  border-bottom: solid 3px #1b0278;  
+  transform: scaleX(1);  
+  transition: transform 250ms ease-in-out;
+}
+
+.content h4 {
+  width: 100%;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #1b0278;
+}
+
+.setBtn {
+  background-color: #fff;
+  width: 100%;
+  border: none;
+  color: #1b0278;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  white-space: nowrap;
+}
+
+.setBtn_selected {
+  background-color: #1b0278;
+  width: 30%;
+  border: none;
+  color:#fff;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  white-space: nowrap;
+}
+
+.setBtn:hover {
+  background-color: #1b0278;
+  color:#fff;
+}
+
+button{
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+  border-radius: 0.3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  justify-content: space-between;
+  color: #1b0278;
+}
+
+.gptResponseArea{
+  padding: 3vh;
+}
+
+.gptResponseItemType{
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-bottom: 1vh;
+}
+
+.gptResponseItemTitle{
+  margin-left: 1vw;
+}
+
+.gptResponseItem{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+  color: #1b0278;
+  font-size: 1rem;
+  margin-top : 2vh;
+}
+
+.gptResponseItem:hover{
+  font-weight: bold;
+}
+
+.gptBottomWrapper{
+  position: absolute;
+  bottom: 3vh;
+}
+
+.gptInput{
+  width:70%;
+  font-size:20px;
+  color: #1b0278;
+  text-align: center;
+  border:0;
+  border-bottom: solid #1b0278;;
+}
+
+.gptBottomContainer{
+  padding-left: 3vw;
+  padding-right: 3vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.gptButton{
+  width: 2vw;
+  height: 2vw;
+  cursor: pointer;
+}

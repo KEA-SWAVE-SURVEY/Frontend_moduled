@@ -1,0 +1,79 @@
+.grid_skeleton {
+    width: 14vw;
+    height: 15vh;
+    background-color: #f6f6f6;
+    border-radius: 16px;
+    margin: 1.5vw;
+    transition: all 0.5s;
+    position: relative;
+    animation-name: loading;
+    animation-duration: 0.5s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+
+.list_skeleton {
+    background-color: #f6f6f6;
+    height: 1rem;
+    margin-right: 1vw;
+    margin-left: 1vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    animation-name: loading;
+    animation-duration: 0.5s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+
+
+.grid_wrapper {
+    width: 90%;
+    display: grid;
+    grid-template-columns: 40% 30% 15% 15%;
+}
+
+
+.gpt_skeleton_type {
+    background-color: #f6f6f6;
+    font-weight: bold;
+    height: 1.5rem;
+    width: 20%;
+    margin-bottom: 1vh;
+    animation-name: loading;
+    animation-duration: 0.5s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+
+.gpt_skeleton_title {
+    background-color: #f6f6f6;
+    height: 1rem;
+    width: 90%;
+    margin-left: 1vw;
+    animation-name: loading;
+    animation-duration: 0.5s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+
+.gpt_skeleton_item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+    color: #1b0278;
+    margin-top: 2vh;
+}
+
+
+@keyframes loading {
+    from {
+        background-color: #f6f6f6;
+    }
+
+    to {
+        background-color: #efefef;
+    }
+}

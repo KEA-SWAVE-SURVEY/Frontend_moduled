@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  front:
+    image: kjk7212/react
+    hostname: front
+    container_name: front
+    ports:
+      - 3000:3000
+  
+  back:
+    image: kjk7212/back_arm
+    hostname: back
+    restart: "on-failure"
+    container_name: back
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql
+  
+  mysql:
+    image: mysql:8.0-oracle
+    hostname: mysql
+    container_name: mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: gcu

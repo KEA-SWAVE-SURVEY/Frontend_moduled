@@ -1,0 +1,134 @@
+.beforelogin{
+    margin : 4rem 6rem;
+}
+.beforelogin h1{
+    font-size: 6rem;
+    font-family: 'TheJamsil5Bold'
+}
+
+.beforelogin p{
+    font-size: 3rem;
+    font-family: 'TheJamsil5Bold'
+}
+
+.beforelogin .beforeMain img{
+    background-size: cover;
+    position: relative;
+    width : 100%;
+    height : 700px;
+}
+
+.beforelogin .beforeMain-txt{
+    position: absolute;
+    top: 53%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    font-size:x-large;
+} 
+
+
+
+.item-box{
+    transition: 0.5s;
+}
+
+.card-box{
+    
+    text-align: center;
+}
+.first-bef{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 4.5rem;
+}
+.first-bef-reverse{
+    display: flex;
+    flex-direction: row-reverse;
+
+    margin-top: 4.5rem;
+}
+
+.bef-text{
+    width: 45%;
+    text-align: center;
+    font-size:1.1rem;
+}
+
+.bef-text h2{
+    font-size: 3.5rem;
+    padding-bottom: 3rem;
+    font-family: 'TheJamsil5Bold'
+}
+
+.bef-text p{
+    font-family: 'TheJamsil5Bold';
+    font-size: 2rem;
+}
+
+.image{
+    position: relative;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    z-index: -99;
+}
+
+.image img{
+    width: 49%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 6px;
+    
+}
+.image2 img{
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 6px;
+    
+}
+
+.image img:nth-child(2){
+    position: absolute;
+    top: -10%;
+    right:0;
+}
+
+@font-face {
+    font-family: 'TheJamsil5Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+}
+
+
+@media screen and (max-width: 850px){
+    .beforelogin{
+        margin : 4rem 2rem;
+    }
+    
+    .first-bef{
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 2.5rem;
+    }
+    .first-bef-reverse{
+        display: flex;
+        flex-direction: column-reverse;
+        
+        margin-top: 2.5rem;
+    }
+    .bef-text{
+        width: 100%;
+    }
+    .image{
+        width: 100%;
+        margin: 1.8rem 0;
+    }
+    .image img{
+        height: 250px;
+    }
+}
