@@ -16,14 +16,14 @@ pipeline {
         
         stage('Build User') {
             steps {
-                sh "cd  /var/jenkins_home/workspace/WS_cluster/User"
-                sh "npm install"
-                sh "npm run build"
-
-                script{
-                    image = docker.build("kjk7212/user-front")
-                    docker.withRegistry('https://registry.hub.docker.com/repository/docker/kjk7212/user-front/', 'docker-hub-credentials') {
-                        image.push()
+                dir('User') {
+                    sh "npm install"
+                    sh "npm run build"
+                    script{
+                        image = docker.build("kjk7212/user-front")
+                        docker.withRegistry('https://registry.hub.docker.com/repository/docker/kjk7212/user-front/', 'docker-hub-credentials') {
+                            image.push("${env.BUILD_NUMBER}")
+                        }
                     }
                 }
             }
@@ -47,14 +47,14 @@ pipeline {
 
         stage('Build Survey') {
             steps {
-                sh "cd /var/jenkins_home/workspace/WS_cluster/Survey"
-                sh "npm install"
-                sh "npm run build"
-
-                script{
-                    image = docker.build("kjk7212/survey-front")
-                    docker.withRegistry('https://registry.hub.docker.com/repository/docker/kjk7212/survey-front/', 'docker-hub-credentials') {
-                        image.push()
+                dir('Survey') {
+                    sh "npm install"
+                    sh "npm run build"
+                    script{
+                        image = docker.build("kjk7212/survey-front")
+                        docker.withRegistry('https://registry.hub.docker.com/repository/docker/kjk7212/survey-front/', 'docker-hub-credentials') {
+                            image.push("${env.BUILD_NUMBER}")
+                        }
                     }
                 }
             }
@@ -78,14 +78,14 @@ pipeline {
 
         stage('Build Response') {
             steps {
-                sh "cd  /var/jenkins_home/workspace/WS_cluster/Response"
-                sh "npm install"
-                sh "npm run build"
-
-                script{
-                    image = docker.build("kjk7212/response-front")
-                    docker.withRegistry('https://registry.hub.docker.com/repository/docker/kjk7212/response-front/', 'docker-hub-credentials') {
-                        image.push()
+                dir('Response') {
+                    sh "npm install"
+                    sh "npm run build"
+                    script{
+                        image = docker.build("kjk7212/response-front")
+                        docker.withRegistry('https://registry.hub.docker.com/repository/docker/kjk7212/response-front/', 'docker-hub-credentials') {
+                            image.push("${env.BUILD_NUMBER}")
+                        }
                     }
                 }
             }
@@ -109,15 +109,14 @@ pipeline {
 
         stage('Build Analysis') {
             steps {
-                sh "cd  /var/jenkins_home/workspace/WS_cluster/Analysis"
-                sh "npm install"
-                sh "npm run build"
-                sh "cd  /var/jenkins_home/workspace/WS_cluster"
-
-                script{
-                    image = docker.build("kjk7212/analysis-front")
-                    docker.withRegistry('https://registry.hub.docker.com/repository/docker/kjk7212/analysis-front/', 'docker-hub-credentials') {
-                        image.push("${env.BUILD_NUMBER}")
+                dir('Response') {
+                    sh "npm install"
+                    sh "npm run build"
+                    script{
+                        image = docker.build("kjk7212/analysis-front")
+                        docker.withRegistry('https://registry.hub.docker.com/repository/docker/kjk7212/analysis-front/', 'docker-hub-credentials') {
+                            image.push("${env.BUILD_NUMBER}")
+                        }
                     }
                 }
             }
