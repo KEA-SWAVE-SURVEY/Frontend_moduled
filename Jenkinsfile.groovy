@@ -109,7 +109,7 @@ pipeline {
 
         stage('Build Analysis') {
             steps {
-                dir('Response') {
+                dir('Analysis') {
                     sh "npm install"
                     sh "npm run build"
                     script{
