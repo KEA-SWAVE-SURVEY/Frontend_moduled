@@ -140,22 +140,23 @@ pipeline {
 
         stage('AgroCD Manifest Update') {
             steps {
-                git credentialsId: 'git-kjk7212',
-                    url: 'https://github.com/KEA-SWAVE-SURVEY/argocd-front',
-                    branch: 'main'
-                sh "cd apps"
-                sh "sed -i 's/user-front:.*\$/user-front:${currentBuild.number}/g' user.yaml"
-                sh "git add user.yaml"
-                sh "sed -i 's/survey-front:.*\$/survey-front:${currentBuild.number}/g' survey.yaml"
-                sh "git add survey.yaml"
-                sh "sed -i 's/response-front:.*\$/response-front:${currentBuild.number}/g' response.yaml"
-                sh "git add response.yaml"
-                sh "sed -i 's/analysis-front:.*\$/analysis-front:${currentBuild.number}/g' analysis.yaml"
-                sh "git add analysis.yaml"
-                sh "git commit -m '[UPDATE] v${currentBuild.number} image versioning'"
-                sshagent(credentials: ['git-kjk7212']) {
-                    sh "git remote set-url origin git@github.com:KEA-SWAVE-SURVEY/argocd-front.git"
-                    sh "git push -u origin main"
+                   git credentialsId: 'git-kjk7212',
+                       url: 'https://github.com/KEA-SWAVE-SURVEY/argocd-front',
+                       branch: 'main'
+                dir('apps') {
+                   sh "sed -i 's/user-front:.*\$/user-front:${currentBuild.number}/g' user.yaml"
+                   sh "git add user.yaml"
+                   sh "sed -i 's/survey-front:.*\$/survey-front:${currentBuild.number}/g' survey.yaml"
+                   sh "git add survey.yaml"
+                   sh "sed -i 's/response-front:.*\$/response-front:${currentBuild.number}/g' response.yaml"
+                   sh "git add response.yaml"
+                   sh "sed -i 's/analysis-front:.*\$/analysis-front:${currentBuild.number}/g' analysis.yaml"
+                   sh "git add analysis.yaml"
+                   sh "git commit -m '[UPDATE] v${currentBuild.number} image versioning'"
+                   sshagent(credentials: ['git-kjk7212']) {
+                       sh "git remote set-url origin git@github.com:KEA-SWAVE-SURVEY/argocd-front.git"
+                       sh "git push -u origin main"
+                   }
                 }
             }
             post {
