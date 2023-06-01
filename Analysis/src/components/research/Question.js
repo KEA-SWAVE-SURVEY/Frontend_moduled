@@ -20,7 +20,7 @@ function Question() {
     //코드는 서베이로만
     //http://localhost:8080/api/survey-participate/${id}
     const loadSurveys=async()=>{
-       const result = await axios.get(`/api/load-survey/${documentId}`);
+       const result = await axios.get(`/api/survey/load/${documentId}`);
     //    const result = {data:{
     //     "id": 1,
     //     "title": "설문 테스트",

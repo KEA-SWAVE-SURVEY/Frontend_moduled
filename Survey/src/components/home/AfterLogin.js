@@ -22,7 +22,10 @@ import alphabet from '../../assets/alphabet.png';
 import time from '../../assets/time.png';
 import HaveNoSurvey from './HaveNoSurvey';
 
+import {getCookie} from '../login/cookie'
+
 function AfterLogin(props) {
+    const cookie = getCookie("token");
     const setNavItem = useSetRecoilState(navbarItemState);
     const isLogined = useRecoilValue(loginState);
 
@@ -35,6 +38,7 @@ function AfterLogin(props) {
     const [currentPage, setCurrentPage] = useState(1);
     const [isAlphabetOrder, setIsAlphabetOrder] = useState(true);
     const [isAscendingOrder, setIsAscendingOrder] = useState(true);
+    
 
     const navigate = useNavigate();
     const [pageNumberList, setPageNumberList] =useState([]);
@@ -58,7 +62,7 @@ function AfterLogin(props) {
             },
             {
                 headers: {
-                    'Authorization': isLogined.token,
+                    'Authorization': cookie,
                     'Content-Type': 'application/json'
                 }
             }
@@ -80,7 +84,7 @@ function AfterLogin(props) {
                 console.log(response);
                 alert("네트워크 에러가 발생했습니다. 다시 시도해주세요");
             });
-            console.log(isLogined.token);
+            console.log(cookie);
     }
 
     useEffect(() => {

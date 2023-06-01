@@ -1,20 +1,38 @@
 import { useRecoilState, useRecoilValue } from "recoil";
-
+import axios from 'axios';
 import "../styles/NavbarStyles.css"
 import { useNavigate } from "react-router-dom";
 import { navbarItemState, navbarSelectedState } from "../contexts/selector";
 import { loginState } from "../contexts/atom";
 
-import logo from "../assets/logo.png"
+import {getCookie} from './login/cookie' //쿠키 가져옴 1/3
 
+import logo from "../assets/logo.png"
+import { useEffect,useState } from "react";
+import { refType } from "@mui/utils";
+
+import MenuProfile from "./home/MenuProfile";
+//넵바에서 나의 정보를 db에서 읽을 수 있게하기
 
 function Navbar(props) {
+    
     const [selected, setSelected] = useRecoilState(navbarSelectedState);
     const [navItem, setNavItem] = useRecoilState(navbarItemState);
-    const isLogined = useRecoilValue(loginState);
+    const [isOpen,setIsOpen] = useState(false);
+    
+    const [isLogined,setIsLogined] = useRecoilState(loginState);
+    const cookie = getCookie("token");//쿠키 가져옴 2/3
 
     const navigate = useNavigate();
     const scrollTo = props.scrollTo;
+
+    const handleMouseOver = () => {
+        setIsOpen(true);
+      };
+    
+      const handleMouseOut = () => {
+        setTimeout(function(){setIsOpen(false)},3000);
+      };
 
     function onClickMenu(e, index) {
         e.preventDefault();
@@ -37,9 +55,31 @@ function Navbar(props) {
         e.preventDefault();
         navigate('/mypage');
     }
+    
+    function getMe(){
+        axios.get('/api/me',{
+            headers: {
+            Authorization: cookie,
+            },
+        }).then((response) => {//api의 응답을 제대로 받은경우 
+            //console.log(response);
+            //console.log(response.data);
+            setIsLogined((prev) => {
+            return {
+            state : true,
+            img: response.data.profileImg,
+            name: response.data.nickname,
+            email: response.data.email,
+            info: "",
+            token: cookie
+            };})});
+        }
+    
+       
 
     return (
         <nav className="NavbarItems">
+            
             <img src={logo} alt="logo" className="Navbar-logo" onClick={(e) => onClickTitle(e)}/>
 
             <ul className={selected ? "nav-menu active" : "nav-menu"}>
@@ -52,11 +92,18 @@ function Navbar(props) {
                 })}
 
             </ul>
-            {isLogined.state ?(
-                <img className="navbar_img" onClick={(e) => onClickMypage(e)} src={isLogined.img} alt='img'/>
+            {cookie ?(
+                getMe(),
+                <img className="navbar_img" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} src={isLogined.img} alt='img' />
+                  
             ):(
                 <button className="navbar_login" onClick={(e) => onClickLogin(e)}>Login</button>
             )}
+            {
+                isOpen && (
+                    <MenuProfile/>
+                )
+            }
         </nav>
     )
 

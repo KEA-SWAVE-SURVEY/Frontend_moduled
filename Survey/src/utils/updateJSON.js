@@ -4,7 +4,10 @@ export function updateSurveyContent(json, newContent, indexToUpdate) {
         title : json.title,
         description : json.description,
         type : json.type,
-        design : json.design,
+        reliability:json.reliability,
+        font:json.font,
+        fontSize:json.fontSize,
+        backColor:json.backColor,
         questionRequest : [
             ...json.questionRequest.slice(0, indexToUpdate),
             newContent,
@@ -12,6 +15,7 @@ export function updateSurveyContent(json, newContent, indexToUpdate) {
         ]
     };
 };
+
 
 export function updateAnswerContent(json, newContent, indexToUpdate) {
     return {

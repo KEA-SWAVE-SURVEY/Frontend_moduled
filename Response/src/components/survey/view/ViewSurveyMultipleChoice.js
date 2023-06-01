@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { surveyListState } from '../../../contexts/atom';
+import { surveyListState,fontSizeState,fontState } from '../../../contexts/atom';
 import { answerListState } from '../../../contexts/atom';
 import { updateAnswerContent } from '../../../utils/updateJSON';
+
+import '../../../styles/SurveyStyle.css';
 
 function ViewSurveyMultipleChoice(props) {
     const [answer, setAnswer] = useState(0);
     const surveyList = useRecoilValue(surveyListState);
     const [answerList, setAnswerList] = useRecoilState(answerListState);
+    const fontSize = useRecoilValue(fontSizeState); 
+    const font = useRecoilValue(fontState);
 
     useEffect(()=>{
         console.log(surveyList);
@@ -32,14 +36,14 @@ function ViewSurveyMultipleChoice(props) {
         return (
             <label className="radio_container">
                 <input className="radio" type="radio" value={value} checked={checked} onChange={onChange} />
-                <div className="label_container" style={{ width: "20%" }}>{label}</div>
+                <div className="label_container" style={{ width: "20%", fontSize: fontSize+'vw' ,fontFamily:font }} >{label}</div>
             </label>
         );
     };
 
     return (
         <div className="problem_container" style={{marginBottom:"30px"}}>
-            <h1 style={{textAlign:"left"}}>{surveyList.questionRequest[props.index].title} </h1>
+            <h1 style={{textAlign:"left", fontSize: fontSize+'vw' ,fontFamily:font }} className='survey_input'>{surveyList.questionRequest[props.index].title} </h1>
             {surveyList.questionRequest[props.index].choiceList.map((option, index)=>{
                 return(
                     <RadioButton key={index} label={option.choiceName} value={index} checked={answer === index} onChange={(e) => onChangeRadioButton(e)}/>

@@ -19,11 +19,10 @@ export const surveyListState = atom({
                 title:"",
                 description:"",
                 type:0,
-                design :{
-                    font : 0,
-                    fontSize: 0,
-                    layout : 0,
-                },
+                reliability:1,
+                font:"",
+                fontSize:3,
+                backColor:'#ffffff',
                 questionRequest:[   
                             {
                                 id : 0,
@@ -68,4 +67,34 @@ export const navbarState = atom({
                 item : [],
                 selected : 0
             }
+});
+
+export const relState = atom({
+    key: "relState",
+    default: 1
+});
+
+export const fontState = atom({
+    key: "fontState",
+    default: `Dancing Script', cursive`
+});
+
+export const fontSizeState = atom({
+    key: "fontSizeState",
+    default: 3
+});
+
+export const backColorState = atom({
+    key: "backColorState",
+    default: '#ffffff'
+});
+
+
+export const designState = atom({
+    key: "designState",
+    default: {
+        font : "",
+        fontSize : "",
+        layout:""
+    }
 });

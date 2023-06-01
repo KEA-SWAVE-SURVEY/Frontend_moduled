@@ -4,7 +4,7 @@ import styles from "../../styles/selectList.module.css";
 import settingIcon from "../../assets/setting.png";
 import { useSetRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
-import { surveyListState, modifyState } from '../../contexts/atom';
+import { surveyListState, modifyState, fontSizeState } from '../../contexts/atom';
 import axios from 'axios';
 function ListItem(props) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -24,7 +24,10 @@ function ListItem(props) {
                     id: result.data.id,
                     title: result.data.title,
                     description: result.data.description,
-                    //design : result.data.design,
+                    reliability: result.data.reliability,
+                    font:result.data.font,
+                    fontSize:result.data.fontSize,
+                    backColor:result.data.backColor,
                     type: result.data.type,
                     questionRequest: result.data.questionList.map((questionList) => {
                         return {

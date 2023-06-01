@@ -14,6 +14,8 @@ import { useNavigate } from "react-router-dom";
 import React, { useEffect, useRef, useState } from "react";
 import { navbarItemState, navbarSelectedState } from '../../contexts/selector'
 import { HomeItems } from '../../constants/MenuItems'
+import Swipers from './Swipers'
+
 
 import Navbar from '../../components/Navbar';
 
@@ -43,7 +45,7 @@ const BeforeLogin = (props) => {
       console.error("Error converting div to image:", error);
     }
   };
-  
+
   function onClickLogin(e) {
     e.preventDefault();
     console.log(process.env);
@@ -88,23 +90,25 @@ const BeforeLogin = (props) => {
   return (
     <>
 
-      
-      <div className="beforelogin" 
-    ref={divRef}>
+
+      <div className="beforelogin">
+
+      <div ref={element => (props.scrollRef.current[0] = element)}></div>
         <br />
         <br />
         <br />
         <br />
-        <br />
-        <br />
-        
+
+
+
+
         <div className='beforeMain' >
         <img src={surveyphoto} alt="survey"/>
         <div className='beforeMain-txt'>
         <h1>Wave form</h1>
         <p>Survey, What you want</p>
         <button type="button" onClick={(e) => onClickLogin(e)}>로그인하고 시작하기</button>
-        
+
         </div>
         </div>
         <br />
@@ -114,9 +118,29 @@ const BeforeLogin = (props) => {
           <br />
           <br />
           <br />
-          <div className='item-box'>
-            <div className='letter-box' style={{ opacity: (position - 530) / 100, }}>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
 
+          <div ref={element => (props.scrollRef.current[1] = element)}></div>
+          <br />
+          <br />
+          <br />
+          <br />
+
+          <br />
+          <br />
+          <br />
+          <br />
+
+          <br />
+          <br />
+          <div className='item-box'>
+            <div className='letter-box' style={{ opacity: (position - 900) / 100, }}>
               <BeforeLoginData2
                 className="first-bef"
                 heading="설문 문항 추천"
@@ -124,7 +148,7 @@ const BeforeLogin = (props) => {
                 img1={gpt}
               />
 
-            </div>
+
           </div>
 
         </div>
@@ -133,7 +157,7 @@ const BeforeLogin = (props) => {
         <br />
         <br />
         <br />
-        <div className='letter-box' style={{ opacity: (position - 1300) / 100 }}>
+        <div className='letter-box' style={{ opacity: (position - 1700) / 100 }}>
           <div className='item-box'>
             <br />
             <br />
@@ -141,7 +165,6 @@ const BeforeLogin = (props) => {
             <br />
             <br />
 
-            <div ref={element => (props.scrollRef.current[1] = element)}>
             </div>
             <br />
             <br />
@@ -168,28 +191,31 @@ const BeforeLogin = (props) => {
       <br />
       <br />
       <br />
-      
+
         <br />
         <br />
         <br />
         <br />
-        
+
         <div ref={element => (props.scrollRef.current[2] = element)}></div>
         <br />
         <br />
         <br />
         <br />
-       
-        <div ref={element => (props.scrollRef.current[2] = element)}>
 
-        <div className='letter-box' style={{ opacity: (position - 2200) / 100 }}>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div className='letter-box' style={{ opacity: (position - 2450) / 100 }}>
           <div className='item-box'>
             <div className='card-box'>
-            <Card />
-            </div>
+
+              <Swipers/>
+
           </div>
         </div>
-        
+
       <button onClick={handleDownload}>다운로드</button>
       </div>
       <br />
@@ -203,7 +229,7 @@ const BeforeLogin = (props) => {
       <br />
       <br />
       <br />
-       
+
     </>
   )
 }

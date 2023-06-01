@@ -9,7 +9,7 @@
   color: #202020;
   height: 80vh;
   width: 35vw;
-  z-index: 99;
+  z-index: 9;
 }
 
 .icon {
@@ -33,6 +33,7 @@
 
 .container {
   width: 30vw;
+  z-index: 999;
 }
 
 .sidebar {

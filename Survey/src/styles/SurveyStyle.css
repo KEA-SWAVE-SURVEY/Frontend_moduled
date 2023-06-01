@@ -1,12 +1,20 @@
-* {
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:700,800'); 
+@import url('https://fonts.googleapis.com/css?family=Nanum+Brush+Script:400');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Song+Myung:400');
+@import url('https://fonts.googleapis.com/css?family=Hi+Melody:400');
+* 
+  {
     box-sizing: border-box;
   }
+  
   
   body {
     background-color: #edeff2;
     font-family: "Calibri", "Roboto", sans-serif;
   }
-  
+  /*font-family: 'Dancing Script', cursive;*/
+  /*font-family: "Calibri", "Roboto", sans-serif;*/
   .survey_area .survey_container {
     width: 70%;
     margin-left: 15%;
@@ -262,11 +270,65 @@
     border-radius: 16px;
     margin: 2%;
   }
+  
+  @font-face {
+    font-family: 'TheJamsil5Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+}
+
+  :root{
+    --font-lit:'Dancing Script', cursive;
+    
+    --font-default: "Calibri", "Roboto", sans-serif;
+    
+    --font-commer: 'TheJamsil5Bold'
+  }
+  
+  /*create 미리보기 설문 제목,문항제목*/
+   
+  .survey_container .create_survey .survey_input{
+  font-family: var(--font-commer)
+  } 
+  /*create 설문 설명*/
+   .survey_container .create_survey .textarea{
+    font-family: var(--font-commer)
+  } 
+ 
+  /*create 객관식 선지*/
+  .choice_input{
+    font-family: var(--font-commer)
+  }
+  /*view 객관식 선지*/
+  .label_container{
+    font-family: var(--font-commer)
+  }
+
+  .survey_container .create_survey .survey_inputa{
+  font-family: var(--font-lit)
+  } 
+  /*create 설문 설명*/
+   .survey_container .create_survey .textareaa{
+    font-family: var(--font-lit)
+  } 
+ 
+  /*create 객관식 선지*/
+  .choice_inputa{
+    font-family: var(--font-lit)
+  }
+  /*view 객관식 선지*/
+  .label_containera{
+    font-family: var(--font-lit)
+  }
+
+  
 
   .problem_container{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    
     padding: 5%;
   }
   

@@ -25,7 +25,10 @@ export default function BeforeAnswer() {
                 id: result.data.id,
                 title: result.data.title,
                 description: result.data.description,
-                //design : result.data.design,
+                reliability: result.data.reliability,
+                font:result.data.font,
+                fontSize:result.data.fontSize,
+                backColor:result.data.backColor,
                 type: result.data.type,
                 questionRequest: result.data.questionList.map((questionList) => {
                     return {

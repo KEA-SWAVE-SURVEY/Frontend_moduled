@@ -54,9 +54,10 @@ function SidebarProblem(props) {
                 id: prev.id,
                 title: prev.title,
                 type: prev.type,
-                font: prev.font,
-                fontSize: prev.fontSize,
-                layout: prev.layout,
+                reliability: prev.reliability,
+                font:prev.font,
+                fontSize:prev.fontSize,
+                backColor:prev.backColor,
                 questionRequest: newContent
             };
         });
@@ -73,9 +74,10 @@ function SidebarProblem(props) {
                 id: prev.id,
                 title: prev.title,
                 type: prev.type,
-                font: prev.font,
-                fontSize: prev.fontSize,
-                layout: prev.layout,
+                reliability: prev.reliability,
+                font:prev.font,
+                fontSize:prev.fontSize,
+                backColor:prev.backColor,
                 questionRequest: deletedContent
             };
         });

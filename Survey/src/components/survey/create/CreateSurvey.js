@@ -1,6 +1,7 @@
 import { useState,useEffect } from 'react';
-import { useRecoilState } from 'recoil';
-import { surveyListState } from '../../../contexts/atom';
+import { useRecoilState,useRecoilValue } from 'recoil';
+import { surveyListState,relState } from '../../../contexts/atom';
+
 
 import SurveyChoice from './SurveyChoice';
 import SurveyMultipleChoice from './SurveyMultipleChoice';
@@ -9,6 +10,8 @@ import SurveyQuestion from './SurveyQuestion';
 function CreateSurvey(props) {
     const [surveyList, setSurveyList] = useRecoilState(surveyListState);
     const [category,setCategory] = useState(surveyList.questionRequest[props.index].type);
+    const Rel = useRecoilValue(relState);
+    
 
     const surveyId = props.id;
     const surveyIndex = props.index;
@@ -27,8 +30,11 @@ function CreateSurvey(props) {
                 id : prev.id,
                 title : prev.title,
                 description : prev.description,
+                reliability: prev.reliability,
+                font:prev.font,
+                fontSize:prev.fontSize,
+                backColor:prev.backColor,
                 type : prev.type,
-                design: prev.design,
                 questionRequest : deletedContent
             }; 
         });

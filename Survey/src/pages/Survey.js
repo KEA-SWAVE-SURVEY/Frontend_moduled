@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { surveyListState, answerListState, loginState, modifyState } from '../contexts/atom';
+import { surveyListState, answerListState, loginState, modifyState,fontState, fontSizeState,backColorState } from '../contexts/atom';
 import ReactDragList from 'react-drag-list';
 import axios from 'axios';
 
@@ -25,31 +25,45 @@ function Survey(props) {
     const [surveyList, setSurveyList] = useRecoilState(surveyListState);
     const [answerList, setAnswerList] = useRecoilState(answerListState);
 
+    const font = useRecoilValue(fontState);
+    const fontSize = useRecoilValue(fontSizeState);
+    const backColor = useRecoilValue(backColorState);
+
     const [isPreview, setIsPreview] = useState(false);
 
     const scrollRef = useRef();
 
     const navigate = useNavigate();
     const divRef = useRef(null);
-    const today = new Date().toLocaleDateString();
-    console.log(today)
+    const today = new Date().toLocaleDateString(); 
+
+    const [size, setSize] = useState(`30px`);
+
+
+
+    const changeSize=(e)=>{
+        setSize(prev=>prev===`50px`?`5px`:`50px`);
+        console.log(size);
+
+    }
 
     const handleDownload = async () => {
-      if (!divRef.current) return;
-  
-      try {
-        const div = divRef.current;
-        const canvas = await html2canvas(div, { scale: 2 });
-        canvas.toBlob((blob) => {
-          if (blob !== null) {
-            saveAs(blob, "result.png");
-          }
-        });
-      } catch (error) {
-        console.error("Error converting div to image:", error);
-      }
-    };
+        if (!divRef.current) return;
     
+        try {
+          const div = divRef.current;
+          const canvas = await html2canvas(div, { scale: 2 });
+          canvas.toBlob((blob) => {
+            if (blob !== null) {
+              saveAs(blob, "result.png");
+            }
+          });
+        } catch (error) {
+          console.error("Error converting div to image:", error);
+        }
+      };
+  
+
     useEffect(() => {
         scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
     }, [surveyList?.questionRequest.length]);
@@ -57,17 +71,17 @@ function Survey(props) {
 
     useEffect(() => {
         if (!isModify) {
+            //console.log(Rel)
             setSurveyList((prev) => {
                 return {
                     id: 0,
                     title: "",
                     description: "",
                     type: 0,
-                    design: {
-                        font: 0,
-                        fontSize: 0,
-                        layout: 0,
-                    },
+                    reliability: 1,
+                    font:"",
+                    fontSize:3,
+                    backColor:'#ffffff',
                     questionRequest: [
                         {
                             id: 0,
@@ -92,7 +106,10 @@ function Survey(props) {
                 title: prev.title,
                 description: prev.description,
                 type: prev.type,
-                design: prev.design,
+                reliability: prev.reliability,
+                font:prev.font,
+                fontSize:prev.fontSize,
+                backColor:prev.backColor,
                 questionRequest: [...updated]
             }
         }
@@ -114,7 +131,10 @@ function Survey(props) {
                 title: prev.title,
                 description: prev.description,
                 type: prev.type,
-                design: prev.design,
+                reliability:prev.reliability,
+                font:prev.font,  
+                fontSize:prev.fontSize,
+                backColor:prev.backColor,
                 questionRequest: [
                     ...prev.questionRequest,
                     {
@@ -145,7 +165,10 @@ function Survey(props) {
                 title: e.target.value,
                 description: prev.description,
                 type: prev.type,
-                design: prev.design,
+                reliability:prev.reliability,
+                font:prev.font,
+                fontSize:prev.fontSize,
+                backColor:prev.backColor,
                 questionRequest: prev.questionRequest
             };
         });
@@ -159,7 +182,10 @@ function Survey(props) {
                 title: prev.title,
                 description: e.target.value,
                 type: prev.type,
-                design: prev.design,
+                reliability:prev.reliability,
+                font:prev.font,
+                fontSize:prev.fontSize,
+                backColor:prev.backColor,
                 questionRequest: prev.questionRequest
             };
         });
@@ -219,9 +245,10 @@ function Survey(props) {
             title: surveyList.title,
             description: surveyList.description,
             type: surveyList.type,
-            //design : surveyList.design,
-            // startDay : today
-            // endDay : today + 
+            reliability:surveyList.reliability,
+            font:surveyList.font,
+            fontSize:surveyList.fontSize,
+            backColor:surveyList.backColor,
             questionRequest: surveyList.questionRequest.map((prev) => {
                 return {
                     //id : prev.id
@@ -232,8 +259,10 @@ function Survey(props) {
             })
         }
 
+
         console.log(isLogined.token);
         var url = '/api/create';
+        console.log(url);
         if (isModify) url = `/api/modify-survey/${surveyList.id}` //임시
         axios.post(url, dataToTransport,
             {
@@ -243,18 +272,17 @@ function Survey(props) {
                 }
             }
         )
-            .then((response) => {//api의 응답을 제대로 받은경우 
+            .then((response) => {//api의 응답을 제대로 받은경우
                 setSurveyList((prev) => {
                     return {
                         id: 0,
                         title: "",
                         description: "",
                         type: 0,
-                        design: {
-                            font: 0,
-                            fontSize: 0,
-                            layout: 0,
-                        },
+                        reliability:1,
+                        font:"",
+                        fontSize:0,
+                        backColor:"#ffffff",
                         questionRequest: [
                             {
                                 id: 0,
@@ -295,27 +323,33 @@ function Survey(props) {
     }
 
     return (
-        <div >
-            <div className="survey_area" style={!sidebarIsOpen.open ? { paddingRight: "0px" } : { paddingRight: "30vw" }}    >
-                <div className="survey_container" ref={divRef} > 
-                    <div ref={scrollRef} >
+        <div style={{backgroundColor:backColor}}  ref={divRef}>
+            <div className="survey_area" style={!sidebarIsOpen.open ? { paddingRight: "0px" } : { paddingRight: "30vw" }}>
+                <div className="survey_container">
+                    
+
+                    <div ref={scrollRef}>
                         {!isPreview ? (
-                            <>
+                            <div >
                                 <div className='create_survey'>
                                     <div className='problem_container'>
-                                        <input placeholder="설문 제목" value={surveyList?.title} onChange={(e) => onChangeTitleInput(e)} className='survey_input' style={{ fontSize: "50px" }}></input>
-                                        <textarea placeholder="부연 설명을 입력해 주세요" value={surveyList?.description} onChange={(e) => onChangeTextArea(e)} className='textarea'></textarea>
+                                    {font}
+                                            <input placeholder="설문 제목" value={surveyList?.title} onChange={(e) => onChangeTitleInput(e)} className='survey_input' style={{ fontSize: fontSize+'vw' ,fontFamily:font }}></input>
+                                            <textarea placeholder="부연 설명을 입력해 주세요" value={surveyList?.description} onChange={(e) => onChangeTextArea(e) }style={{ fontSize: fontSize+`vw` ,fontFamily:font }} className='textarea'></textarea>
+
                                     </div>
                                 </div>
                                 <>
                                     {surveyList && <ReactDragList dataSource={[...surveyList.questionRequest]} rowKey='id' row={dragList} handles={false} ghostClass="dragGhost" onUpdate={onUpdateList} />}
                                 </>
-                            </>) : (
+                            </div>) : (
                             <>
+
                                 <div className='create_survey'>
-                                    <div className='problem_container'>
-                                        <h1 style={{ textAlign: "left", margin: '0 0 0 0 ', fontSize: '50px' }}>{surveyList?.title}</h1>
-                                        <textarea readOnly className='textarea'>{surveyList?.description}</textarea>
+                                    <div className='problem_container' >
+
+                                        <h1 style={{ textAlign: "left", margin: '0 0 0 0 ',  fontSize: fontSize+'vw' ,fontFamily:font }} className='survey_input'>{surveyList?.title}</h1>
+                                        <textarea readOnly className='textarea'style={{ fontSize: fontSize+'vw' ,fontFamily:font }}>{surveyList?.description}</textarea>
                                     </div>
                                 </div>
                                 {surveyList?.questionRequest.map((survey, index) => <ViewSurvey key={index} id={survey.id} index={index} />)}
@@ -329,7 +363,7 @@ function Survey(props) {
                         )}
                         <div className='survey_contatiner_bottom'>
                             <div className="survey_button" onClick={(e) => onClickPreviewButton(e)}>{isPreview ? "Create" : "Preview"}</div>
-                            <div className="survey_button" onClick={handleDownload}>테스트</div> 
+                            <div className="survey_button" onClick={handleDownload}>테스트 !</div>
                             <div className="survey_button" onClick={(e) => onClickSaveButton(e)}>Save</div>
                         </div>
                     </div>

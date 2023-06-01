@@ -1,4 +1,4 @@
-import React, {  useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { surveyListState, answerListState } from '../contexts/atom';
 import { useNavigate } from "react-router-dom";
@@ -34,7 +34,10 @@ function AnswerSurvey() {
                 id: result.data.id,
                 title: result.data.title,
                 description: result.data.description,
-                //design : result.data.design,
+                reliability: result.data.reliability,
+                font:result.data.font,
+                fontSize:result.data.fontSize,
+                backColor:result.data.backColor,
                 type: result.data.type,
                 questionRequest: result.data.questionList.map((questionList) => {
                     return {
@@ -65,7 +68,7 @@ function AnswerSurvey() {
 
         result.data.questionList.map((survey, index) => {
             let contentDefault = ""; // default 답변 주관식은 ""
-            console.log(index);
+            console.log(survey.questionType);
             if (survey.questionType === 1) contentDefault = true; //찬부식은 true
             else if (survey.questionType === 2) contentDefault = 0; //객관식은 0
 
@@ -100,7 +103,7 @@ function AnswerSurvey() {
                     'Content-Type': 'application/json'
                 }
             }
-            
+
         )
             .then((response) => {//api의 응답을 제대로 받은경우
                 console.log('Saved');

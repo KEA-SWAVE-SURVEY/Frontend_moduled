@@ -1,6 +1,22 @@
 import '../styles/FooterStyles.css'
 
+import { useNavigate } from "react-router-dom";
+
+
+import {removeCookie} from './login/cookie'
+
+
+//project
+
+
+
 const Footer = () =>{
+    
+    const navigate = useNavigate();
+    function onClickLogout() {
+        removeCookie('token')
+        navigate('/');
+    }
     return(
         <>
         <div className='footer'>
@@ -36,8 +52,8 @@ const Footer = () =>{
                 <div>
                    <h4>Community</h4>
                    <a href="/">Github</a>
-                   <a href="/">Issues</a>
-                   <a href="/">Projects</a>
+                   <a href="/mypage">mypage</a>
+                   <a onClick={onClickLogout} style={{cursor:'pointer'}}>Logout</a> 
                    <a href="/">Twitter</a> 
                 </div>
                 <div>

@@ -1,18 +1,24 @@
 import { useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { surveyListState } from '../../../contexts/atom';
+import { useRecoilState,useRecoilValue } from 'recoil';
+import { surveyListState,fontState,fontSizeState } from '../../../contexts/atom';
 import { updateSurveyContent } from '../../../utils/updateJSON';
 
 import MultipleChoiceOption from './MultipleChoiceOption';
 
+
+import '../../../styles/SurveyStyle.css';
+
 function SurveyMultipleChoice(props) {
     const [surveyList, setSurveyList] = useRecoilState(surveyListState);
+    const font = useRecoilValue(fontState);
+    const fontSize = useRecoilValue(fontSizeState);
     const [choiceId, setChoiceId] = useState(
         surveyList.questionRequest[props.index].choiceList.length !== 0 &&
         surveyList.questionRequest[props.index].choiceList[surveyList.questionRequest[props.index].choiceList.length - 1].id + 1);
 
     const surveyId = props.id;
     const surveyIndex = props.index;
+
 
     function onChangeInput(e) {
         e.preventDefault();
@@ -45,7 +51,7 @@ function SurveyMultipleChoice(props) {
 
     return (
         <div className="problem_container">
-            <input placeholder="제목을 입력해 주세요" value={surveyList.questionRequest[surveyIndex].title || ""} className='survey_input' onChange={(e) => onChangeInput(e)}></input>
+            <input placeholder="제목을 입력해 주세요" value={surveyList.questionRequest[surveyIndex].title || ""} className='survey_input' onChange={(e) => onChangeInput(e)} style={{fontSize:fontSize+'vw',fontFamily:font}}></input>
             <div>
                 {surveyList.questionRequest[surveyIndex].choiceList && surveyList.questionRequest[surveyIndex].choiceList.map((option, index) => {
                     return <MultipleChoiceOption key={option.id} id={surveyId} choiceId={option.id} index={surveyIndex} choiceIndex={index} />;
