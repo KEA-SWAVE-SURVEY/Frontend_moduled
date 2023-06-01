@@ -152,9 +152,9 @@ pipeline {
                    sh "git add response.yaml"
                    sh "sed -i 's/analysis-front:.*\$/analysis-front:${currentBuild.number}/g' analysis.yaml"
                    sh "git add analysis.yaml"
-                   sh "git commit -m '[UPDATE] v${currentBuild.number} image versioning'"
                    sshagent(credentials: ['git-kjk7212']) {
-                       sh "git remote set-url origin git@github.com:KEA-SWAVE-SURVEY/argocd-front.git"
+                       sh "git commit -m '[UPDATE] v${currentBuild.number} image versioning'"
+                       sh "git remote set-url origin https://github.com/KEA-SWAVE-SURVEY/argocd-front.git"
                        sh "git push -u origin main"
                    }
                 }
