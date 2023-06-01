@@ -16,7 +16,7 @@ pipeline {
         
         stage('Build User') {
             steps {
-                sh "cd User"
+                sh "cd  /var/jenkins_home/workspace/WS_cluster/User"
                 sh "npm install"
                 sh "npm run build"
 
@@ -47,8 +47,7 @@ pipeline {
 
         stage('Build Survey') {
             steps {
-                sh "cd .."
-                sh "cd Survey"
+                sh "cd /var/jenkins_home/workspace/WS_cluster/Survey"
                 sh "npm install"
                 sh "npm run build"
 
@@ -79,8 +78,7 @@ pipeline {
 
         stage('Build Response') {
             steps {
-                sh "cd .."
-                sh "cd Response"
+                sh "cd  /var/jenkins_home/workspace/WS_cluster/Response"
                 sh "npm install"
                 sh "npm run build"
 
@@ -111,11 +109,10 @@ pipeline {
 
         stage('Build Analysis') {
             steps {
-                sh "cd .."
-                sh "cd Analysis"
+                sh "cd  /var/jenkins_home/workspace/WS_cluster/Analysis"
                 sh "npm install"
                 sh "npm run build"
-                sh "cd .."
+                sh "cd  /var/jenkins_home/workspace/WS_cluster"
 
                 script{
                     image = docker.build("kjk7212/analysis-front")
@@ -197,75 +194,3 @@ pipeline {
         }
     }
 }
-
-pipeline {
-    agent any
-    tools {nodejs "WS"}
-    environment {
-        TARGET_HOST = "root@172.16.210.22"
-    }
-    
-    stages() {
-        stage('git clone') {
-            steps() {
-                git branch: 'main', credentialsId: 'git-kjk7212', url: 'https://github.com/KEA-SWAVE-SURVEY/Front-end/'
-            }
-        }
-        
-        stage('build') {
-            steps {
-                sh "npm install"
-                sh "npm run build"
-                slackSend (
-                    channel: '#jenkins', 
-                    color: '#00FF00', 
-                    message: "SUCCESS: build ${env.JOB_NAME}"
-                )
-            }
-        }
-        
-        stage('build & push docker image') {
-            steps {
-                script{
-                    image = docker.build("kjk7212/front")
-                    docker.withRegistry('https://registry.hub.docker.com/repository/docker/kjk7212/front/', 'docker-hub-credentials') {
-                        image.push()
-                    }
-                slackSend (
-                    channel: '#jenkins', 
-                    color: '#00FF00', 
-                    message: "SUCCESS: build docker image ${env.JOB_NAME}"
-                )
-                }
-            }
-        }
-        stage('ws deployment') {
-            steps{
-                sshagent(['WS']) {
-                sh "ssh -o StrictHostKeyChecking=no ${TARGET_HOST} 'docker stop front'"
-                sh "ssh -o StrictHostKeyChecking=no ${TARGET_HOST} 'docker rm front'"
-                sh "ssh -o StrictHostKeyChecking=no ${TARGET_HOST} 'docker rmi kjk7212/front'"
-                sh "ssh -o StrictHostKeyChecking=no ${TARGET_HOST} 'docker pull kjk7212/front'"
-                sh "ssh -o StrictHostKeyChecking=no ${TARGET_HOST} 'docker run --name front -d -p 3000:3000 kjk7212/front'"
-                }
-            }
-        }
-    }
-    post {
-        success {
-            slackSend (
-                channel: '#jenkins', 
-                color: '#00FF00', 
-                message: "SUCCESS: Job ${env.JOB_NAME}"
-            )
-        }
-        failure {
-            slackSend (
-                channel: '#jenkins', 
-                color: '#FF0000', 
-                message: "FAIL: Job ${env.JOB_NAME}"
-            )
-        }
-    }
-}
-
