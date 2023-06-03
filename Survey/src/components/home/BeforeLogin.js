@@ -49,7 +49,9 @@ const BeforeLogin = (props) => {
   function onClickLogin(e) {
     e.preventDefault();
     console.log(process.env);
-    navigate('/Login');
+    // navigate('/Login');
+    
+    window.location.href = `http://172.16.210.22/Login`; 
   }
   const [position, setPosition] = useState(0);
 

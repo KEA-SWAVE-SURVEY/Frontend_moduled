@@ -8,11 +8,15 @@ const MenuProfile = () => {
     const navigate = useNavigate();
     function onClickLogout() {
         removeCookie('token')
-        navigate('/');
+        // navigate('/');
+        
+        window.location.href = `http://172.16.210.22/`; 
     }
     function onClickMypage(e){
         e.preventDefault();
-        navigate('/mypage');
+        // navigate('/mypage');
+        
+        window.location.href = `http://172.16.210.22/mypage`; 
     }
   return (
     <div className='menuProfile'>

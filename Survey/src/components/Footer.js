@@ -15,7 +15,9 @@ const Footer = () =>{
     const navigate = useNavigate();
     function onClickLogout() {
         removeCookie('token')
-        navigate('/');
+        // navigate('/');
+        
+        window.location.href = `http://172.16.210.22/`; 
     }
     return(
         <>

@@ -11,7 +11,8 @@ function Dropdown(props) {
   function onClickResearch(e){
     e.preventDefault();
     e.stopPropagation();
-    navigate('/survey/research/'+id);
+    window.location.href = `http://172.16.210.22/research/${id}`; 
+    // nav igate('/survey/research/'+id);
   }
   return (
     <>

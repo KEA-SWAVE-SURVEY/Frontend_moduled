@@ -114,7 +114,9 @@ function AnswerSurvey() {
                 console.log('Error');
                 console.log(JSON.stringify(answerList));
             });
-        navigate('/survey/afteranswer');
+        // navigate('/survey/afteranswer');
+        
+        window.location.href = `http://172.16.210.22/survey/afteranswer`; 
     }
 
     return (

@@ -109,7 +109,9 @@ function AfterLogin(props) {
     function onClickCreateSurvey(e) {
         e.preventDefault();
         setIsModify((prev) => false);
-        navigate('/survey');
+        // navigate('/survey');
+        
+        window.location.href = `http://172.16.210.22/survey`; 
     }
 
     function onClickViewIcon(e) {

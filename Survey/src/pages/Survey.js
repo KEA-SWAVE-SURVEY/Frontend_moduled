@@ -314,7 +314,9 @@ function Survey(props) {
                     }
                 });
                 console.log('Saved');
-                navigate('/');
+                // navigate('/');
+                
+        window.location.href = `http://172.16.210.22/`; 
             })
             .catch((response) => {//종류불문 에러
                 console.log('Error');

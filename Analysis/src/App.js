@@ -29,7 +29,7 @@ function App() {
         <Navbar scrollTo={scrollTo} scrollRef={scrollRef} />
         <div style={{width:"100%",minHeight:"100vh",height:"auto"}}>
           <Routes> 
-            <Route path="/research/:documentId" element={<Research />} />  
+            <Route path="/Research/:documentId" element={<Research />} />  
 
             </Routes>
         </div>

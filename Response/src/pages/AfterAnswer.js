@@ -6,7 +6,9 @@ const navigate = useNavigate();
 
 function onClickMovetoMain(e) {
     e.preventDefault();
-    navigate('/');
+    // navigate('/'); Answer -> Survey 이동
+    
+    window.location.href = `http://172.16.210.22/`; 
   }
 
   return (

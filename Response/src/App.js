@@ -18,9 +18,9 @@ function App() {
       <BrowserRouter> 
         <div style={{width:"100%",minHeight:"100vh",height:"auto"}}>
           <Routes>  
-            <Route path="/survey/answer/:documentId" element={<AnswerSurvey />} />
-            <Route path="/survey/beforeanswer" element={<BeforeAnswer />} />
-            <Route path="/survey/afteranswer" element={<AfterAnswer />} />
+            <Route path="/Response/:documentId" element={<AnswerSurvey />} />
+            <Route path="/Response/beforeanswer/" element={<BeforeAnswer />} />
+            <Route path="/Response/afteranswer/" element={<AfterAnswer />} />
 
             </Routes>
         </div>

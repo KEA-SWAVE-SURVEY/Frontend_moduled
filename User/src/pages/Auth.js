@@ -50,7 +50,8 @@ const Auth = () => {
           };
         });
 
-          navigate('/');
+          // navigate('/');
+        window.location.href = `http://172.16.210.22/`; 
           try {
                 axios.get('/api/me',{
                   headers: {
@@ -80,7 +81,9 @@ const Auth = () => {
        catch (e) {
         console.log('실패 ㅠㅜ')
         console.error(e);
-        navigate('/');
+        // navigate('/');
+        
+        window.location.href = `http://172.16.210.22/`; 
       }
     })();
   }, []);

@@ -42,18 +42,24 @@ function Navbar(props) {
 
     function onClickTitle(e) {
         e.preventDefault();
-        navigate('/');
+        // navigate('/');
+        
+        window.location.href = `http://172.16.210.22/`; 
     }
 
     function onClickLogin(e){
         e.preventDefault();
         setNavItem((prev)=> []);
-        navigate('/login');
+        // navigate('/login');
+        
+        window.location.href = `http://172.16.210.22/login`; 
     }
 
     function onClickMypage(e){
         e.preventDefault();
-        navigate('/mypage');
+        // navigate('/mypage');
+        
+        window.location.href = `http://172.16.210.22/mypage`; 
     }
     
     function getMe(){

@@ -45,7 +45,9 @@ function ListItem(props) {
                 }
             });
             setIsModify((prev) => true);
-            navigate('/survey');
+            // navigate('/survey');
+            
+        window.location.href = `http://172.16.210.22/survey`; 
         }
         loadSurveys();
     }
