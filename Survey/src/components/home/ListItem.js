@@ -2,15 +2,13 @@ import React, { useState } from 'react';
 import Dropdown from './Dropdown';
 import styles from "../../styles/selectList.module.css";
 import settingIcon from "../../assets/setting.png";
-import { useSetRecoilState } from 'recoil';
-import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil'; 
 import { surveyListState, modifyState, fontSizeState } from '../../contexts/atom';
 import axios from 'axios';
 function ListItem(props) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const setSurveyList = useSetRecoilState(surveyListState)
-    const setIsModify = useSetRecoilState(modifyState);
-    const navigate = useNavigate();
+    const setIsModify = useSetRecoilState(modifyState); 
 
     const survey = props.survey;
     const index = props.index;
@@ -18,7 +16,8 @@ function ListItem(props) {
     function onClickList(e, id) {
         e.preventDefault();
         const loadSurveys = async()=>{
-            const result = await axios.get(`/api/load-survey/${id}`);
+            // const result = await axios.get(`/api/load-survey/${id}`);
+            const result = await axios.get(`/api/external/load-survey/${id}`);
             setSurveyList((prev) => {
                 return {
                     id: result.data.id,
@@ -45,9 +44,7 @@ function ListItem(props) {
                 }
             });
             setIsModify((prev) => true);
-            // navigate('/survey');
-            
-        window.location.href = `http://172.16.210.22/survey`; 
+            window.location.href = `http://172.16.210.22/survey`; 
         }
         loadSurveys();
     }

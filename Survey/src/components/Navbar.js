@@ -1,7 +1,6 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 import axios from 'axios';
-import "../styles/NavbarStyles.css"
-import { useNavigate } from "react-router-dom";
+import "../styles/NavbarStyles.css" 
 import { navbarItemState, navbarSelectedState } from "../contexts/selector";
 import { loginState } from "../contexts/atom";
 
@@ -22,8 +21,7 @@ function Navbar(props) {
     
     const [isLogined,setIsLogined] = useRecoilState(loginState);
     const cookie = getCookie("token");//쿠키 가져옴 2/3
-
-    const navigate = useNavigate();
+ 
     const scrollTo = props.scrollTo;
 
     const handleMouseOver = () => {
@@ -41,23 +39,20 @@ function Navbar(props) {
     }
 
     function onClickTitle(e) {
-        e.preventDefault();
-        // navigate('/');
+        e.preventDefault(); 
         
         window.location.href = `http://172.16.210.22/`; 
     }
 
     function onClickLogin(e){
         e.preventDefault();
-        setNavItem((prev)=> []);
-        // navigate('/login');
+        setNavItem((prev)=> []); 
         
         window.location.href = `http://172.16.210.22/login`; 
     }
 
     function onClickMypage(e){
-        e.preventDefault();
-        // navigate('/mypage');
+        e.preventDefault(); 
         
         window.location.href = `http://172.16.210.22/mypage`; 
     }

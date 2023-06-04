@@ -1,6 +1,5 @@
 import '../styles/FooterStyles.css'
-
-import { useNavigate } from "react-router-dom";
+ 
 
 
 import {removeCookie} from './login/cookie'
@@ -11,11 +10,9 @@ import {removeCookie} from './login/cookie'
 
 
 const Footer = () =>{
-    
-    const navigate = useNavigate();
+     
     function onClickLogout() {
-        removeCookie('token')
-        // navigate('/');
+        removeCookie('token') 
         
         window.location.href = `http://172.16.210.22/`; 
     }

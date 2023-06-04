@@ -1,3 +1,11 @@
+.inputBox {
+
+  
+  border: none;
+  outline: none;
+  background-color: rgba(214, 206, 206, 0.103);
+}
+
 .container {
   color: #1b0278;
   height: 100%;

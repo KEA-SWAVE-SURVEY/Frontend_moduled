@@ -1,12 +1,9 @@
-import React from 'react'
-import { useNavigate } from "react-router-dom";
+import React from 'react' 
 
-export default function AfterAnswer() {
-const navigate = useNavigate();
+export default function AfterAnswer() { 
 
 function onClickMovetoMain(e) {
-    e.preventDefault();
-    // navigate('/'); Answer -> Survey 이동
+    e.preventDefault(); 
     
     window.location.href = `http://172.16.210.22/`; 
   }

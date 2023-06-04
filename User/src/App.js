@@ -1,8 +1,7 @@
 import './App.css'; 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
   
-import Login from './pages/Login'; 
-import SocialLogin from './pages/SocialLogin'; 
+import Login from './pages/Login';  
 import Auth from './pages/Auth'; 
 import Footer from './components/Footer';
  
@@ -20,8 +19,7 @@ function App() {
         {/* <Navbar scrollTo={scrollTo} scrollRef={scrollRef} /> */}
         <div style={{width:"100%",minHeight:"100vh",height:"auto"}}>
           <Routes> 
-            <Route path="/login" element={<Login />} />
-            <Route path="/sociallogin" element={<SocialLogin />} />  
+            <Route path="/login" element={<Login />} /> 
             <Route path="/oauth/callback/:provider" element={<Auth />} /> 
 
             </Routes>

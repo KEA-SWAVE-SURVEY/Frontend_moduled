@@ -1,20 +1,16 @@
 import React from 'react'
 import '../../styles/NavbarStyles.css';
-
-import { useNavigate } from "react-router-dom";
+ 
 import {removeCookie} from '../login/cookie'
 
-const MenuProfile = () => {
-    const navigate = useNavigate();
+const MenuProfile = () => { 
     function onClickLogout() {
-        removeCookie('token')
-        // navigate('/');
+        removeCookie('token') 
         
         window.location.href = `http://172.16.210.22/`; 
     }
     function onClickMypage(e){
-        e.preventDefault();
-        // navigate('/mypage');
+        e.preventDefault(); 
         
         window.location.href = `http://172.16.210.22/mypage`; 
     }

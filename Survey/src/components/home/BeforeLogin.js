@@ -9,8 +9,7 @@ import surveyphoto from '../../assets/surveyphoto.jpg'
 import white from '../../assets/trans.png'
 import black from '../../assets/black.jpg'
 import research from '../../assets/research.gif'
-import gpt from '../../assets/gpt.gif'
-import { useNavigate } from "react-router-dom";
+import gpt from '../../assets/gpt.gif' 
 import React, { useEffect, useRef, useState } from "react";
 import { navbarItemState, navbarSelectedState } from '../../contexts/selector'
 import { HomeItems } from '../../constants/MenuItems'
@@ -26,8 +25,7 @@ const BeforeLogin = (props) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const setNavItem = useSetRecoilState(navbarItemState);
   const setSelected = useSetRecoilState(navbarSelectedState);
-
-  const navigate = useNavigate();
+ 
   const divRef = useRef(null);
 
   const handleDownload = async () => {
@@ -49,14 +47,12 @@ const BeforeLogin = (props) => {
   function onClickLogin(e) {
     e.preventDefault();
     console.log(process.env);
-    // navigate('/Login');
-    
     window.location.href = `http://172.16.210.22/Login`; 
   }
   const [position, setPosition] = useState(0);
 
   function onScroll() {
-    console.log(window.scrollY)
+    // console.log(window.scrollY)
     setPosition(window.scrollY);
   }
   useEffect(() => {

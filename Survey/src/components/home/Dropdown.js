@@ -1,10 +1,9 @@
-import { useNavigate } from "react-router-dom";
+ 
 import '../../styles/DropdownStyles.css';
 
 
 function Dropdown(props) {
-  /* 현재 기능 아예 없음 */
-  const navigate = useNavigate();
+  /* 현재 기능 아예 없음 */ 
 
   const id = props.id;
 
@@ -12,7 +11,6 @@ function Dropdown(props) {
     e.preventDefault();
     e.stopPropagation();
     window.location.href = `http://172.16.210.22/research/${id}`; 
-    // nav igate('/survey/research/'+id);
   }
   return (
     <>

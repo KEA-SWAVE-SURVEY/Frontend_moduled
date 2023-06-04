@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import '../../styles/HomeStyles.css'
 import setting from '../../assets/setting.png'
-import Dropdown from './Dropdown';
-import { useNavigate } from 'react-router-dom';
+import Dropdown from './Dropdown'; 
 import { useSetRecoilState } from 'recoil';
 import { surveyListState, modifyState } from '../../contexts/atom';
 import axios from 'axios';
@@ -10,15 +9,15 @@ import axios from 'axios';
 function PrintSurveyGrid(props) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const setSurveyList = useSetRecoilState(surveyListState)
-    const setIsModify = useSetRecoilState(modifyState);
-    const navigate = useNavigate();
+    const setIsModify = useSetRecoilState(modifyState); 
 
     const survey = props.survey;
 
     function onClickGrid(e, id) {
         e.preventDefault();
         const loadSurveys = async()=>{
-            const result = await axios.get(`/api/load-survey/${id}`);
+            // const result = await axios.get(`/api/load-survey/${id}`); 이부분 POST인데 GET으로 되어있음
+            const result = await axios.get(`/api/external/load-survey/${id}`);
             console.log(result)
             setSurveyList((prev) => {
                 return {
@@ -45,10 +44,8 @@ function PrintSurveyGrid(props) {
                     })
                 }
             });
-            setIsModify((prev) => true);
-            // navigate('/survey');
-            
-        window.location.href = `http://172.16.210.22/survey`; 
+            setIsModify((prev) => true); 
+            window.location.href = `http://172.16.210.22/survey`; 
         }
         loadSurveys();
     }

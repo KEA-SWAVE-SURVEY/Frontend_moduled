@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useRecoilState } from 'recoil';
-import { useNavigate } from "react-router-dom";
+import { useRecoilState } from 'recoil'; 
 import { surveyListState} from '../contexts/atom';
 import axios from 'axios';
 import '../styles/BeforeAnswerStyles.css';
@@ -53,8 +52,7 @@ export default function BeforeAnswer() {
     //링크에서 정보를 가져와야겠어
 
     function onClickStart(e) {
-        e.preventDefault();
-        //navigate('/survey/answer')
+        e.preventDefault(); 
         window.location.href = `/survey/answer/`
       }
 

@@ -7,8 +7,7 @@ import axios from 'axios';
 import '../styles/SurveyStyle.css';
 import CreateSurvey from '../components/survey/create/CreateSurvey';
 import ViewSurvey from '../components/survey/view/ViewSurvey';
-import Sidebar from '../components/survey/sidebar/Sidebar';
-import { useNavigate } from 'react-router-dom';
+import Sidebar from '../components/survey/sidebar/Sidebar'; 
 
 
 import html2canvas from "html2canvas";
@@ -32,9 +31,10 @@ function Survey(props) {
     const [isPreview, setIsPreview] = useState(false);
 
     const scrollRef = useRef();
-
-    const navigate = useNavigate();
+ 
     const divRef = useRef(null);
+    
+    const topRef = useRef(null);
     const today = new Date().toLocaleDateString(); 
 
     const [size, setSize] = useState(`30px`);
@@ -47,22 +47,7 @@ function Survey(props) {
 
     }
 
-    const handleDownload = async () => {
-        if (!divRef.current) return;
-    
-        try {
-          const div = divRef.current;
-          const canvas = await html2canvas(div, { scale: 2 });
-          canvas.toBlob((blob) => {
-            if (blob !== null) {
-              saveAs(blob, "result.png");
-            }
-          });
-        } catch (error) {
-          console.error("Error converting div to image:", error);
-        }
-      };
-  
+   
 
     useEffect(() => {
         scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
@@ -236,6 +221,41 @@ function Survey(props) {
         setSidebarIsOpen({ open: false, isSetting: false, isGPT: false });
     }
 
+    const handleDownload = async () => {
+        if (!divRef.current) return;
+      
+        try {
+          const div = divRef.current;
+          const canvas = await html2canvas(div, {
+            x:0,        // 캡처할 부분의 x 좌표
+            y: 0,        // 캡처할 부분의 y 좌표
+              // 캡처할 부분의 가로 크기
+            height: 400  // 캡처할 부분의 세로 크기
+          });
+          canvas.toBlob(async (blob) => {
+            if (blob !== null) {
+              const formData = new FormData();
+              formData.append('blobData', blob);
+              saveAs(blob, "result.png");
+            console.log('try to axios');
+       
+              try {
+                await axios.post('/processBlob', formData, {
+                  headers: {
+                    'Content-Type': 'application/octet-stream',
+                  },
+                });
+                console.log('Blob sent to backend successfully');
+              } catch (error) {
+                console.error('Error sending blob to backend:', error);
+              }
+            }
+          });
+        } catch (error) {
+          console.error('Error converting div to image:', error);
+        }
+      };
+
     function onClickSaveButton(e) {
         e.preventDefault();
         console.log(surveyList);
@@ -261,9 +281,10 @@ function Survey(props) {
 
 
         console.log(isLogined.token);
-        var url = '/api/create';
+        var url = '/api/external/create';
         console.log(url);
-        if (isModify) url = `/api/modify-survey/${surveyList.id}` //임시
+        //if (isModify) url = `/api/modify-survey/${surveyList.id}` //임시
+        if (isModify) url = `/api/external/modify-survey/${surveyList.id}` //임시
         axios.post(url, dataToTransport,
             {
                 headers: {
@@ -279,8 +300,8 @@ function Survey(props) {
                         title: "",
                         description: "",
                         type: 0,
-                        reliability:1,
-                        font:"",
+                        reliability:1, //notion상에서는 Boolean인데 이거 변경할지
+                        font:"", // design쪽 notion에는 없는데 일단 유지 
                         fontSize:0,
                         backColor:"#ffffff",
                         questionRequest: [
@@ -313,21 +334,22 @@ function Survey(props) {
                         ]
                     }
                 });
-                console.log('Saved');
-                // navigate('/');
-                
-        window.location.href = `http://172.16.210.22/`; 
+                console.log('Saved'); 
+                window.location.href = `http://172.16.210.22/`; 
             })
             .catch((response) => {//종류불문 에러
                 console.log('Error');
                 console.log(dataToTransport);
             });
+            handleDownload();
     }
 
     return (
-        <div style={{backgroundColor:backColor}}  ref={divRef}>
+       
+        <div style={{backgroundColor:backColor}}  >
             <div className="survey_area" style={!sidebarIsOpen.open ? { paddingRight: "0px" } : { paddingRight: "30vw" }}>
-                <div className="survey_container">
+                <div className="survey_container" ref={divRef}> 
+                    <div ref ={topRef}> <p> </p></div>
                     
 
                     <div ref={scrollRef}>

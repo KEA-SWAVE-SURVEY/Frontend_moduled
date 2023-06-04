@@ -12,8 +12,7 @@ import survey from '../assets/survey.png'
 import answer from '../assets/answer.png'
 
 import '../styles/ResearchStyles.css' 
-
-import { useNavigate } from 'react-router-dom';
+ 
 
 import html2canvas from "html2canvas";
 import saveAs from "file-saver";

@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useState} from 'react';
 import '../../styles/SurveyStyle.css';
 import { PieChartComponent } from './chart'
 import randomColor from 'randomcolor';  
@@ -95,9 +95,12 @@ export default function PickAnalyze({ data }) {
   };
 
   
-  const transformedData = data.questionList.map((question) => ({
+  const [transformedData, setTransformedData] = useState(data.questionList.map((question) => ({
+    
+    isOpen : true,
     question: question.title,
     questionType: question.questionType,
+    
     wordCloudDTOs :question.wordCloudDtos.map((words) => ({
     
 text: words.title,
@@ -110,17 +113,53 @@ value:  words.count
 
       fill: randomColor({ luminosity: 'liight', hue: 'random' })
     })),
-  }));
- 
+
+    
+  }))
+  );
+  const toggleQuestion = (index) => {
+    setTransformedData((prevData) => {
+      const newData = [...prevData];
+      newData[index].isOpen = !newData[index].isOpen;
+      return newData;
+    });
+  };
   console.log(typeof(transformedData[2].wordCloudDTOs[0].value) + " " + transformedData[2].wordCloudDTOs[0].value+" " + (transformedData[2].wordCloudDTOs[0].value + transformedData[2].wordCloudDTOs[0].value))
   return (
     <div className={'analyzeBox'} style={{ padding: '0', width: '100%', height: '100%', overflowY: 'scroll', scrollbarWidth: 'none', msOverflowStyle: 'none', margin: '10' }}>
-      {transformedData.map((question) => (
+      {transformedData.map((question, index) => (
 
-        <div className={'questionContainer'} style={{ background: 'rgb(255,255,255)', margin: '20px' }}>
-          <div className={'questionBox'}><p style={{ margin: '10px' }}>{question.question}</p></div>
-          <div>
-            {question.questionType === 0 ?
+        <div className={'questionContainer'} onClick={() => toggleQuestion(index)} style={{ background: 'rgb(255,255,255)', margin: '20px' }}>
+          <div className={'questionBox'} style={{height:'10vh'}}>
+
+
+            {
+              question.isOpen === true? (
+
+<div> 
+            <p style={{ margin: '10px' }}>{question.question} (열림) 
+            
+            </p>
+            
+            </div>
+
+              ) : (
+
+
+<div> 
+            <p style={{ margin: '10px' }}>{question.question} (닫힘) 
+            
+            </p>
+            
+            </div>
+
+
+              )
+            } 
+ 
+          </div>  
+          <div> 
+{question.isOpen === true ? (  <div> {question.questionType === 0 ?
               (
 
                 <div className={'chartBox'} style={{ height:'350px' ,  margin: '10px',overflowY:'scroll'}}>
@@ -154,7 +193,14 @@ value:  words.count
                 </div>)
 
 
-            }
+            }</div>
+  
+
+
+
+
+) : ( <div> </div>) }
+ 
           </div>
 
         </div>

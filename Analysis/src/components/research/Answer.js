@@ -110,9 +110,10 @@ const [data , setData] = useState({
 
   useEffect(() => {
     async function fetchTestData() {
-      console.log(`TEST : /api/research/2/${documentId}`)
+    //   console.log(`TEST : /api /research/2/${documentId}`)
       try {
-        const response = await axios.get(`/api/research/2/${documentId}`, { timeout: 10000 });
+        // const response = await axios.get(`/api/research/2/${documentId}`, { timeout: 10000 });
+        const response = await axios.get(`/api/external/response/${documentId}`, { timeout: 10000 });
         setData(response.data);
       } catch (error) {
         console.error(error);

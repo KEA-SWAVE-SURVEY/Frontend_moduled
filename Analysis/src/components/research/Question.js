@@ -18,9 +18,11 @@ function Question() {
 
     //로드가 몇개가 있어야할까 서베이로 싹다 긁어올 수 있나?
     //코드는 서베이로만
-    //http://localhost:8080/api/survey-participate/${id}
+    //http://localhost:8080/api/ survey-participate/${id}
     const loadSurveys=async()=>{
-       const result = await axios.get(`/api/survey/load/${documentId}`);
+    //    const result = await axios.get(`/api/load-survey/${documentId}`);
+       
+       const result = await axios.get(`/api/external/research/survey/load/${documentId}`);
     //    const result = {data:{
     //     "id": 1,
     //     "title": "설문 테스트",
@@ -85,7 +87,10 @@ function Question() {
                 id: result.data.id,
                 title: result.data.title,
                 description: result.data.description,
-                //design : result.data.design,
+                reliability: result.data.reliability,
+                font:result.data.font,
+                fontSize:result.data.fontSize,
+                backColor:result.data.backColor,
                 type: result.data.type,
                 questionRequest: result.data.questionList.map((questionList) => {
                     return {

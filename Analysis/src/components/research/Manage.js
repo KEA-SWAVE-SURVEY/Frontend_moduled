@@ -30,7 +30,7 @@ export default function Manage() {
   }
   let encoded = base64_encode(documentId)
 
-  const handleCopyClipBoard = async (text: string) => {
+  const handleCopyClipBoard = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
 
@@ -38,7 +38,7 @@ export default function Manage() {
     }
   };
 
-  //TODO : 백과 연동해서 CSV 받아오는 api 설정 후, csv 받아오기
+  //TODO : 백과 연동해서 CSV 받아오는 api 설정 후, csv 받아오기 
 
   const csvdata =
   [

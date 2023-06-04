@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { surveyListState, answerListState } from '../contexts/atom';
-import { useNavigate } from "react-router-dom";
+import { surveyListState, answerListState } from '../contexts/atom'; 
 import axios from 'axios';
 
 import { useParams } from 'react-router-dom';
@@ -20,14 +19,14 @@ function AnswerSurvey() {
     useEffect(() => {
         loadSurveys()
     }, []);
-
-    const navigate = useNavigate();
+ 
 
     //로드가 몇개가 있어야할까 서베이로 싹다 긁어올 수 있나?
     //코드는 서베이로만
-    //http://localhost:8080/api/survey-participate/${id}
+    //http://localhost:8080/api/ survey-participate/${id}
     const loadSurveys=async()=>{
-        const result = await axios.get(`/api/survey/load/${decoded}`);
+        // const result = await axios.get(`/api/load-survey/${decoded}`); // decoded = id 복호화된 것
+        const result = await axios.get(`/api/external/load/${decoded}`); // decoded = id 복호화된 것
         console.log(result)
         setSurveyList((prev) => {
             return {
@@ -97,7 +96,9 @@ function AnswerSurvey() {
 
     function onClickSubmitButton(e) {
         e.preventDefault();
-        axios.post(`/api/response/create`, answerList,
+        
+        // axios.post(`/api /response/create`, answerList,
+        axios.post(`/api/external/response/create`, answerList,
             {
                 headers: {
                     'Content-Type': 'application/json'
@@ -114,9 +115,9 @@ function AnswerSurvey() {
                 console.log('Error');
                 console.log(JSON.stringify(answerList));
             });
-        // navigate('/survey/afteranswer');
+        // na vigate('/survey/afteranswer');
         
-        window.location.href = `http://172.16.210.22/survey/afteranswer`; 
+    window.location.href = `http://172.16.210.22/survey/afteranswer`; 
     }
 
     return (

@@ -66,7 +66,7 @@ import randomColor from 'randomcolor';
 //   ]
 // }
 export default function Cross({ data }) {
-
+console.log(JSON.stringify(data))
 
 
   return (

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react'; 
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import axios from 'axios';
 
@@ -38,9 +37,7 @@ function AfterLogin(props) {
     const [currentPage, setCurrentPage] = useState(1);
     const [isAlphabetOrder, setIsAlphabetOrder] = useState(true);
     const [isAscendingOrder, setIsAscendingOrder] = useState(true);
-    
-
-    const navigate = useNavigate();
+     
     const [pageNumberList, setPageNumberList] =useState([]);
 
     const template = [
@@ -51,8 +48,8 @@ function AfterLogin(props) {
     ];
 
     function sendRequestSurveyList(method, page, sort1, sort2) {
-        var uri = '/api/survey-list';
-        if (isGridView) uri = '/api/survey-list-grid';
+        var uri = '/api/external/survey-list';
+        if (isGridView) uri = '/api/external/survey-list-grid';
         axios.post(uri,
             {
                 'method': method, // string grid,list
@@ -109,8 +106,6 @@ function AfterLogin(props) {
     function onClickCreateSurvey(e) {
         e.preventDefault();
         setIsModify((prev) => false);
-        // navigate('/survey');
-        
         window.location.href = `http://172.16.210.22/survey`; 
     }
 

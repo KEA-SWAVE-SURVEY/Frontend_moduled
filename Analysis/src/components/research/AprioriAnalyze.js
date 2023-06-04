@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useState} from 'react';
 import '../../styles/SurveyStyle.css';
 import { BarChartComponent } from './chart'
 import randomColor from 'randomcolor';
@@ -15,7 +15,7 @@ export default function AprioriAnalyze({ data }) {
 
 //     );
 
-    const transformedData = data.questionAnalyzeList.reduce((acc, question) => {
+    const [transformedData,setTransformedData] = useState(data.aprioriAnalyzeList.reduce((acc, question) => {
         const existingQuestion = acc.find((q) => q.questionTitle === question.questionTitle);
         if (existingQuestion) {
             existingQuestion.answerList.push({
@@ -40,7 +40,8 @@ export default function AprioriAnalyze({ data }) {
             });
         }
         return acc;
-    }, []);
+    }, [])
+    );
 
 
     return (

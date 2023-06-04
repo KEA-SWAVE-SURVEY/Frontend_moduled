@@ -1,7 +1,6 @@
 import { Button, Grid } from '@mui/material'
 import React from 'react'
-import { signin, SocialLogin } from "../utils/socialLogin"
-import { useNavigate } from 'react-router-dom'
+import { signin, SocialLogin } from "../utils/socialLogin" 
 import AuthWrapper from "../components/login/AuthWrapper"
 import kakao from '../assets/kakao2.png'
 import google2 from '../assets/google3.png'
@@ -11,8 +10,7 @@ import { useSetRecoilState } from 'recoil'
 import { loginState } from '../contexts/atom'
 import logo from '../assets/black.jpg'
 
-export default function Login() {
-  const navigate = useNavigate();
+export default function Login() { 
   const host = process.env.REACT_APP_HOST;
   const setIsLogined = useSetRecoilState(loginState);
   const REACT_APP_REST_API_KEY="4646a32b25c060e42407ceb8c13ef14a";
