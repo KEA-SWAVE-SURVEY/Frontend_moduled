@@ -49,15 +49,16 @@ function SidebarProblem(props) {
                 duplicatedProblem,
                 ...prev.questionRequest.slice(index)
             ];
-
+//수정필요 일단 넣긴함
             return {
                 id: prev.id,
                 title: prev.title,
                 type: prev.type,
                 reliability: prev.reliability,
-                font:prev.font,
-                fontSize:prev.fontSize,
-                backColor:prev.backColor,
+                startDate:prev.startDate,
+                endDate: prev.endDate,
+                enable: prev.enable,
+                design:prev.design,
                 questionRequest: newContent
             };
         });
@@ -75,9 +76,7 @@ function SidebarProblem(props) {
                 title: prev.title,
                 type: prev.type,
                 reliability: prev.reliability,
-                font:prev.font,
-                fontSize:prev.fontSize,
-                backColor:prev.backColor,
+                design:prev.design,
                 questionRequest: deletedContent
             };
         });

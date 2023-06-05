@@ -287,24 +287,25 @@
   }
   
   /*create 미리보기 설문 제목,문항제목*/
-   
-  .survey_container .create_survey .survey_input{
-  font-family: var(--font-commer)
-  } 
-  /*create 설문 설명*/
-   .survey_container .create_survey .textarea{
-    font-family: var(--font-commer)
-  } 
  
-  /*create 객관식 선지*/
-  .choice_input{
-    font-family: var(--font-commer)
-  }
-  /*view 객관식 선지*/
-  .label_container{
-    font-family: var(--font-commer)
-  }
-
+  .survey_container .create_survey .survey_input{
+    font-family: var(--font-default)
+    } 
+    /*create 설문 설명*/
+     .survey_container .create_survey .textarea{
+      font-family: var(--font-default)
+    } 
+   
+    /*create 객관식 선지*/
+    .choice_input{
+      font-family: var(--font-default)
+    }
+    /*view 객관식 선지*/
+    .label_container{
+      font-family: var(--font-default)
+    }
+  
+  
   .survey_container .create_survey .survey_inputa{
   font-family: var(--font-lit)
   } 

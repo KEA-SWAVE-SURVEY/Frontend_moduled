@@ -52,13 +52,10 @@ function SidebarSetting(props){
           description: prev.description,
           type: prev.type,
           reliability: !prel,
-          backColor:prev.backColor,
           startDate:prev.startDate,
           endDate: prev.endDate,
           enable: prev.enable,
           design:prev.design,
-          font:prev.font,
-          fontSize:prev.fontSize, 
           questionRequest: prev.questionRequest
       }
   })
@@ -77,13 +74,12 @@ function SidebarSetting(props){
           description: prev.description,
           type: prev.type,
           reliability: prev.reliability,
-          backColor:prev.backColor,
+          
           startDate:prev.startDate,
           endDate: prev.endDate,
           enable: !prevEnable,
           design:prev.design,
-          font:prev.font,
-          fontSize:prev.fontSize, 
+         
           questionRequest: prev.questionRequest
       }
   })

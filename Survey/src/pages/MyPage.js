@@ -23,8 +23,8 @@ import {getCookie} from '../components/login/cookie'
 
 function MyPage() {
   const [isLogined,setIsLogined] = useRecoilState(loginState);
-  const cookie = getCookie("token");
- 
+  //const cookie = getCookie("token");
+  const cookie = sessionStorage.getItem('token')
 
   const [surveyList, setSurveyList] = useState();
 

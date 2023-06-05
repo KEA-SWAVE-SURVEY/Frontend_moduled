@@ -246,7 +246,7 @@ export default function Analyze({ documentId }) {
   //   fetchTestData();
   // }, []);
 
-
+  //document param 없어도 되는지 param
   useEffect(() => {
     async function fetchTestData() {
       try {

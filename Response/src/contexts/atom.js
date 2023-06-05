@@ -11,7 +11,7 @@ export const loginState = atom({
         token: null
     }
 });
-
+//수정 아톰 수정 필요!!
 export const surveyListState = atom({
     key: "surveyListState",
     default: {  
@@ -20,9 +20,11 @@ export const surveyListState = atom({
                 description:"",
                 type:0,
                 reliability:1,
-                font:"",
-                fontSize:3,
-                backColor:'#ffffff',
+                design:{
+                    font:"",
+                    fontSize:3,
+                    backColor:'#ffffff'
+                },
                 questionRequest:[   
                             {
                                 id : 0,

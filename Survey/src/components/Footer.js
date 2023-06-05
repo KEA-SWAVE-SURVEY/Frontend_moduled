@@ -12,8 +12,8 @@ import {removeCookie} from './login/cookie'
 const Footer = () =>{
      
     function onClickLogout() {
-        removeCookie('token') 
-        
+        //removeCookie('token') 
+        sessionStorage.removeItem('token')
         window.location.href = `http://172.16.210.22/`; 
     }
     return(

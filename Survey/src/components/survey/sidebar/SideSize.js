@@ -20,12 +20,15 @@ const FontSize = () => {
           description: prev.description,
           type: prev.type,
           reliability: prev.reliability, 
-          backColor:prev.backColor,
+          
           startDate:prev.startDate,
           endDate: prev.endDate,
           enable: prev.enable,
-          font:prev.font,
-          fontSize:cfontSize, 
+          design:{
+            backColor:prev.design.backColor,
+            font:prev.design.font,
+            fontSize:cfontSize,
+          }, 
           questionRequest: prev.questionRequest
       }
   })
@@ -46,9 +49,11 @@ const FontSize = () => {
           startDate:prev.startDate,
           endDate: prev.endDate,
           enable: prev.enable,
-          font:prev.font,
-          fontSize:cfontSize,
-          backColor:prev.backColor,
+          design:{
+            backColor:prev.design.backColor,
+            font:prev.design.font,
+            fontSize:cfontSize,
+          },
           questionRequest: prev.questionRequest
       }
   })

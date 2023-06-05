@@ -2,6 +2,7 @@
 import { surveyListState,fontState,fontSizeState } from '../../../contexts/atom';
 import { updateSurveyContent } from '../../../utils/updateJSON';
 import { useRecoilState,useRecoilValue } from 'recoil';
+import {setCookie,getCookie} from '../../../components/login/cookie'
 
 
 import '../../../styles/SurveyStyle.css';
@@ -52,6 +53,15 @@ function MultipleChoiceOption(props) {
         });
         console.log(surveyList);
     };
+    const expirationTime = new Date();
+    expirationTime.setTime(expirationTime.getTime() + 30 * 60 * 1000);
+    setCookie('survey',surveyList,{
+        path:"/",
+        sameSite: "strict",
+        expires: expirationTime
+
+      });
+    console.log('쿠키 굽는중 객관식')
 
 
 

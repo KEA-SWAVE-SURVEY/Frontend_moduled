@@ -69,3 +69,33 @@ export const navbarState = atom({
                 selected : 0
             }
 });
+
+export const relState = atom({
+    key: "relState",
+    default: 1
+});
+
+export const fontState = atom({
+    key: "fontState",
+    default: `"Calibri", "Roboto", sans-serif`
+});
+
+export const fontSizeState = atom({
+    key: "fontSizeState",
+    default: 3
+});
+
+export const backColorState = atom({
+    key: "backColorState",
+    default: '#ffffff'
+});
+
+
+export const designState = atom({
+    key: "designState",
+    default: {
+        font : "",
+        fontSize : "",
+        layout:""
+    }
+});

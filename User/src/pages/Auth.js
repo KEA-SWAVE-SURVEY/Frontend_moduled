@@ -26,12 +26,13 @@ const Auth = () => {
         const res = await axios.post(`/api/oauth/token?code=${code}&provider=${provider}`);
         //인가코드를 백엔드로 보내고 헤더에서 엑세스 토큰 받아옴
         const token = res.headers.authorization;
+        sessionStorage.setItem('token',token)
         //로컬스토리지에 저장
-        setCookie('token',token,{
+        /* setCookie('token',token,{
           path:"/",
           sameSite: "strict",
 
-        });
+        }); */
 
         
 

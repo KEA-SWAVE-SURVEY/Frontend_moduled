@@ -20,9 +20,11 @@ export const surveyListState = atom({
                 description:"",
                 type:0,
                 reliability:1,
-                font:"",
-                fontSize:3,
-                backColor:'#ffffff',
+                design:{
+                    font:"",
+                    fontSize:3,
+                    backColor:'#ffffff'
+                },
                 questionRequest:[   
                             {
                                 id : 0,
@@ -76,7 +78,7 @@ export const relState = atom({
 
 export const fontState = atom({
     key: "fontState",
-    default: `Dancing Script', cursive`
+    default: `"Calibri", "Roboto", sans-serif`
 });
 
 export const fontSizeState = atom({

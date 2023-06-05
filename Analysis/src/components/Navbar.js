@@ -8,7 +8,7 @@ import {getCookie} from './login/cookie' //쿠키 가져옴 1/3
 
 import logo from "../assets/logo.png"
 import { useEffect,useState } from "react";
-import { refType } from "@mui/utils";
+
 
 import MenuProfile from "./home/MenuProfile";
 //넵바에서 나의 정보를 db에서 읽을 수 있게하기
@@ -20,8 +20,8 @@ function Navbar(props) {
     const [isOpen,setIsOpen] = useState(false);
     
     const [isLogined,setIsLogined] = useRecoilState(loginState);
-    const cookie = getCookie("token");//쿠키 가져옴 2/3
- 
+    //const cookie = getCookie("token");//쿠키 가져옴 2/3
+    const cookie = sessionStorage.getItem('token')
     const scrollTo = props.scrollTo;
 
     const handleMouseOver = () => {
@@ -55,8 +55,14 @@ function Navbar(props) {
         
         window.location.href = `http://172.16.210.22/mypage`; 
     }
+    useEffect(()=>{
+        if(cookie){
+            GetMe()
+            console.log("여기11")
+        }
+    },[])
     
-    function getMe(){
+    function GetMe(){
         axios.get('/user/external/me',{
             headers: {
             Authorization: cookie,
@@ -93,7 +99,7 @@ function Navbar(props) {
 
             </ul>
             {cookie ?(
-                getMe(),
+            
                 <img className="navbar_img" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} src={isLogined.img} alt='img' />
                   
             ):(

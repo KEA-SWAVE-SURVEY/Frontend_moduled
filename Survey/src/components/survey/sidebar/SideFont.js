@@ -22,38 +22,44 @@ const SideFont = () => {
   function onClickFontButton(e,index){
     e.preventDefault();
     if(index===0) {
-      setFont(prev=>`"Calibri", "Roboto", sans-serif`) 
+      setFont(`"Calibri", "Roboto", sans-serif`) 
       //console.log(font)
     }
     else if(index===1)
     {
-      setFont(prev=>`'Nanum Brush Script'`) 
+      setFont(`'Nanum Brush Script'`) 
       //console.log(font)
     }
     else if(index===2) 
     {
-      setFont(prev=>`'Nanum Gothic'`) 
+      setFont(`'Nanum Gothic'`) 
       //console.log(font)
     }
     else if(index===3)
     {
-      setFont(prev=>`'Song Myung'`) 
+      setFont(`'Song Myung'`) 
       //console.log(font)
     }
     else if(index===4)
     {
-      setFont(prev=>`'Hi Melody'`) 
+      setFont(`'Hi Melody'`) 
       //console.log(font)
     }
     else if(index===5)
     {
-      setFont(prev=>`'Dancing Script', cursive`) 
+      setFont(`'Dancing Script', cursive`) 
+      //console.log(font)
+    }
+    else if(index===6)
+    {
+      setFont(`'TheJamsil5Bold'`) 
       //console.log(font)
     }
 
   //return index
     const cfont = font
     console.log(cfont)
+    console.log(surveyList.font)
    
     setSurveyList((prev) => {
       return {
@@ -62,17 +68,20 @@ const SideFont = () => {
           description: prev.description,
           type: prev.type,
           reliability: prev.reliability,
-          backColor:prev.backColor,
+          
           startDate:prev.startDate,
           endDate: prev.endDate,
           enable: prev.enable,
-          font:cfont,
-          fontSize:prev.fontSize,
+          design:{
+            backColor:prev.design.backColor,
+            font:cfont,
+            fontSize:prev.design.fontSize,
+          },
           questionRequest: prev.questionRequest
       }
   })
   console.log(surveyList)
-  
+  console.log(surveyList.design.font)
   console.log(cfont)
   } 
   
@@ -82,18 +91,19 @@ const SideFont = () => {
   //명조, 송명 : `'Song Myung'`
   //손글씨,하이멜로디 : `'Hi Melody'`
   //영어 필기 : `'Dancing Script', cursive`
-  
+    //잠실광고체 : 'TheJamsil5Bold'
   return (
     <div className='menuProfile1'>
         <ui className='menuProfile1'>
           
     
-            <li><button key='font' style={{ width: "30%", fontFamily:`"Calibri", "Roboto", sans-serif`}} onClick={(e) => { onClickFontButton(e, 0) }}>기본</button></li>
-            <li><button key='font1' style={{ width: "30%", fontFamily:`'Nanum Brush Script'` }} onClick={(e) => { onClickFontButton(e, 1) }}>나눔 손글씨 붓</button></li>
-            <li><button key='font2' style={{ width: "30%", fontFamily:`'Nanum Gothic'` }} onClick={(e) => { onClickFontButton(e, 2) }}>나눔 고딕</button></li>
-            <li><button key='font3' style={{ width: "30%", fontFamily:`'Song Myung'` }} onClick={(e) => { onClickFontButton(e, 3) }}>송명 , 명조</button></li>
-            <li><button key='font3' style={{ width: "30%", fontFamily:`'Hi Melody'` }} onClick={(e) => { onClickFontButton(e, 4) }}>하이멜로디, 손글씨</button></li>
-            <li><button key='font4' style={{ width: "30%", fontFamily:`'Dancing Script', cursive` }} onClick={(e) => { onClickFontButton(e, 5) }}>영어 필기체</button></li>
+            <li><button key='0' className={`"Calibri", "Roboto", sans-serif` === font ? styles.setBtn_selected : styles.setBtn} style={{fontSize:'1.3vw',  fontFamily:`"Calibri", "Roboto", sans-serif`}} onClick={(e) => { onClickFontButton(e, 0) }}>기본</button></li>
+            <li><button key='1' className={`'Nanum Brush Script'` === font ? styles.setBtn_selected : styles.setBtn} style={{  fontSize:'1.3vw', fontFamily:`'Nanum Brush Script'` }} onClick={(e) => { onClickFontButton(e, 1) }}>나눔 손글씨 붓</button></li>
+            <li><button key='2' className={`'Nanum Gothic'` === font ? styles.setBtn_selected : styles.setBtn} style={{  fontSize:'1.3vw', fontFamily:`'Nanum Gothic'` }} onClick={(e) => { onClickFontButton(e, 2) }}>나눔 고딕</button></li>
+            <li><button key='3' className={`'Song Myung'` === font ? styles.setBtn_selected : styles.setBtn} style={{  fontSize:'1.3vw', fontFamily:`'Song Myung'` }} onClick={(e) => { onClickFontButton(e, 3) }}>송명 , 명조</button></li>
+            <li><button key='4' className={`'Hi Melody'` === font ? styles.setBtn_selected : styles.setBtn} style={{  fontSize:'1.3vw', fontFamily:`'Hi Melody'` }} onClick={(e) => { onClickFontButton(e, 4) }}>하이멜로디, 손글씨</button></li>
+            <li><button key='5' className={`'Dancing Script', cursive` === font ? styles.setBtn_selected : styles.setBtn} style={{  fontSize:'1.3vw',fontFamily:`'Dancing Script', cursive` }} onClick={(e) => { onClickFontButton(e, 5) }}>영어 필기체</button></li>
+            <li><button key='6' className={`'TheJamsil5Bold'` === font ? styles.setBtn_selected : styles.setBtn} style={{  fontSize:'1.3vw',fontFamily:`'TheJamsil5Bold'` }} onClick={(e) => { onClickFontButton(e, 6) }}>더잠실체</button></li>
             
           
          

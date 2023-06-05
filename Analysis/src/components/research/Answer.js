@@ -109,6 +109,7 @@ const [data , setData] = useState({
 }); 
 
   useEffect(() => {
+    //answer에 useparam없어도 되는지
     async function fetchTestData() {
     //   console.log(`TEST : /api /research/2/${documentId}`)
       try {

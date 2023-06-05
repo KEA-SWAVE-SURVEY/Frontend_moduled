@@ -22,12 +22,15 @@ const SideColor = () => {
             description: prev.description,
             type: prev.type,
             reliability: prev.reliability,
-            backColor:cbackColor,
+            
             startDate:prev.startDate,
             endDate: prev.endDate,
             enable: prev.enable,
-            font:prev.font,
-            fontSize:prev.fontSize,
+            design:{
+              backColor:cbackColor,
+              font:prev.design.font,
+              fontSize:prev.design.fontSize,
+            },
             questionRequest: prev.questionRequest
         }})
 

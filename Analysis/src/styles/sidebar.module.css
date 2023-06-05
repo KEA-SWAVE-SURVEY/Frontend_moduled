@@ -98,7 +98,7 @@
 
 .setBtn {
   background-color: #fff;
-  width: 100%;
+  width: 12vw;
   border: none;
   color: #1b0278;
   padding: 10px 20px;
@@ -111,7 +111,7 @@
 
 .setBtn_selected {
   background-color: #1b0278;
-  width: 30%;
+  width: 12vw;
   border: none;
   color:#fff;
   padding: 10px 20px;
@@ -137,6 +137,7 @@ button{
   cursor: pointer;
   justify-content: space-between;
   color: #1b0278;
+  text-align: center;
 }
 
 .gptResponseArea{

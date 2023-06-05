@@ -12,6 +12,7 @@ import Sidebar from '../components/survey/sidebar/Sidebar';
 
 import html2canvas from "html2canvas";
 import saveAs from "file-saver";
+import {setCookie,getCookie,removeCookie} from '../components/login/cookie'
 
 function dateFormat(date) {
     let month = date.getMonth() + 1;
@@ -39,10 +40,9 @@ function Survey(props) {
     const [surveyList, setSurveyList] = useRecoilState(surveyListState);
     const [answerList, setAnswerList] = useRecoilState(answerListState);
 
-    const font = useRecoilValue(fontState);
-    const fontSize = useRecoilValue(fontSizeState);
-    const backColor = useRecoilValue(backColorState);
-
+    const [font,setFont] = useRecoilState(fontState);
+    const [fontSize,setFontSize] = useRecoilState(fontSizeState);
+    const [backColor,setBackColor] = useRecoilState(backColorState);
     const [isPreview, setIsPreview] = useState(false);
 
     const scrollRef = useRef();
@@ -64,12 +64,89 @@ function Survey(props) {
 
    
 
+
+
+
+
     useEffect(() => {
         scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
     }, [surveyList?.questionRequest.length]);
-
-
+    const surveyCookie = getCookie("survey");
     useEffect(() => {
+        if (!isModify) {
+            checkCookie()
+            console.log(surveyCookie)
+            if(!surveyCookie){
+                console.log(surveyCookie)
+                setSurveyList((prev) => {
+                    return {
+                        id: 0,
+                        title: "",
+                        description: "",
+                        type: 0,
+                        reliability: 1,
+                        startDate:dateFormat(new Date()),
+                        endDate: dateFormat(new Date()),
+                        enable: false, 
+                        design:
+                            {
+                        font:"",
+                        fontSize:3,
+                        backColor:'#ffffff'
+                            },
+                        questionRequest: [
+                            {
+                                id: 0,
+                                type: 0,
+                                title: "",
+                                choiceList: ""/*[
+                                            id:0;
+                                            choiceName:null;
+                                        ]*/
+                            }
+                        ]
+                    }
+                });
+                setBackColor(()=>{'#ffffff'})
+                setFontSize(()=>3)
+                setFont(()=>{'`"Calibri", "Roboto", sans-serif`'})
+                 
+            }
+            else{
+                console.log(surveyCookie)
+                setSurveyList((prev) => {
+                    return {
+                        id: 0,
+                        title: surveyCookie.title,
+                        description: surveyCookie.description,
+                        reliability: surveyCookie.reliability,
+                        startDate:surveyCookie.startDate,
+                        endDate: surveyCookie.endDate,
+                        enable: surveyCookie.enable,
+                        design:surveyCookie.design,
+                        type: surveyCookie.type,
+                        questionRequest: surveyCookie.questionRequest.map((questionList) => {
+                            return {
+                                id: questionList.id,
+                                title: questionList.title,
+                                type: questionList.type,
+                                choiceList: questionList.choiceList.map((choice) => {
+                                    return {
+                                        id: choice.id,
+                                        choiceName: choice.title
+                                    }
+                                })
+                            }
+                        })
+                    }
+                });
+                
+            }
+            
+        }
+    }, []);
+
+    /* useEffect(() => {
         if (!isModify) {
             //console.log(Rel)
             setSurveyList((prev) => {
@@ -79,27 +156,28 @@ function Survey(props) {
                     description: "",
                     type: 0,
                     reliability: 1,
-                    backColor:'#ffffff',
+                    
                     startDate:dateFormat(new Date()),
                     endDate: dateFormat(new Date()),
                     enable: false, 
-                    font:"",
-                    fontSize:3, 
+                    design:
+                            {
+                        font:"",
+                        fontSize:3,
+                        backColor:'#ffffff'
+                            },
                     questionRequest: [
                         {
                             id: 0,
                             type: 0,
                             title: "",
-                            choiceList: ""/*[
-                                        id:0;
-                                        choiceName:null;
-                                    ]*/
+                            choiceList: ""
                         }
                     ]
                 }
             });
         }
-    }, []);
+    }, []); */
 
     const onUpdateList = (e, updated) => {
         console.log(updated);
@@ -110,12 +188,11 @@ function Survey(props) {
                 description: prev.description,
                 type: prev.type,
                 reliability: prev.reliability,
-                backColor:prev.backColor,
+                
                 startDate:prev.startDate,
                 endDate: prev.endDate,
                 enable: prev.enable,
-                font:prev.font,
-                fontSize:prev.fontSize, 
+                design:prev.design,
                 questionRequest: [...updated]
             }
         }
@@ -139,12 +216,11 @@ function Survey(props) {
                 type: prev.type,
                 reliability:prev.reliability,
                 
-                backColor:prev.backColor,
                 startDate:prev.startDate,
                 endDate: prev.endDate,
                 enable: prev.enable,
-                font:prev.font,  
-                fontSize:prev.fontSize, 
+                design:prev.design,
+                
                 questionRequest: [
                     ...prev.questionRequest,
                     {
@@ -176,16 +252,24 @@ function Survey(props) {
                 description: prev.description,
                 type: prev.type,
                 reliability:prev.reliability, 
-                backColor:prev.backColor,
+                
                 startDate:prev.startDate,
                 endDate: prev.endDate,
                 enable: prev.enable,
-                font:prev.font,
-                fontSize:prev.fontSize, 
+                design:prev.design,
                 questionRequest: prev.questionRequest
             };
         });
+        const expirationTime = new Date();
+        expirationTime.setTime(expirationTime.getTime() + 30 * 60 * 1000);
+        setCookie('survey',surveyList,{
+            path:"/",
+            sameSite: "strict",
+            expires: expirationTime
+    
+          });
     }
+
 
     function onChangeTextArea(e) {
         e.preventDefault();
@@ -196,20 +280,35 @@ function Survey(props) {
                 description: e.target.value,
                 type: prev.type,
                 reliability:prev.reliability,
-                backColor:prev.backColor,
+                
                 startDate:prev.startDate,
                 endDate: prev.endDate,
                 enable: prev.enable,
-                font:prev.font,
-                fontSize:prev.fontSize, 
+                design:prev.design,
                 questionRequest: prev.questionRequest
             };
         });
+        const expirationTime = new Date();
+        expirationTime.setTime(expirationTime.getTime() + 30 * 60 * 1000);
+        setCookie('survey',surveyList,{
+            path:"/",
+            sameSite: "strict",
+            expires: expirationTime
+    
+          });
 
     }
 
     function onClickPreviewButton(e) {
         e.preventDefault();
+        const expirationTime = new Date();
+        expirationTime.setTime(expirationTime.getTime() + 30 * 60 * 1000);
+        setCookie('survey',surveyList,{
+            path:"/",
+            sameSite: "strict",
+            expires: expirationTime
+    
+          });
         if (!isPreview) {
             surveyList.questionRequest.map((survey) => {
                 let contentDefault = ""; // default 답변 주관식은 ""
@@ -297,9 +396,7 @@ function Survey(props) {
             description: surveyList.description,
             type: surveyList.type,
             reliability:surveyList.reliability,
-            font:surveyList.font,
-            fontSize:surveyList.fontSize,
-            backColor:surveyList.backColor,
+            design:surveyList.design,
             questionRequest: surveyList.questionRequest.map((prev) => {
                 return {
                     //id : prev.id
@@ -332,12 +429,16 @@ function Survey(props) {
                         description: "",
                         type: 0,
                         reliability:1, //notion상에서는 Boolean인데 이거 변경할지
-                        font:"", // design쪽 notion에는 없는데 일단 유지 
+                         // design쪽 notion에는 없는데 일단 유지 
                         startDate:dateFormat(new Date()),
                         endDate: dateFormat(new Date()),
                         enable: true,
-                        fontSize:0,
-                        backColor:"#ffffff",
+                        design:
+                            {
+                            font:"",
+                            fontSize:0,
+                            backColor:"#ffffff"
+                            },
                         questionRequest: [
                             {
                                 id: 0,
@@ -370,13 +471,27 @@ function Survey(props) {
                 });
                 console.log('Saved'); 
                 window.location.href = `http://172.16.210.22/`; 
+                if(surveyCookie){
+                    removeCookie('survey')
+                    }
             })
             .catch((response) => {//종류불문 에러
                 console.log('Error');
                 console.log(dataToTransport);
             });
             handleDownload();
-    }
+        }
+        function checkCookie(){
+            if(surveyCookie){
+                if(window.confirm("이전 저장 내용을 불러오시겠습니까")){
+                    
+                }
+                else{removeCookie('survey')
+                window.location.replace("/survey")    
+            }
+
+            }
+        }
 
     return (
        

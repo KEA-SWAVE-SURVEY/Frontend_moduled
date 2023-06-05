@@ -9,10 +9,10 @@ import SkeletonGrid from '../skeleton/SkeletonGrid';
 import { loginState, modifyState } from '../../contexts/atom';
 
 import '../../styles/HomeStyles.css'
-import exampleImg0 from '../../assets/example0.png';
-import exampleImg1 from '../../assets/example1.png';
-import exampleImg2 from '../../assets/example2.png';
-import exampleImg3 from '../../assets/example3.png';
+import spring from '../../assets/spring.JPG';
+import product1 from '../../assets/product1.JPG';
+import fall from '../../assets/fall.jpg';
+import tomorrow from '../../assets/tomorrow.JPG';
 import grid from '../../assets/grid.png';
 import list from '../../assets/list.png';
 import ascending from '../../assets/ascending.png';
@@ -24,7 +24,8 @@ import HaveNoSurvey from './HaveNoSurvey';
 import {getCookie} from '../login/cookie'
 
 function AfterLogin(props) {
-    const cookie = getCookie("token");
+    //const cookie = getCookie("token");
+    const cookie = sessionStorage.getItem('token')
     const setNavItem = useSetRecoilState(navbarItemState);
     const isLogined = useRecoilValue(loginState);
 
@@ -41,11 +42,11 @@ function AfterLogin(props) {
     const [pageNumberList, setPageNumberList] =useState([]);
 
     const template = [
-        { title: "연락처 정보", description: "연락처 정보", img: exampleImg0, date: 1 },
-        { title: "티셔츠 신청", description: "티셔츠 신청", img: exampleImg1, date: 2 },
-        { title: "행사 참석 여부", description: "행사 참석 여부", img: exampleImg2, date: 3 },
-        { title: "파티 초대", description: "파티 초대", img: exampleImg3, date: 4 }
-    ];
+        { title: "봄 활동 조사", description: "축하드립니다", img: spring, date: 1 },
+        { title: "제품 만족도 조사", description: "제품", img: product1, date: 2 },
+        { title: "가을 독서 대회 참석 여부", description: "날짜", img: fall, date: 3 },
+        { title: "tomorrow", description: "내일은", img: tomorrow, date: 4 }
+     ];
 
     function sendRequestSurveyList(method, page, sort1, sort2) {
         var uri = '/api/external/survey-list';

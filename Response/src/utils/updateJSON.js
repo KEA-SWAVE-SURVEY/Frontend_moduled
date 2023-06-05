@@ -1,3 +1,4 @@
+//수정 업데이트 json수정필요
 export function updateSurveyContent(json, newContent, indexToUpdate) {
     return {
         id : json.id,
@@ -5,9 +6,11 @@ export function updateSurveyContent(json, newContent, indexToUpdate) {
         description : json.description,
         type : json.type,
         reliability:json.reliability,
-        font:json.font,
-        fontSize:json.fontSize,
-        backColor:json.backColor,
+        design:{
+            font:json.design.font,
+            fontSize:json.design.fontSize,
+            backColor:json.design.backColor,
+        },
         questionRequest : [
             ...json.questionRequest.slice(0, indexToUpdate),
             newContent,

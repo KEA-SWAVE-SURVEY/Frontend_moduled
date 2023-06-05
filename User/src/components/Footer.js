@@ -1,6 +1,21 @@
 import '../styles/FooterStyles.css'
+ 
+
+
+import {removeCookie} from './login/cookie'
+
+
+//project
+
+
 
 const Footer = () =>{
+     
+    function onClickLogout() {
+        //removeCookie('token') 
+        sessionStorage.removeItem('token')
+        window.location.href = `http://172.16.210.22/`; 
+    }
     return(
         <>
         <div className='footer'>
@@ -36,8 +51,8 @@ const Footer = () =>{
                 <div>
                    <h4>Community</h4>
                    <a href="/">Github</a>
-                   <a href="/">Issues</a>
-                   <a href="/">Projects</a>
+                   <a href="/mypage">mypage</a>
+                   <a onClick={onClickLogout} style={{cursor:'pointer'}}>Logout</a> 
                    <a href="/">Twitter</a> 
                 </div>
                 <div>

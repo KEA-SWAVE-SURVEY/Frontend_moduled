@@ -31,12 +31,11 @@ function CreateSurvey(props) {
                 title : prev.title,
                 description : prev.description,
                 reliability: prev.reliability,
-                backColor:prev.backColor,
+                
                 startDate:prev.startDate,
                 endDate: prev.endDate,
                 enable: prev.enable,
-                font:prev.font,
-                fontSize:prev.fontSize, 
+                design:prev.design, 
                 type : prev.type,
                 questionRequest : deletedContent
             }; 

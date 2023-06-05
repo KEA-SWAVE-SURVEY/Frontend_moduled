@@ -57,12 +57,11 @@ const SideDate = () => {
           description: prev.description,
           type: prev.type,
           reliability: prev.reliability,
-          backColor:prev.backColor,
+          
           startDate:cStartDate,
           endDate: cEndDate,
           enable: cEnable,
-          font:prev.font,
-          fontSize:prev.fontSize,
+          design:prev.design,
           questionRequest: prev.questionRequest
       }
   })
@@ -83,12 +82,11 @@ const SideDate = () => {
           description: prev.description,
           type: prev.type,
           reliability: prev.reliability,
-          backColor:prev.backColor,
+          
           startDate: cStartDate,
           endDate: prev.endDate,
           enable: prev.enable,
-          font:prev.font,
-          fontSize:prev.fontSize,
+          design:prev.design,
           questionRequest: prev.questionRequest
       }
   })
@@ -108,12 +106,11 @@ const SideDate = () => {
           description: prev.description,
           type: prev.type,
           reliability: prev.reliability,
-          backColor:prev.backColor,
+          
           startDate:prev.startDate,
           endDate: cEndDate,
           enable: prev.enable,
-          font:prev.font,
-          fontSize:prev.fontSize,
+          design:prev.design,
           questionRequest: prev.questionRequest
       }
   })

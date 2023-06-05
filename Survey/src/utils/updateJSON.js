@@ -5,12 +5,15 @@ export function updateSurveyContent(json, newContent, indexToUpdate) {
         description : json.description,
         type : json.type,
         reliability:json.reliability, 
-        backColor:json.backColor,
+        
         startDate:json.startDate,
         endDate: json.endDate,
         enable: json.enable,
-        font:json.font,
-        fontSize:json.fontSize, 
+        design:{
+            font:json.design.font,
+            fontSize:json.design.fontSize,
+            backColor:json.design.backColor,
+        },
         questionRequest : [
             ...json.questionRequest.slice(0, indexToUpdate),
             newContent,

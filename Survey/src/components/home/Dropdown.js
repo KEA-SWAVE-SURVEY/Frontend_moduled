@@ -14,10 +14,12 @@ function Dropdown(props) {
   }
   return (
     <>
+    <ul className='drop_ui'>
       <li className="dropdown_item" style={{borderRadius: "5px 5px 0 0"}} onClick={(e)=>onClickResearch(e)}>설문 분석</li>
       <li className="dropdown_item">내보내기</li>
       <li className="dropdown_item">복사</li>
       <li className="dropdown_item" style={{borderRadius: "0 0 5px 5px"}}>삭제</li>
+      </ul>
     </>
   );
 }

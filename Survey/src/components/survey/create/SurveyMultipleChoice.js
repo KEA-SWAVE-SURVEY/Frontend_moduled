@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useRecoilState,useRecoilValue } from 'recoil';
 import { surveyListState,fontState,fontSizeState } from '../../../contexts/atom';
 import { updateSurveyContent } from '../../../utils/updateJSON';
-
+import {setCookie,getCookie} from '../../../components/login/cookie'
 import MultipleChoiceOption from './MultipleChoiceOption';
 
 
@@ -33,6 +33,14 @@ function SurveyMultipleChoice(props) {
         });
         console.log(surveyList);
     }
+    const expirationTime = new Date();
+        expirationTime.setTime(expirationTime.getTime() + 30 * 60 * 1000);
+        setCookie('survey',surveyList,{
+            path:"/",
+            sameSite: "strict",
+            expires: expirationTime
+    
+          });
 
     function onClickAddOption(e) {
         e.preventDefault();

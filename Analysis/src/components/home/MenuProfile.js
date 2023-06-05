@@ -4,11 +4,21 @@ import '../../styles/NavbarStyles.css';
 import {removeCookie} from '../login/cookie'
 
 const MenuProfile = () => { 
-    function onClickLogout() {
-        removeCookie('token') 
+    
+   
+    const cookie = sessionStorage.getItem('token')
+    async function onClickLogout() {
+        if(window.confirm("로그아웃 하시겠습니까?")){
+            
+            sessionStorage.removeItem('token')
+            removeCookie('survey')
+            window.location.reload()
+            window.location.href = `http://172.16.210.22/`;
+            console.log(cookie)
+        }
         
-        window.location.href = `http://172.16.210.22/`; 
     }
+    
     function onClickMypage(e){
         e.preventDefault(); 
         

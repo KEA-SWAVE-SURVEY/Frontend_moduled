@@ -8,7 +8,9 @@ export default function BeforeAnswer() {
 
 
     const [surveyList, setSurveyList] = useRecoilState(surveyListState);
-
+    const { documentId } = useParams();
+    const decoded = base64_decode(documentId);
+    console.log(decoded + '| | '+ documentId)
     useEffect(() => {
         loadSurveys()
     }, []);
@@ -17,7 +19,7 @@ export default function BeforeAnswer() {
     //기한도 받고 싶다!!
     //http://localhost:8080/api/survey-participate/${id}
     const loadSurveys=async()=>{ 
-        const result = await axios.get(`/survey/external/load/${id}`);
+        const result = await axios.get(`/survey/external/load/${decoded}`);
         console.log(result)
         setSurveyList((prev) => {
             return {
@@ -26,14 +28,11 @@ export default function BeforeAnswer() {
                 description: result.data.description,
                 reliability: result.data.reliability,
 
-                
-                backColor:result.data.backColor,
                 startDate:result.data.startDate,
                 endDate: result.data.endDate,
                 enable: result.data.enable,
-
-                font:result.data.font,
-                fontSize:result.data.fontSize, 
+                
+                design:result.data.design,
                 type: result.data.type,
                 questionRequest: result.data.questionList.map((questionList) => {
                     return {
