@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import styles from "../../../styles/sidebar.module.css";
 import { useRecoilState, useRecoilValue } from 'recoil';
 
-import { surveyListState, relState } from '../../../contexts/atom';
+import { surveyListState, relState, enableState } from '../../../contexts/atom';
 import SideFont from "./SideFont";
 import SideSize from "./SideSize";
 import SideColor from "./SideColor";
+import SideDate from "./SideDate";
 
 import '../../../styles/SurveyStyle.css';
 
@@ -18,10 +19,13 @@ function SidebarSetting(props){
   const [surveyList, setSurveyList] = useRecoilState(surveyListState);
   const [isTheme, setIsTheme] = useState(true);
   const [viewRel, setViewRel] = useState('진정성 검사 미사용');
+  const [viewEnable, setViewEnable] = useState('설문 응답 받지 않기');
   const [fontOpen,setFontOpen] = useState(false)
   const [sizeOpen,setSizeOpen] = useState(false)
   const [colorOpen,setColorOpen] = useState(false)
-  const [Rel, setRel] = useRecoilState(relState);
+  const [dateOpen,setDateOpen] = useState(false)
+  const [Rel, setRel] = useRecoilState(relState)
+  const [enable, setEnable] = useRecoilState(enableState)
   const [font,setFont] = useState(false)
 
   function onClickThemeButton(e){
@@ -48,15 +52,43 @@ function SidebarSetting(props){
           description: prev.description,
           type: prev.type,
           reliability: !prel,
+          backColor:prev.backColor,
+          startDate:prev.startDate,
+          endDate: prev.endDate,
+          enable: prev.enable,
           design:prev.design,
           font:prev.font,
-          fontSize:prev.fontSize,
-          backColor:prev.backColor,
+          fontSize:prev.fontSize, 
           questionRequest: prev.questionRequest
       }
   })
   }
 
+  const toggleEnable = (e) => {
+    console.log(enable)
+    setViewEnable(prev=>prev==='설문 응답 받지 않기'?'설문 응답 받기':'설문 응답 받지 않기')
+    const prevEnable = enable;
+    setEnable(prev=>prev===true?false:true);
+    
+    setSurveyList((prev) => {
+      return {
+          id: prev.id,
+          title: prev.title,
+          description: prev.description,
+          type: prev.type,
+          reliability: prev.reliability,
+          backColor:prev.backColor,
+          startDate:prev.startDate,
+          endDate: prev.endDate,
+          enable: !prevEnable,
+          design:prev.design,
+          font:prev.font,
+          fontSize:prev.fontSize, 
+          questionRequest: prev.questionRequest
+      }
+  })
+  console.log(surveyList)
+  }
   return (
     <div className={styles.container}>
 
@@ -67,9 +99,9 @@ function SidebarSetting(props){
             <h2 className={isTheme? styles.menu_selected : styles.menu} onClick={(e)=>{onClickThemeButton(e)}}>테마</h2>
             <h2 className={isTheme? styles.menu : styles.menu_selected}  onClick={(e)=>{onClickManagementButton(e)}}>관리</h2>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '5%'}}>
+          <div  className={styles.sidebarList} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '5%'}}>
             {isTheme ?
-              <div style={{overflowY:'scroll',overflowX:'hidden',width:"100%",height:"60vh"}}>
+              <div className = {styles.sidebarList} style={{overflowY:'auto',overflowX:'hidden',width:"100%",height:"60vh"}}>
                 <button className={styles.setBtn} onClick={(e)=>setFontOpen(!fontOpen)}>폰트</button>
                 <div>
                 {
@@ -87,25 +119,42 @@ function SidebarSetting(props){
                  }
                 </div>
                 <button className={styles.setBtn} onClick={(e)=>setColorOpen(!colorOpen)}>배경 색상</button>
-                <div>
+                <div style={{display:'flex', width:'100%',alignItems:'center', justifyContent:'center' }}>
                 {
                 colorOpen && (
                     <SideColor/>
                 )
                   }
 
-                </div>
-                <button className={styles.setBtn} >파일 내보내기</button>
-                <button className={styles.setBtn} >설문 내보내기</button>
+                </div> 
               </div>
               :
-              <div>
+              <div  >
                 <button className={styles.setBtn} >템플릿 설정</button>
                 
-                <button className={styles.setBtn} >설문 기간 설정</button>
+                <button className={styles.setBtn} onClick={toggleEnable}>
+                  {viewEnable}
+                  </button>
+
                 <button className={styles.setBtn} onClick={toggleRel}>
                   {viewRel}
                   </button>
+
+                  
+                <button className={styles.setBtn} onClick={(e)=>setDateOpen(!dateOpen)}>설문 기간 설정</button>
+                <div>
+                {
+                dateOpen && (
+                  
+                <div style={{display:'flex', width:'100%',alignItems:'center', justifyContent:'center' }}>
+
+
+<SideDate/>
+                  </div> 
+                )
+                  }
+
+                </div> 
               </div>
               
             }

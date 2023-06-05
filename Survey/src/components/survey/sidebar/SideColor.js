@@ -23,6 +23,9 @@ const SideColor = () => {
             type: prev.type,
             reliability: prev.reliability,
             backColor:cbackColor,
+            startDate:prev.startDate,
+            endDate: prev.endDate,
+            enable: prev.enable,
             font:prev.font,
             fontSize:prev.fontSize,
             questionRequest: prev.questionRequest

@@ -57,7 +57,7 @@ function Navbar(props) {
     }
     
     function getMe(){
-        axios.get('/api/me',{
+        axios.get('/user/external/me',{
             headers: {
             Authorization: cookie,
             },

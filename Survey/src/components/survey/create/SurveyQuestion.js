@@ -23,9 +23,12 @@ function SurveyQuestion(props) {
                 type : prev.questionRequest[surveyIndex].type,
                 title : e.target.value,
                 reliability:prev.reliability,
-                font:prev.font,
-                fontSize:prev.fontSize,
                 backColor:prev.backColor,
+                startDate:prev.startDate,
+                endDate: prev.endDate,
+                enable: prev.enable,
+                font:prev.font,
+                fontSize:prev.fontSize, 
                 choiceList : []
             };
             return updateSurveyContent(prev, newContent, surveyIndex);

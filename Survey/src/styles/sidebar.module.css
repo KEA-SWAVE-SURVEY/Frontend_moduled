@@ -36,6 +36,15 @@
   z-index: 999;
 }
 
+.container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: black;
+  border-radius: 10px;
+}
+
 .sidebar {
   background-color: #fff;
   border-radius: 16px;
@@ -43,8 +52,9 @@
   margin-right: 5%;
   margin-left: 5%;
   box-shadow: 0 10px 20px rgba(2, 4, 142, 0.15);
+  overflow-y: scroll;
 }
-
+ 
 .content {
   position: relative;
   padding: 5% 5% 0 5%;
@@ -194,4 +204,17 @@ button{
   width: 2vw;
   height: 2vw;
   cursor: pointer;
+}
+ 
+
+.sidebarList{ 
+  align-items: center;
+} 
+.sidebarList::-webkit-scrollbar {
+  width: 10px;
+}
+
+.sidebarList::-webkit-scrollbar-thumb {
+  background-color: black;
+  border-radius: 10px;
 }

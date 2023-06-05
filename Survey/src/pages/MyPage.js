@@ -110,7 +110,7 @@ function MyPage() {
     console.log(isLogined.name);
     console.log(isLogined.info);
      // axios.post(`/api /response/create`, answerList,
-     axios.post(`/api/external/response/create`, {
+     axios.post(`/user/external/updatepage`, {
 "nickname":isLogined.name,
 "description": isLogined.info
 

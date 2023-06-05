@@ -13,6 +13,21 @@ import Sidebar from '../components/survey/sidebar/Sidebar';
 import html2canvas from "html2canvas";
 import saveAs from "file-saver";
 
+function dateFormat(date) {
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let hour = date.getHours();
+    let minute = date.getMinutes();
+    let second = date.getSeconds();
+  
+    month = month >= 10 ? month : '0' + month;
+    day = day >= 10 ? day : '0' + day;
+    hour = hour >= 10 ? hour : '0' + hour;
+    minute = minute >= 10 ? minute : '0' + minute;
+    second = second >= 10 ? second : '0' + second;
+  
+    return date.getFullYear() + '-' + month + '-' + day + ' ';
+  }
 
 function Survey(props) {
     const isLogined = useRecoilValue(loginState);
@@ -64,9 +79,12 @@ function Survey(props) {
                     description: "",
                     type: 0,
                     reliability: 1,
-                    font:"",
-                    fontSize:3,
                     backColor:'#ffffff',
+                    startDate:dateFormat(new Date()),
+                    endDate: dateFormat(new Date()),
+                    enable: false, 
+                    font:"",
+                    fontSize:3, 
                     questionRequest: [
                         {
                             id: 0,
@@ -92,9 +110,12 @@ function Survey(props) {
                 description: prev.description,
                 type: prev.type,
                 reliability: prev.reliability,
-                font:prev.font,
-                fontSize:prev.fontSize,
                 backColor:prev.backColor,
+                startDate:prev.startDate,
+                endDate: prev.endDate,
+                enable: prev.enable,
+                font:prev.font,
+                fontSize:prev.fontSize, 
                 questionRequest: [...updated]
             }
         }
@@ -117,9 +138,13 @@ function Survey(props) {
                 description: prev.description,
                 type: prev.type,
                 reliability:prev.reliability,
-                font:prev.font,  
-                fontSize:prev.fontSize,
+                
                 backColor:prev.backColor,
+                startDate:prev.startDate,
+                endDate: prev.endDate,
+                enable: prev.enable,
+                font:prev.font,  
+                fontSize:prev.fontSize, 
                 questionRequest: [
                     ...prev.questionRequest,
                     {
@@ -150,10 +175,13 @@ function Survey(props) {
                 title: e.target.value,
                 description: prev.description,
                 type: prev.type,
-                reliability:prev.reliability,
-                font:prev.font,
-                fontSize:prev.fontSize,
+                reliability:prev.reliability, 
                 backColor:prev.backColor,
+                startDate:prev.startDate,
+                endDate: prev.endDate,
+                enable: prev.enable,
+                font:prev.font,
+                fontSize:prev.fontSize, 
                 questionRequest: prev.questionRequest
             };
         });
@@ -168,9 +196,12 @@ function Survey(props) {
                 description: e.target.value,
                 type: prev.type,
                 reliability:prev.reliability,
-                font:prev.font,
-                fontSize:prev.fontSize,
                 backColor:prev.backColor,
+                startDate:prev.startDate,
+                endDate: prev.endDate,
+                enable: prev.enable,
+                font:prev.font,
+                fontSize:prev.fontSize, 
                 questionRequest: prev.questionRequest
             };
         });
@@ -284,7 +315,7 @@ function Survey(props) {
         var url = '/api/external/create';
         console.log(url);
         //if (isModify) url = `/api/modify-survey/${surveyList.id}` //임시
-        if (isModify) url = `/api/external/modify-survey/${surveyList.id}` //임시
+        if (isModify) url = `/api/external/update/${surveyList.id}` //임시
         axios.post(url, dataToTransport,
             {
                 headers: {
@@ -302,6 +333,9 @@ function Survey(props) {
                         type: 0,
                         reliability:1, //notion상에서는 Boolean인데 이거 변경할지
                         font:"", // design쪽 notion에는 없는데 일단 유지 
+                        startDate:dateFormat(new Date()),
+                        endDate: dateFormat(new Date()),
+                        enable: true,
                         fontSize:0,
                         backColor:"#ffffff",
                         questionRequest: [

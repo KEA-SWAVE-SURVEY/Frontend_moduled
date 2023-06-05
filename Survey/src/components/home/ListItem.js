@@ -17,16 +17,19 @@ function ListItem(props) {
         e.preventDefault();
         const loadSurveys = async()=>{
             // const result = await axios.get(`/api/load-survey/${id}`);
-            const result = await axios.get(`/api/external/load-survey/${id}`);
+            const result = await axios.get(`/survey/external/load/${id}`);
             setSurveyList((prev) => {
                 return {
                     id: result.data.id,
                     title: result.data.title,
                     description: result.data.description,
                     reliability: result.data.reliability,
+                    backColor:result.data.backColor, 
+                    startDate:result.data.startDate,
+                    endDate: result.data.endDate,
+                    enable: result.data.enable,
                     font:result.data.font,
-                    fontSize:result.data.fontSize,
-                    backColor:result.data.backColor,
+                    fontSize:result.data.fontSize,  
                     type: result.data.type,
                     questionRequest: result.data.questionList.map((questionList) => {
                         return {

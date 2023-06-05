@@ -89,7 +89,7 @@ export const backColorState = atom({
     default: '#ffffff'
 });
 
-
+ 
 export const designState = atom({
     key: "designState",
     default: {
@@ -97,4 +97,22 @@ export const designState = atom({
         fontSize : "",
         layout:""
     }
+});
+
+
+
+export const startDateState = atom({
+    key: "startDayState",
+    default: new Date()
+});
+
+
+export const endDateState = atom({
+    key: "endDayState",
+    default: new Date()
+});
+
+export const enableState = atom({
+    key: "enableState",
+    default: `false`
 });

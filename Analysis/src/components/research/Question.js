@@ -88,6 +88,11 @@ function Question() {
                 title: result.data.title,
                 description: result.data.description,
                 reliability: result.data.reliability,
+                backColor:result.data.backColor,
+                startDate:result.data.startDate,
+                endDate: result.data.endDate,
+                enable: result.data.enable,
+                
                 font:result.data.font,
                 fontSize:result.data.fontSize,
                 backColor:result.data.backColor,

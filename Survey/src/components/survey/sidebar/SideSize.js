@@ -19,10 +19,13 @@ const FontSize = () => {
           title: prev.title,
           description: prev.description,
           type: prev.type,
-          reliability: prev.reliability,
-          font:prev.font,
-          fontSize:cfontSize,
+          reliability: prev.reliability, 
           backColor:prev.backColor,
+          startDate:prev.startDate,
+          endDate: prev.endDate,
+          enable: prev.enable,
+          font:prev.font,
+          fontSize:cfontSize, 
           questionRequest: prev.questionRequest
       }
   })
@@ -40,6 +43,9 @@ const FontSize = () => {
           description: prev.description,
           type: prev.type,
           reliability: prev.reliability,
+          startDate:prev.startDate,
+          endDate: prev.endDate,
+          enable: prev.enable,
           font:prev.font,
           fontSize:cfontSize,
           backColor:prev.backColor,

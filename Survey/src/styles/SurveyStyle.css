@@ -390,3 +390,17 @@
   .dragGhost{
     opacity: 0.1;
   }
+
+
+  
+.analyzeBox{    
+}
+
+.analyzeBox::-webkit-scrollbar {
+  width: 10px;
+}
+
+.analyzeBox::-webkit-scrollbar-thumb {
+  background-color: black;
+  border-radius: 10px;
+}

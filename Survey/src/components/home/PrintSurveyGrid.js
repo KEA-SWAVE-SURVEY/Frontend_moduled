@@ -17,7 +17,7 @@ function PrintSurveyGrid(props) {
         e.preventDefault();
         const loadSurveys = async()=>{
             // const result = await axios.get(`/api/load-survey/${id}`); 이부분 POST인데 GET으로 되어있음
-            const result = await axios.get(`/api/external/load-survey/${id}`);
+            const result = await axios.get(`/survey/external/load/${id}`);
             console.log(result)
             setSurveyList((prev) => {
                 return {
@@ -25,9 +25,12 @@ function PrintSurveyGrid(props) {
                     title: result.data.title,
                     description: result.data.description,
                     reliability: result.data.reliability,
-                    font:result.data.font,
-                    fontSize:result.data.fontSize,
                     backColor:result.data.backColor,
+                    startDate:result.data.startDate,
+                    endDate: result.data.endDate,
+                    enable: result.data.enable,
+                    font:result.data.font,
+                    fontSize:result.data.fontSize, 
                     type: result.data.type,
                     questionRequest: result.data.questionList.map((questionList) => {
                         return {

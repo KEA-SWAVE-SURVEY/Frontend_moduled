@@ -16,8 +16,8 @@ export default function BeforeAnswer() {
     //난제 랜덤이미지로 만들 때 변수를 잘 저장할 수 있도록
     //기한도 받고 싶다!!
     //http://localhost:8080/api/survey-participate/${id}
-    const loadSurveys=async()=>{
-        const result = await axios.get(`/api/load-survey/1`);
+    const loadSurveys=async()=>{ 
+        const result = await axios.get(`/survey/external/load/${id}`);
         console.log(result)
         setSurveyList((prev) => {
             return {
@@ -25,9 +25,15 @@ export default function BeforeAnswer() {
                 title: result.data.title,
                 description: result.data.description,
                 reliability: result.data.reliability,
-                font:result.data.font,
-                fontSize:result.data.fontSize,
+
+                
                 backColor:result.data.backColor,
+                startDate:result.data.startDate,
+                endDate: result.data.endDate,
+                enable: result.data.enable,
+
+                font:result.data.font,
+                fontSize:result.data.fontSize, 
                 type: result.data.type,
                 questionRequest: result.data.questionList.map((questionList) => {
                     return {

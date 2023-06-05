@@ -63,6 +63,9 @@ const SideFont = () => {
           type: prev.type,
           reliability: prev.reliability,
           backColor:prev.backColor,
+          startDate:prev.startDate,
+          endDate: prev.endDate,
+          enable: prev.enable,
           font:cfont,
           fontSize:prev.fontSize,
           questionRequest: prev.questionRequest
