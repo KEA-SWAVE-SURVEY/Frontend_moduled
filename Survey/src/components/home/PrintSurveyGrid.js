@@ -18,6 +18,7 @@ function PrintSurveyGrid(props) {
         const loadSurveys = async()=>{
             // const result = await axios.get(`/api/load-survey/${id}`); 이부분 POST인데 GET으로 되어있음
             const result = await axios.get(`/survey/external/load/${id}`);
+            //의논 설문 참여가 아닌 설문 상세 조회가 아닌지? load로 통일 0606
             console.log(result)
             setSurveyList((prev) => {
                 return {
