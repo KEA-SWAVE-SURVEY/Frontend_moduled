@@ -7,7 +7,9 @@ import {getCookie} from '../components/login/cookie'
 
 export default function Home(props) {
   const isLogined = useRecoilValue(loginState);
-  const cookie = getCookie("token");
+  //const cookie = getCookie("token");
+  
+  const cookie = sessionStorage.getItem('token')
   console.log(cookie)
   return (
     <>

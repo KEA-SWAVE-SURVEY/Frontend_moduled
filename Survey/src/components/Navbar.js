@@ -20,8 +20,15 @@ function Navbar(props) {
     const [isOpen,setIsOpen] = useState(false);
     
     const [isLogined,setIsLogined] = useRecoilState(loginState);
+<<<<<<< Updated upstream
     const cookie = getCookie("token");//쿠키 가져옴 2/3
  
+=======
+    //const cookie = getCookie("token");//쿠키 가져옴 2/3
+
+    const cookie = sessionStorage.getItem('token')
+    const navigate = useNavigate();
+>>>>>>> Stashed changes
     const scrollTo = props.scrollTo;
 
     const handleMouseOver = () => {
