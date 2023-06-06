@@ -6,6 +6,8 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { startDateState,endDateState, enableState, surveyListState } from '../../../contexts/atom';
 //import * as ReactBootStrap from 'react-bootstrap';
 
+import {setCookie} from '../../../components/login/cookie'
+
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 

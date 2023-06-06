@@ -7,6 +7,8 @@ import { fontState, surveyListState } from '../../../contexts/atom';
 //import * as ReactBootStrap from 'react-bootstrap';
 
 
+import {setCookie} from '../../../components/login/cookie'
+
 
 const SideFont = () => {
   const [surveyList, setSurveyList] = useRecoilState(surveyListState);

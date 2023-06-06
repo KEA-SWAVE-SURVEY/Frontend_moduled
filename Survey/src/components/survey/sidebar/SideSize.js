@@ -4,6 +4,8 @@ import { useRecoilState } from 'recoil';
 import { surveyListState,fontSizeState } from '../../../contexts/atom';
 
 
+import {setCookie} from '../../../components/login/cookie'
+
 const FontSize = () => {
   const [fontSize, setFontSize] = useRecoilState(fontSizeState)
   const [surveyList, setSurveyList] = useRecoilState(surveyListState);

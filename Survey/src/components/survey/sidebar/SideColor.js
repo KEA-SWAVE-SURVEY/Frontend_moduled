@@ -4,6 +4,9 @@ import { useRecoilState } from 'recoil';
 import {surveyListState,backColorState } from '../../../contexts/atom';
 import {SketchPicker} from 'react-color';
 
+import {setCookie} from '../../../components/login/cookie'
+
+
 
 
 const SideColor = () => {
