@@ -16,6 +16,7 @@ import { EffectCoverflow, Pagination, Navigation,EffectFade,Autoplay } from 'swi
 
 
 
+
 export default function Swipers() {
   return (
     <div>
