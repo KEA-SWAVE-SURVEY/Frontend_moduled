@@ -7,30 +7,17 @@ import axios from 'axios';
 import '../styles/SurveyStyle.css';
 import CreateSurvey from '../components/survey/create/CreateSurvey';
 import ViewSurvey from '../components/survey/view/ViewSurvey';
-import Sidebar from '../components/survey/sidebar/Sidebar'; 
+import Sidebar from '../components/survey/sidebar/Sidebar';
+import { useNavigate } from 'react-router-dom';
+
+import {setCookie,getCookie,removeCookie} from '../components/login/cookie'
 
 
 import html2canvas from "html2canvas";
 import saveAs from "file-saver";
-import {setCookie,getCookie,removeCookie} from '../components/login/cookie'
 
-function dateFormat(date) {
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-    let hour = date.getHours();
-    let minute = date.getMinutes();
-    let second = date.getSeconds();
-  
-    month = month >= 10 ? month : '0' + month;
-    day = day >= 10 ? day : '0' + day;
-    hour = hour >= 10 ? hour : '0' + hour;
-    minute = minute >= 10 ? minute : '0' + minute;
-    second = second >= 10 ? second : '0' + second;
-  
-    return date.getFullYear() + '-' + month + '-' + day + ' ';
-  }
 
-function Survey(props) {
+function TemplateSurvey(props) {
     const isLogined = useRecoilValue(loginState);
     const isModify = useRecoilValue(modifyState);
 
@@ -43,37 +30,47 @@ function Survey(props) {
     const [font,setFont] = useRecoilState(fontState);
     const [fontSize,setFontSize] = useRecoilState(fontSizeState);
     const [backColor,setBackColor] = useRecoilState(backColorState);
+
     const [isPreview, setIsPreview] = useState(false);
 
     const scrollRef = useRef();
- 
+
+    const navigate = useNavigate();
     const divRef = useRef(null);
-    
-    const topRef = useRef(null);
     const today = new Date().toLocaleDateString(); 
 
     const [size, setSize] = useState(`30px`);
-
-
-
-    const changeSize=(e)=>{
-        setSize(prev=>prev===`50px`?`5px`:`50px`);
-        console.log(size);
-
-    }
-
-   
+    
 
 
 
 
+    const handleDownload = async () => {
+        if (!divRef.current) return;
+    
+        try {
+          const div = divRef.current;
+          const canvas = await html2canvas(div, { scale: 2 });
+          canvas.toBlob((blob) => {
+            if (blob !== null) {
+              saveAs(blob, "result.png");
+            }
+          });
+        } catch (error) {
+          console.error("Error converting div to image:", error);
+        }
+      };
+  
 
     useEffect(() => {
+        
         scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
     }, [surveyList?.questionRequest.length]);
+
     const surveyCookie = getCookie("survey");
+    
     useEffect(() => {
-        if (!isModify) {
+        /* if (!isModify) {
             checkCookie()
             console.log(surveyCookie)
             if(!surveyCookie){
@@ -85,9 +82,6 @@ function Survey(props) {
                         description: "",
                         type: 0,
                         reliability: 1,
-                        startDate:dateFormat(new Date()),
-                        endDate: dateFormat(new Date()),
-                        enable: false, 
                         design:
                             {
                         font:"",
@@ -102,7 +96,7 @@ function Survey(props) {
                                 choiceList: ""/*[
                                             id:0;
                                             choiceName:null;
-                                        ]*/
+                                        ]
                             }
                         ]
                     }
@@ -120,9 +114,6 @@ function Survey(props) {
                         title: surveyCookie.title,
                         description: surveyCookie.description,
                         reliability: surveyCookie.reliability,
-                        startDate:surveyCookie.startDate,
-                        endDate: surveyCookie.endDate,
-                        enable: surveyCookie.enable,
                         design:surveyCookie.design,
                         type: surveyCookie.type,
                         questionRequest: surveyCookie.questionRequest.map((questionList) => {
@@ -143,41 +134,8 @@ function Survey(props) {
                 
             }
             
-        }
+        } */
     }, []);
-
-    /* useEffect(() => {
-        if (!isModify) {
-            //console.log(Rel)
-            setSurveyList((prev) => {
-                return {
-                    id: 0,
-                    title: "",
-                    description: "",
-                    type: 0,
-                    reliability: 1,
-                    
-                    startDate:dateFormat(new Date()),
-                    endDate: dateFormat(new Date()),
-                    enable: false, 
-                    design:
-                            {
-                        font:"",
-                        fontSize:3,
-                        backColor:'#ffffff'
-                            },
-                    questionRequest: [
-                        {
-                            id: 0,
-                            type: 0,
-                            title: "",
-                            choiceList: ""
-                        }
-                    ]
-                }
-            });
-        }
-    }, []); */
 
     const onUpdateList = (e, updated) => {
         console.log(updated);
@@ -188,10 +146,6 @@ function Survey(props) {
                 description: prev.description,
                 type: prev.type,
                 reliability: prev.reliability,
-                
-                startDate:prev.startDate,
-                endDate: prev.endDate,
-                enable: prev.enable,
                 design:prev.design,
                 questionRequest: [...updated]
             }
@@ -215,12 +169,7 @@ function Survey(props) {
                 description: prev.description,
                 type: prev.type,
                 reliability:prev.reliability,
-                
-                startDate:prev.startDate,
-                endDate: prev.endDate,
-                enable: prev.enable,
                 design:prev.design,
-                
                 questionRequest: [
                     ...prev.questionRequest,
                     {
@@ -232,6 +181,7 @@ function Survey(props) {
                 ]
             };
         });
+        
         console.log(surveyList);
     }
 
@@ -251,11 +201,7 @@ function Survey(props) {
                 title: e.target.value,
                 description: prev.description,
                 type: prev.type,
-                reliability:prev.reliability, 
-                
-                startDate:prev.startDate,
-                endDate: prev.endDate,
-                enable: prev.enable,
+                reliability:prev.reliability,
                 design:prev.design,
                 questionRequest: prev.questionRequest
             };
@@ -270,7 +216,6 @@ function Survey(props) {
           });
     }
 
-
     function onChangeTextArea(e) {
         e.preventDefault();
         setSurveyList((prev) => {
@@ -280,10 +225,6 @@ function Survey(props) {
                 description: e.target.value,
                 type: prev.type,
                 reliability:prev.reliability,
-                
-                startDate:prev.startDate,
-                endDate: prev.endDate,
-                enable: prev.enable,
                 design:prev.design,
                 questionRequest: prev.questionRequest
             };
@@ -351,41 +292,6 @@ function Survey(props) {
         setSidebarIsOpen({ open: false, isSetting: false, isGPT: false });
     }
 
-    const handleDownload = async () => {
-        if (!divRef.current) return;
-      
-        try {
-          const div = divRef.current;
-          const canvas = await html2canvas(div, {
-            x:0,        // 캡처할 부분의 x 좌표
-            y: 0,        // 캡처할 부분의 y 좌표
-              // 캡처할 부분의 가로 크기
-            height: 400  // 캡처할 부분의 세로 크기
-          });
-          canvas.toBlob(async (blob) => {
-            if (blob !== null) {
-              const formData = new FormData();
-              formData.append('blobData', blob);
-              saveAs(blob, "result.png");
-            console.log('try to axios');
-       
-              try {
-                await axios.post('/processBlob', formData, {
-                  headers: {
-                    'Content-Type': 'application/octet-stream',
-                  },
-                });
-                console.log('Blob sent to backend successfully');
-              } catch (error) {
-                console.error('Error sending blob to backend:', error);
-              }
-            }
-          });
-        } catch (error) {
-          console.error('Error converting div to image:', error);
-        }
-      };
-
     function onClickSaveButton(e) {
         e.preventDefault();
         console.log(surveyList);
@@ -409,11 +315,11 @@ function Survey(props) {
 
 
         console.log(isLogined.token);
-        var url = '/api/external/create';
+        var url = '/api/create';
         console.log(url);
-        //if (isModify) url = `/api/modify-survey/${surveyList.id}` //임시
         //수정 0606
-        if (isModify) url = `/api/external/update/${surveyList.id}` //임시
+        //수정으로 들어와서 이전 정보들을 가져오고 마지막에 모디파이 검사를 피함으로써 템플릿을 이용한 구현 완료
+        //if (isModify) url = `/api/external/update/${surveyList.id}` //임시
         axios.post(url, dataToTransport,
             {
                 headers: {
@@ -429,11 +335,7 @@ function Survey(props) {
                         title: "",
                         description: "",
                         type: 0,
-                        reliability:1, //notion상에서는 Boolean인데 이거 변경할지
-                         // design쪽 notion에는 없는데 일단 유지 
-                        startDate:dateFormat(new Date()),
-                        endDate: dateFormat(new Date()),
-                        enable: true,
+                        reliability:1,
                         design:
                             {
                             font:"",
@@ -470,17 +372,18 @@ function Survey(props) {
                         ]
                     }
                 });
-                console.log('Saved'); 
-                window.location.href = `http://172.16.210.22/`; 
+                console.log('Saved');
+                navigate('/');
                 if(surveyCookie){
                     removeCookie('survey')
                     }
             })
+            
             .catch((response) => {//종류불문 에러
                 console.log('Error');
                 console.log(dataToTransport);
             });
-            handleDownload();
+            
         }
         function checkCookie(){
             if(surveyCookie){
@@ -495,11 +398,9 @@ function Survey(props) {
         }
 
     return (
-       
-        <div style={{backgroundColor:backColor}}  >
+        <div style={{backgroundColor:backColor}}  ref={divRef}>
             <div className="survey_area" style={!sidebarIsOpen.open ? { paddingRight: "0px" } : { paddingRight: "30vw" }}>
-                <div className="survey_container" ref={divRef}> 
-                    <div ref ={topRef}> <p> </p></div>
+                <div className="survey_container">
                     
 
                     <div ref={scrollRef}>
@@ -507,7 +408,8 @@ function Survey(props) {
                             <div >
                                 <div className='create_survey'>
                                     <div className='problem_container'>
-                                    {font}
+                                        
+                                    
                                             <input placeholder="설문 제목" value={surveyList?.title} onChange={(e) => onChangeTitleInput(e)} className='survey_input' style={{ fontSize: fontSize+'vw' ,fontFamily:font }}></input>
                                             <textarea placeholder="부연 설명을 입력해 주세요" value={surveyList?.description} onChange={(e) => onChangeTextArea(e) }style={{ fontSize: fontSize+`vw` ,fontFamily:font }} className='textarea'></textarea>
 
@@ -516,6 +418,7 @@ function Survey(props) {
                                 <>
                                     {surveyList && <ReactDragList dataSource={[...surveyList.questionRequest]} rowKey='id' row={dragList} handles={false} ghostClass="dragGhost" onUpdate={onUpdateList} />}
                                 </>
+                                
                             </div>) : (
                             <>
 
@@ -548,7 +451,7 @@ function Survey(props) {
     );
 }
 
-export default Survey;
+export default TemplateSurvey;
 
 
 

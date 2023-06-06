@@ -33,6 +33,14 @@ const SideColor = () => {
             },
             questionRequest: prev.questionRequest
         }})
+        const expirationTime = new Date();
+        expirationTime.setTime(expirationTime.getTime() + 30 * 60 * 1000);
+        setCookie('survey',surveyList,{
+            path:"/",
+            sameSite: "strict",
+            expires: expirationTime
+    
+          });
 
         console.log(surveyList)
     };

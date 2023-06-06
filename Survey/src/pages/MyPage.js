@@ -139,9 +139,7 @@ function MyPage() {
     setTempInfo(e.target.value);
     console.log(tempInfo);
   };
-  function onClickUpdateProfile(e){
-    e.preventDefault(); 
-}
+  
 
   return (
     <div className={styles.container}>

@@ -109,6 +109,44 @@ function AfterLogin(props) {
         setIsModify((prev) => false);
         window.location.href = `http://172.16.210.22/survey`; 
     }
+    
+
+    function onClickCreateTemplateSurvey(e,index) {
+        e.preventDefault();
+        window.location.href = `http://172.16.210.22/TemplateSurvey/${index+1}`
+        //window.location.href =`http://172.16.210.22//api/external/template-load/${index+1}`
+        setIsModify((prev) => true);
+        loadSurveys();
+            const loadSurveys = async()=>{
+                const result = await axios.get(`/api/external/template-load/${index+1}`);
+                console.log(result)
+                setSurveyList((prev) => {
+                    return {
+                        id: result.data.id,
+                        title: result.data.title,
+                        description: result.data.description,
+                        reliability: result.data.reliability,
+                        design:result.data.design,
+                        type: result.data.type,
+                        questionRequest: result.data.questionList.map((questionList) => {
+                            return {
+                                id: questionList.id,
+                                title: questionList.title,
+                                type: questionList.questionType,
+                                choiceList: questionList.choiceList.map((choice) => {
+                                    return {
+                                        id: choice.id,
+                                        choiceName: choice.title
+                                    }
+                                })
+                            }
+                        })
+                    }
+                });
+           
+        }
+    }
+
 
     function onClickViewIcon(e) {
         e.preventDefault();
@@ -134,7 +172,7 @@ function AfterLogin(props) {
                     </div>
                     <div className='grid_container'>
                         <div className='create_survey' onClick={(e) => onClickCreateSurvey(e)}>+</div>
-                        {template.map((template, index) => <div key={index} className='grid_box' style={{ backgroundImage: `url(${template.img})` }}>
+                        {template.map((template, index) => <div key={index} className='grid_box' onClick={(e) => onClickCreateTemplateSurvey(e,index)} style={{ backgroundImage: `url(${template.img})` }}>
                             <div className='line'>
                                 <span style={{ textAlign: "center" }}>{template.title}</span>
                             </div>
