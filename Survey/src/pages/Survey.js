@@ -13,22 +13,7 @@ import Sidebar from '../components/survey/sidebar/Sidebar';
 import html2canvas from "html2canvas";
 import saveAs from "file-saver";
 import {setCookie,getCookie,removeCookie} from '../components/login/cookie'
-
-function dateFormat(date) {
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-    let hour = date.getHours();
-    let minute = date.getMinutes();
-    let second = date.getSeconds();
-  
-    month = month >= 10 ? month : '0' + month;
-    day = day >= 10 ? day : '0' + day;
-    hour = hour >= 10 ? hour : '0' + hour;
-    minute = minute >= 10 ? minute : '0' + minute;
-    second = second >= 10 ? second : '0' + second;
-  
-    return date.getFullYear() + '-' + month + '-' + day + ' ';
-  }
+ 
 
 function Survey(props) {
     const isLogined = useRecoilValue(loginState);
@@ -85,8 +70,8 @@ function Survey(props) {
                         description: "",
                         type: 0,
                         reliability: 1,
-                        startDate:dateFormat(new Date()),
-                        endDate: dateFormat(new Date()),
+                        startDate:new Date(),
+                        endDate: new Date(),
                         enable: false, 
                         design:
                             {
@@ -157,8 +142,8 @@ function Survey(props) {
                     type: 0,
                     reliability: 1,
                     
-                    startDate:dateFormat(new Date()),
-                    endDate: dateFormat(new Date()),
+                    startDate:new Date(),
+                    endDate: new Date(),
                     enable: false, 
                     design:
                             {
@@ -431,8 +416,8 @@ function Survey(props) {
                         type: 0,
                         reliability:1, //notion상에서는 Boolean인데 이거 변경할지
                          // design쪽 notion에는 없는데 일단 유지 
-                        startDate:dateFormat(new Date()),
-                        endDate: dateFormat(new Date()),
+                        startDate:new Date(),
+                        endDate: new Date(),
                         enable: true,
                         design:
                             {

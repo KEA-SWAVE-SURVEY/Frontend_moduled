@@ -11,22 +11,7 @@ import {setCookie} from '../../../components/login/cookie'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-function dateFormat(date) {
-  let month = date.getMonth() + 1;
-  let day = date.getDate();
-  let hour = date.getHours();
-  let minute = date.getMinutes();
-  let second = date.getSeconds();
-
-  month = month >= 10 ? month : '0' + month;
-  day = day >= 10 ? day : '0' + day;
-  hour = hour >= 10 ? hour : '0' + hour;
-  minute = minute >= 10 ? minute : '0' + minute;
-  second = second >= 10 ? second : '0' + second;
-
-  return date.getFullYear() + '-' + month + '-' + day + ' ';
-}
-
+ 
 
 const SideDate = () => {
   const [surveyList, setSurveyList] = useRecoilState(surveyListState);
@@ -47,8 +32,8 @@ const SideDate = () => {
      
 
   //return index
-    const cStartDate = dateFormat(startDate);
-    const cEndDate = dateFormat(endDate); 
+    const cStartDate = startDate;
+    const cEndDate = endDate; 
     const cEnable = enable; 
    console.log(cStartDate);
    console.log(cEndDate);
@@ -84,7 +69,7 @@ const SideDate = () => {
 
   //return index
   setStartDate(date)
-    const cStartDate = dateFormat(date);  
+    const cStartDate = date;  
     setSurveyList((prev) => {
       return {
           id: prev.id,
@@ -108,7 +93,7 @@ const SideDate = () => {
 
   //return index 
   setEndDate(date)
-    const cEndDate = dateFormat(date);   
+    const cEndDate = date;   
     setSurveyList((prev) => {
       return {
           id: prev.id,

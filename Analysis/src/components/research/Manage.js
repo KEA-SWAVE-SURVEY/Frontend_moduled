@@ -15,6 +15,7 @@ import QRCode from 'qrcode.react';
 import CsvDownloadButton from 'react-json-to-csv'
 
 
+import { useEffect } from "react";
 import axios from 'axios';
 export default function Manage() {
 
@@ -22,14 +23,21 @@ export default function Manage() {
   const { documentId } = useParams();
   const [block, setBlock] = useState(false); //TODO: 서버로부터 받아온걸로 미리 체크설정해두기, toggleBlock에 block 넣기 등
   const [check,setCheck] = useState('응답 받지않음')
+   
   
-  const [firstDate, setFirstDate] = useState(null);
-  const [lastDate, setLastDate] = useState(null);
+const [documentJson,setSurveyList] = useState(null); 
   
+const [firstDate, setFirstDate] = useState(null);
+const [lastDate, setLastDate] = useState(null);
+const result = {"id":0,"title":"2313","description":"412112","type":0,"reliability":false,"startDate":"2023-06-01T14:25:54.000Z","endDate":"2023-06-21T14:25:54.000Z","enable":false,"design":{"font":"","fontSize":3,"backColor":"#ffffff"},"questionRequest":[{"id":0,"type":2,"title":"12342141412","choiceList":[{"id":0,"choiceName":""}]}]}
+  
+
+
   const toggleBlock = () => {
     setBlock(!block);
     setCheck(prev=>prev==='응답 받지않음'?'응답 받음':'응답 받지않음')
     console.log(block);
+  
   }
 
   let encoded = base64_encode(documentId)
@@ -41,7 +49,7 @@ export default function Manage() {
     } catch (error) {
     }
   };
-
+ 
   
   const tempdata =[
     {

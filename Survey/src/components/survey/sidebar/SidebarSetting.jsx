@@ -41,6 +41,7 @@ function SidebarSetting(props){
 
   const toggleRel = (e) => {
     console.log(Rel)
+    console.log(JSON.stringify(surveyList))
     setViewRel(prev=>prev==='진정성 검사 사용'?'진정성 검사 미사용':'진정성 검사 사용')
     const prel = Rel;
     setRel (prev=>prev===1?0:1);
