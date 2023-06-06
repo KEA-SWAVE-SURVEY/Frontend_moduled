@@ -4,6 +4,10 @@ import { surveyListState} from '../contexts/atom';
 import axios from 'axios';
 import '../styles/BeforeAnswerStyles.css';
 
+import { useParams } from 'react-router-dom';
+
+import {decode as base64_decode} from 'base-64';
+
 export default function BeforeAnswer() {
 
 
