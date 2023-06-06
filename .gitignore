@@ -2,10 +2,10 @@
 
 # dependencies
 
-#/Analyze/node_modules
-#/Response/node_modules
-#/Survey/node_modules
-#/User/node_modules
+/Analyze/node_modules
+/Response/node_modules
+/Survey/node_modules
+/User/node_modules
 
 ./node_modules
 /.pnp
