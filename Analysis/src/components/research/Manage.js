@@ -213,7 +213,7 @@ console.log(csvdata)
               <div style={{ width: '50%' }}>
                 <div className={'box'} style={{ width: '50%', height: '50%', margin: '30%' }} >
 
-                  <p className={'manageFont'}>응답 페이지QR 코드</p>
+                  <p className={'manageFont'}>응답 페이지 QR</p>
                   <QRCode value={`http://172.16.210.22/Response/${encoded}`} size={'256'} style={{ width: '60%', height: '60%', margin: '2.5%' }} />
                 </div>
               </div>
