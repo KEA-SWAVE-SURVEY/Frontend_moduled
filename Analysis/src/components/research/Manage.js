@@ -214,12 +214,12 @@ console.log(csvdata)
                 <div className={'box'} style={{ width: '50%', height: '50%', margin: '30%' }} >
 
                   <p className={'manageFont'}>응답 페이지QR 코드</p>
-                  <QRCode value={`http://localhost:3000/survey/answer/${encoded}`} size={'256'} style={{ width: '60%', height: '60%', margin: '2.5%' }} />
+                  <QRCode value={`http://172.16.210.22/Response/${encoded}`} size={'256'} style={{ width: '60%', height: '60%', margin: '2.5%' }} />
                 </div>
               </div>
               <div style={{ width: '50%' }}>
                 <p className={'manageMinorFont'}>URL 복사</p>
-                <button onClick={() => handleCopyClipBoard(`http://172.16.210.22:3000/survey/answer/${encoded}`)}>
+                <button onClick={() => handleCopyClipBoard(`http://172.16.210.22/Response/${encoded}`)}>
                   URL 복사하기
                 </button>
                 <div style={{ width: '100%', height: '4vh' }} /> 
