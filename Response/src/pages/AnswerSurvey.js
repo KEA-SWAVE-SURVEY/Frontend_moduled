@@ -148,8 +148,4 @@ function AnswerSurvey() {
 
 export default AnswerSurvey;
 
-
-
-
-
 //버그 미리보기에선 서베이 설명 안들어감 들어가네 머지
