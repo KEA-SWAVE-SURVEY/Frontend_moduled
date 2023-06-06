@@ -78,7 +78,7 @@ export const relState = atom({
 
 export const fontState = atom({
     key: "fontState",
-    default: `Dancing Script', cursive`
+    default: `"Calibri", "Roboto", sans-serif`
 });
 
 export const fontSizeState = atom({
