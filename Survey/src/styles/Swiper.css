@@ -30,6 +30,11 @@ body {
   padding: 4rem 1rem;
   margin: 0 auto;
 }
+.swiperFont{
+  font-size: 1.4vw;
+  text-align: center;
+  font-family: 'TheJamsil5Bold';
+}
 
 .swiper_container img{
     width:35rem;
@@ -44,14 +49,15 @@ body {
     height: 27rem;
   }
   .swiper-slide {
-    width: 20rem !important;
-    height: 16rem !important;
+    width: 25rem !important;
+    height: 1rem !important;
   }
   .swiper-slide img {
     width: 25rem !important;
     height: 21rem !important;
     opacity: 1;
     border-radius: 10%;
+    box-shadow: 0 10px 20px rgba(2, 4, 142, 0.15);
   }
 
 .swiper-slide-shadow-left,

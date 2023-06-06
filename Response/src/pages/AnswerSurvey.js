@@ -123,6 +123,8 @@ function AnswerSurvey() {
         
     window.location.href = `http://172.16.210.22/survey/afteranswer`; 
     }
+    //,fontSize: surveyList.design.fontSize+'vw' ,fontFamily:surveyList.design.font
+        //style={{fontSize: surveyList.design.fontSize+'vw' ,fontFamily:surveyList.design.font}}
 
     return (
         <div>

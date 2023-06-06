@@ -92,51 +92,23 @@ const BeforeLogin = (props) => {
       <div className="beforelogin">
 
       <div ref={element => (props.scrollRef.current[0] = element)}></div>
-        <br />
-        <br />
-        <br />
-        <br />
-
-
-
-
+      <div style={{height:'10vh'}}></div>
+        
         <div className='beforeMain' >
         <img src={surveyphoto} alt="survey"/>
         <div className='beforeMain-txt'>
         <h1>Wave form</h1>
         <p>Survey, What you want</p>
         <button type="button" onClick={(e) => onClickLogin(e)}>로그인하고 시작하기</button>
-
         </div>
         </div>
-        <br />
-        <br />
-        <div ref={element => (props.scrollRef.current[0] = element)}>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
+        <div style={{height:'36vh'}}></div>
+       
 
           <div ref={element => (props.scrollRef.current[1] = element)}></div>
-          <br />
-          <br />
-          <br />
-          <br />
-
-          <br />
-          <br />
-          <br />
-          <br />
-
-          <br />
-          <br />
+          
+          <div style={{height:'25vh'}}></div>
+          
           <div className='item-box'>
             <div className='letter-box' style={{ opacity: (position - 900) / 100, }}>
               <BeforeLoginData2
@@ -151,28 +123,12 @@ const BeforeLogin = (props) => {
 
         </div>
 
-        <br />
-        <br />
-        <br />
-        <br />
+        <div style={{height:'15vh'}}></div>
+        
         <div className='letter-box' style={{ opacity: (position - 1700) / 100 }}>
-          <div className='item-box'>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-
-            </div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-
-            <br />
-            <br />
-
+          <div className='item-box'></div>
+            
+          <div style={{height:'36vh'}}></div>
             <BeforeLoginData2
               className="first-bef-reverse"
               heading="  머신러닝 분석 리포트"
@@ -180,31 +136,14 @@ const BeforeLogin = (props) => {
               img1={research} />
 
           </div>
-        </div>
+        
       </div>
 
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-
-        <br />
-        <br />
-        <br />
-        <br />
+      <div style={{height:'30vh'}}></div>
 
         <div ref={element => (props.scrollRef.current[2] = element)}></div>
-        <br />
-        <br />
-        <br />
-        <br />
-
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+        <div style={{height:'20vh'}}></div>
+        <>
         <div className='letter-box' style={{ opacity: (position - 2450) / 100 }}>
           <div className='item-box'>
             <div className='card-box'>
@@ -213,22 +152,14 @@ const BeforeLogin = (props) => {
 
           </div>
         </div>
-
+      
       <button onClick={handleDownload}>다운로드</button>
       </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-
+      </>
+      
+      <div style={{height:'15vh'}}></div>
     </>
+
   )
 }
 export default BeforeLogin
