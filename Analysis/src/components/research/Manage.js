@@ -2,8 +2,7 @@ import { React, useState } from 'react'
 import '../../styles/SurveyStyle.css';
 
 
-import { styled } from '@mui/material/styles';
-import Switch from '@mui/material/Switch';
+
 
 
 import { useParams } from 'react-router-dom'; 
@@ -22,13 +21,17 @@ export default function Manage() {
 
   const { documentId } = useParams();
   const [block, setBlock] = useState(false); //TODO: 서버로부터 받아온걸로 미리 체크설정해두기, toggleBlock에 block 넣기 등
-
+  const [check,setCheck] = useState('응답 받지않음')
+  
   const [firstDate, setFirstDate] = useState(null);
   const [lastDate, setLastDate] = useState(null);
+  
   const toggleBlock = () => {
     setBlock(!block);
+    setCheck(prev=>prev==='응답 받지않음'?'응답 받음':'응답 받지않음')
     console.log(block);
   }
+
   let encoded = base64_encode(documentId)
 
   const handleCopyClipBoard = async (text) => {
@@ -129,7 +132,8 @@ console.log(csvdata)
         <div className={'box'} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0', width: '70vw', height: '10vh', marginTop: '10px' }}>
           <p className={'manageFont'}>공개 여부 설정</p>
 
-          {<ToggleSwitch checked={block} onChange={toggleBlock} />}
+          <button style={{width:'12vw'}} onClick={toggleBlock}> {check} </button>
+
 
 
         </div>
@@ -230,7 +234,7 @@ console.log(csvdata)
   )
 }
 
-
+/* 
 const ToggleSwitch = styled(Switch)(({ theme }) => ({
   padding: 8,
   '& .MuiSwitch-track': {
@@ -263,4 +267,4 @@ const ToggleSwitch = styled(Switch)(({ theme }) => ({
     margin: 2,
   },
 }));
-
+ */

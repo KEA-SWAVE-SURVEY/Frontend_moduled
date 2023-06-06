@@ -4,6 +4,8 @@ import { useRecoilState } from 'recoil'
 import { loginState } from '../contexts/atom'
 import logo from '../assets/white.png'
 
+import { useParams } from 'react-router-dom'; 
+
 import {setCookie} from '../components/login/cookie'
 //auth에서 정보를 뿌릴까?
 const Auth = () => { 
@@ -23,7 +25,7 @@ const Auth = () => {
       try {
         // const res = await axios.post(`/api/oauth/token?code=${code}&provider=${provider}`);
         
-        const res = await axios.post(`/api/oauth/token?code=${code}&provider=${provider}`);
+        const res = await axios.post(`/user/external/oauth/token?code=${code}&provider=${provider}`);
         //인가코드를 백엔드로 보내고 헤더에서 엑세스 토큰 받아옴
         const token = res.headers.authorization;
         sessionStorage.setItem('token',token)
