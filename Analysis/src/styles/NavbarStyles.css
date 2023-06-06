@@ -100,7 +100,7 @@
     color: #fff;
     transition: 0.3s ease-in-out;
 }
-
+/*
 @media screen and (max-width: 850px){
     .NavbarItems{
         z-index: 99;
@@ -169,3 +169,4 @@
         color:#222;
     }
 }
+*/

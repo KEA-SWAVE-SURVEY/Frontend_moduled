@@ -61,7 +61,7 @@
     font-family: 'TheJamsil5Bold';
     font-size: 2rem;
 }
-
+/*
 @media screen and (max-width:850px) {
     .card{
         margin: 4rem 2rem;
@@ -75,4 +75,6 @@
         width: 100%;
         margin-bottom: 1.5rem;
     }
+    
 }
+*/

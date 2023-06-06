@@ -130,6 +130,8 @@
     border-top: solid gray;
     z-index: 9999;
 } */
+
+/*
 @media screen and (max-width: 850px){
     .NavbarItems{
         z-index: 99;
@@ -198,6 +200,7 @@
         color:#222;
     }
 }
+*/
 
 
 .scrollContent {
