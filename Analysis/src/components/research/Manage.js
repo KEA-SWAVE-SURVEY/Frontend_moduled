@@ -25,7 +25,7 @@ export default function Manage() {
  
 
   const { documentId } = useParams();
-  const [block, setBlock] = useState(false); //TODO: 서버로부터 받아온걸로 미리 체크설정해두기, toggleBlock에 block 넣기 등
+  const [block, setBlock] = useState(0); //TODO: 서버로부터 받아온걸로 미리 체크설정해두기, toggleBlock에 block 넣기 등
   const [check,setCheck] = useState('응답 받지않기')
    
    
@@ -57,70 +57,50 @@ useEffect(() => {
   }
 }, [surveyList]);
 const loadSurveyData = async () => {
-  const result = {
-    data: {
-      id: 10,
-      title: "2313",
-      description: "412112",
-      type: 0,
-      reliability: false,
-      startDate: "2023-06-01T14:25:54.000Z",
-      endDate: "2023-06-21T14:25:54.000Z",
-      enable: false,
-      design: { font: "", fontSize: 3, backColor: "#ffffff" },
-      questionList: [
-        {
-          id: 0,
-          type: 2,
-          title: "12342141412",
-          choiceList: [{ id: 0, choiceName: "" }]
-        }
-      ]
-    }
-  };
-
-  setSurveyList(result.data);
+  // const result = {
+    
+  //     id: 10,
+  //     title: "2313",
+  //     description: "412112",
+  //     type: 0,
+  //     reliability: false,
+  //     startDate: "2023-06-01T14:25:54.000Z",
+  //     endDate: "2023-06-21T14:25:54.000Z",
+  //     enable: false,
+  //     design: { font: "", fontSize: 3, backColor: "#ffffff" },
+  //     questionList: [
+  //       {
+  //         id: 0,
+  //         type: 2,
+  //         title: "12342141412",
+  //         choiceList: [{ id: 0, choiceName: "" }]
+  //       }
+  //     ]
+    
+  // };
+const result  = await axios.get(`/analyze/external/research/analyze/${documentId}`, { timeout: 10000 });
+  setSurveyList(result);
 };
 
 useEffect(() => {
   loadSurveyData();
 }, []);
  
-
-
-useEffect(() => {
-  if (surveyList !== null) {
-    console.log(surveyList);
-    console.log(JSON.stringify(surveyList));
-    console.log(surveyList);
-  }
-}, [surveyList]);
+ 
   
 // 블록버튼 누르기
 const toggleBlock = () => { 
     
-    setBlock(!block);
-    setCheck(prev=>prev==='응답 받지않기'?'응답 받기':'응답 받지않기')
-    console.log(block);
+  const cblock = block===true? false:true;
+  console.log(cblock);  
+  setCheck(prev=>prev==='응답 받지않기'?'응답 받기':'응답 받지않기');
+    setBlock(cblock);  
     const dataToTransport = {
-      // id : surveyList.id,
-      title: surveyList.title,
-      description: surveyList.description,
-      type: surveyList.type,
-      reliability:surveyList.reliability,
-      startDate:surveyList.startDate,
-      endDate: surveyList.endDate,
-      enable : block,
-      design:surveyList.design,
-      questionRequest: surveyList.questionRequest.map((prev) => {
-          return {
-              //id : prev.id
-              type: prev.type,
-              title: prev.title,
-              choiceList: prev.choiceList
-          }
-      })
+      // id : surveyList.id, 
+      ...surveyList,
+      enable : cblock, 
   }
+  setSurveyList(dataToTransport);
   axios.post(`/api/external/update/${documentId}`, dataToTransport,
     {
         headers: {
@@ -129,6 +109,8 @@ const toggleBlock = () => {
         }
     }
 ) 
+
+console.log(block);
   }
 
 
@@ -138,23 +120,12 @@ const saveDate = () => {
       
   const dataToTransport = {
     // id : surveyList.id,
-    title: surveyList.title,
-    description: surveyList.description,
-    type: surveyList.type,
-    reliability:surveyList.reliability,
+      ...surveyList,
     startDate:firstDate,
-    endDate: lastDate,
-    enable : surveyList.enable,
-    design:surveyList.design,
-    questionRequest: surveyList.questionRequest.map((prev) => {
-        return {
-            //id : prev.id
-            type: prev.type,
-            title: prev.title,
-            choiceList: prev.choiceList
-        }
-    })
+    endDate: lastDate, 
 }
+console.log(dataToTransport);
+setSurveyList(dataToTransport);
 axios.post(`/api/external/update/${documentId}`, dataToTransport,
   {
       headers: {
@@ -263,7 +234,9 @@ console.log(csvdata)
   return (
     <div >
       <>
-            {JSON.stringify(surveyList)}
+      {/* <p> s </p>
+      {block}
+            {JSON.stringify(surveyList)} */}
         <div className={'box'} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0', width: '70vw', height: '10vh', marginTop: '10px' }}>
           <p className={'manageFont'}>공개 여부 설정</p>
 
@@ -288,6 +261,7 @@ console.log(csvdata)
                   selected={firstDate}
                   onChange={date => setFirstDate(date)}
                   dateFormat='dd/MM/yyyy'
+                  maxDate={lastDate}
                   isClearable={false}
                   className={'date'}
                 />
