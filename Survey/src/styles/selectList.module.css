@@ -5,6 +5,17 @@
   outline: none;
   background-color: rgba(214, 206, 206, 0.103);
 }
+.buttonOption{
+  width:15vw;
+  display: flex;
+  padding: auto;
+}
+.buttonOption:hover{
+  width:15vw;
+  display: flex;
+  padding: auto;
+  background-color: navy;
+}
 
 .container {
   color: #1b0278;

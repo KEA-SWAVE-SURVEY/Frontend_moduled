@@ -3,6 +3,7 @@ import { useRecoilValue , useRecoilState} from 'recoil';
 import axios from 'axios';
  
 
+import {removeCookie} from '../components/login/cookie'
 import { loginState } from '../contexts/atom';
 
 import PrintSurveyGrid from '../components/home/PrintSurveyGrid';
@@ -111,17 +112,19 @@ function MyPage() {
     console.log(isLogined.name);
     console.log(isLogined.info);
      // axios.post(`/api /response/create`, answerList,
-     //patch으로 변경 0607
-     axios.patch(`/user/external/updatepage`, {
+     //patch으로 변경+주소변셩 06072200
+     axios.patch(`api/user/external/updatepage`, {
         "nickname":isLogined.name,
         "description": isLogined.info
 
      },
      {
          headers: {
-             'Content-Type': 'application/json'
+             'Content-Type': 'application/json',
+             'Authorization': isLogined.token
          }
      }
+     
 
  )
      .then((response) => {//api의 응답을 제대로 받은경우
@@ -132,6 +135,37 @@ function MyPage() {
      }); 
       
   }
+  //삭제구현 06072200
+  function onClickDelete(e) { 
+      if(window.confirm("계정을 삭제 하시겠습니까?")){
+          
+          sessionStorage.removeItem('token')
+          removeCookie('survey')
+          window.location.reload()
+          window.location.href = `http://172.16.210.80/`; 
+          console.log(cookie)
+          axios.patch(`api/user/external/deleteuser`, {
+           
+         },
+         {
+             headers: {
+                 'Content-Type': 'application/json',
+                 'Authorization': isLogined.token
+             }
+         }
+         
+    
+     )
+         .then((response) => {//api의 응답을 제대로 받은경우
+             console.log('Saved');  
+         })
+         .catch((response) => {//종류불문 에러
+             console.log('Error'); 
+         }); 
+      }
+    
+     
+    }
   const onChangeName = (e) => {
     setTempName(e.target.value);
     console.log(tempName);
@@ -156,7 +190,10 @@ function MyPage() {
 
 <div> <input className={styles.inputBox} id="info"   placeholder = {isLogined.info + ' (click to edit)) '} onChange={onChangeInfo} /></div>
           </div>
-          <button onClick={onClickSave} > 자기소개 저장 </button> 
+          <div className={styles.buttonOption}>
+          <button onClick={onClickSave} > 내정보 저장 </button> 
+          <button onClick={onClickDelete} > 계정 삭제 </button> 
+          </div>
         </div>
       </div>
       <div className={styles.LineContainer} style={{ width: '95%', marginLeft: '2.5%', marginRight: '2.5%', marginTop: '2%', marginBottom: '2%' }} />
