@@ -4,10 +4,10 @@ import { PieChartComponent } from './chart'
 import randomColor from 'randomcolor';  
 
 
-import ReactDOM from "react-dom";
-import ReactWordcloud from "react-wordcloud";
-import "d3-transition";
-import { select } from "d3-selection";
+//import ReactDOM from "react-dom";
+//import ReactWordcloud from "react-wordcloud";
+//import "d3-transition";
+//import { select } from "d3-selection";
 
 // {
 //   "id": 1,
@@ -72,7 +72,7 @@ import { select } from "d3-selection";
 //   ]
 // }
 export default function PickAnalyze({ data }) { 
-
+/* 
   function getCallback(callback) {
     return function (word, event) {
       const isActive = callback !== "onWordMouseOut";
@@ -93,7 +93,7 @@ export default function PickAnalyze({ data }) {
     onWordMouseOut: getCallback("onWordMouseOut"),
     onWordMouseOver: getCallback("onWordMouseOver")
   };
-
+ */
   
   const [transformedData, setTransformedData] = useState(data.questionList.map((question) => ({
     
@@ -165,7 +165,7 @@ value:  words.count
                 <div className={'chartBox'} style={{ height:'350px' ,  margin: '10px',overflowY:'scroll'}}>
 
 <div style={{ height: 400, width: '60%', fontSize:'10px' }}>
-        <ReactWordcloud callbacks ={callbacks} words={question.wordCloudDTOs} options = {{   fontSizes: [25, 50],}}/>
+        {/* <ReactWordcloud callbacks ={callbacks} words={question.wordCloudDTOs} options = {{   fontSizes: [25, 50],}}/> */}
       </div>
                   {
                     question.lists.map((answers) => (
