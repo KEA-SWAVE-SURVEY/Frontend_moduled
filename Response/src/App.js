@@ -21,6 +21,7 @@ function App() {
             <Route path="/Response/:documentId" element={<AnswerSurvey />} />
             <Route path="/Response/beforeanswer/" element={<BeforeAnswer />} />
             <Route path="/Response/afteranswer/" element={<AfterAnswer />} />
+            <Route path="/survey/error" element={<ErrorSurvey/>}/>
 
             </Routes>
         </div>
