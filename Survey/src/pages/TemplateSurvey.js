@@ -315,7 +315,8 @@ function TemplateSurvey(props) {
 
 
         console.log(isLogined.token);
-        var url = '/api/create';
+        //06072200수정완료 설문 생성
+        var url = '/api/document/external/create';
         console.log(url);
         //수정 0606
         //수정으로 들어와서 이전 정보들을 가져오고 마지막에 모디파이 검사를 피함으로써 템플릿을 이용한 구현 완료

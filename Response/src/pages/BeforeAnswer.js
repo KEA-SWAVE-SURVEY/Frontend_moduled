@@ -22,8 +22,9 @@ export default function BeforeAnswer() {
     //난제 랜덤이미지로 만들 때 변수를 잘 저장할 수 있도록
     //기한도 받고 싶다!!
     //http://localhost:8080/api/survey-participate/${id}
+    //06092200 수정완료
     const loadSurveys=async()=>{ 
-        const result = await axios.get(`/survey/external/load/${decoded}`);
+        const result = await axios.get(`/api/answer/external/load/${decoded}`);
         console.log(result)
         setSurveyList((prev) => {
             return {

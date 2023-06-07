@@ -61,9 +61,9 @@ function Navbar(props) {
             console.log("여기11")
         }
     },[])
-    
+    //06092200 수정완료
     function GetMe(){
-        axios.get('/user/external/me',{
+        axios.get('/api/user/external/me',{
             headers: {
             Authorization: cookie,
             },

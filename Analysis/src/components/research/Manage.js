@@ -1,12 +1,12 @@
 import { React, useState } from 'react'
 import '../../styles/SurveyStyle.css';
- 
+
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { surveyListState, answerListState, loginState, modifyState,fontState, fontSizeState,backColorState } from '../../contexts/atom';
 
 
 
-import { useParams } from 'react-router-dom'; 
+import { useParams } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { encode as base64_encode} from 'base-64';
@@ -23,20 +23,20 @@ export default function Manage() {
   const [surveyList, setSurveyList] = useState(null);
   const [csvList, setCsvList] = useState(null);
   const [answerList, setAnswerList] = useState(null);
- 
+
 
   const { documentId } = useParams();
   const [block, setBlock] = useState(0); //TO완료DO: 서버로부터 받아온걸로 미리 체크설정해두기, toggleBlock에 block 넣기 등
   const [check,setCheck] = useState('비공개 중')
-   
-   
-  
+
+
+
 const [firstDate, setFirstDate] = useState(null);
 const [lastDate, setLastDate] = useState(null);
 const result = {"id":0,"title":"2313","description":"412112","type":0,"reliability":false,"startDate":"2023-06-01T14:25:54.000Z","endDate":"2023-06-21T14:25:54.000Z","enable":false,"design":{"font":"","fontSize":3,"backColor":"#ffffff"},"questionRequest":[{"id":0,"type":2,"title":"12342141412","choiceList":[{"id":0,"choiceName":""}]}]}
 
 const isLogined = useRecoilValue(loginState);
- 
+
 
 //로드가 몇개가 있어야할까 서베이로 싹다 긁어올 수 있나?
 //코드는 서베이로만
@@ -52,43 +52,47 @@ useEffect(() => {
     setLastDate(new Date(surveyList.endDate));
     setBlock(surveyList.enable);
     console.log(surveyList.enable);
-    console.log(block); 
-    
+    console.log(block);
+
     setCheck(block===true?'공개 중':'비공개 중')
   }
 }, [surveyList]);
 const loadSurveyData = async () => {
   // const result = {
-    
-  //     id: 10, 
+
+  //     id: 10,
   //     startDate: "2023-06-01T14:25:54.000Z",
   //     endDate: "2023-06-21T14:25:54.000Z",
-  //     enable: false, 
-    
+  //     enable: false,
+
   // };
-const data = axios.get(`/api/surveydocument/external/manage/${documentId}` ,  { timeout: 10000 }); 
-// survey/external/response/{id} 
- const resultCSV  = await axios.get(`/survey/external/response/${documentId}`, { timeout: 10000 });
-setSurveyList(data);
+  //06092200 수정완료 설문상세분석 조회
+const result  = await axios.get(`/api/analyze/external/research/analyze/${documentId}`, { timeout: 10000 });
+// survey/external/response/{id}
+//06092200 수정완료 설문 응답 csv
+const resultCSV  = await axios.get(`/api/answer/external/response/${documentId}`, { timeout: 10000 });
+
+
+setSurveyList(result);
 setCsvList(resultCSV);
 };
 
 useEffect(() => {
   loadSurveyData();
 }, []);
- 
- 
-  
+
+
+
 // 블록버튼 누르기
-const toggleBlock = () => { 
-    
+const toggleBlock = () => {
+
   const cblock = block===true? false:true;
-  console.log(cblock);  
+  console.log(cblock);
   setCheck(prev=>prev==='비공개 중'?'공개 중':'비공개 중');
-    setBlock(cblock);  
+    setBlock(cblock);
     const dataToTransport = {
-      // id : surveyList.id,  
-      enable : cblock, 
+      // id : surveyList.id,
+      enable : cblock,
   }
   setSurveyList(dataToTransport);
   axios.patch(`/api/document/external/manage/enable/${documentId}`, dataToTransport,
@@ -98,20 +102,20 @@ const toggleBlock = () => {
             'Authorization': isLogined.token
         }
     }
-) 
+)
 
 console.log(block);
   }
 
 
-  
+
 // 날짜 설정버튼 누르기
-const saveDate = () => { 
-      
+const saveDate = () => {
+
   const dataToTransport = {
-    id : surveyList.id, 
+    id : surveyList.id,
     startDate:firstDate,
-    endDate: lastDate, 
+    endDate: lastDate,
 }
 
 console.log(dataToTransport.startDate <  new Date());
@@ -129,7 +133,7 @@ axios.patch(`/api/document/external/manage/date/${documentId}`, dataToTransport,
         'Authorization': isLogined.token
     }
 }
-) 
+)
 }
 
 
@@ -142,8 +146,8 @@ axios.patch(`/api/document/external/manage/date/${documentId}`, dataToTransport,
     } catch (error) {
     }
   };
- 
-  
+
+
   const tempdata =[
     {
         "id":"1",
@@ -164,7 +168,7 @@ axios.patch(`/api/document/external/manage/date/${documentId}`, dataToTransport,
                 "questionType":1,
                 "CheckAnswer":"false",
                 "checkAnswerId":1
-            },  
+            },
         ]
     },
     {
@@ -186,7 +190,7 @@ axios.patch(`/api/document/external/manage/date/${documentId}`, dataToTransport,
                 "questionType":1,
                 "CheckAnswer":"true",
                 "checkAnswerId":1
-            },   
+            },
         ]
     }
 ];
@@ -203,12 +207,12 @@ axios.patch(`/api/document/external/manage/date/${documentId}`, dataToTransport,
   // };
 // });
   const [processData,setProcessData] = useState(tempdata);
-//수정 여기 머지?
-  const loadSurveys = async()=>{ 
-    const result = await axios.get(`/survey/external/response/${documentId}`);
+//수정 여기 머지? //06092200 수정완료
+  const loadSurveys = async()=>{
+    const result = await axios.get(`/api/answer/external/response/${documentId}`);
     setProcessData(result)
-  } 
-   
+  }
+
 const csvdata = processData.map((item) => {
   const question = item.questionAnswersList.map((temp) => ({
     [temp.title]: temp.CheckAnswer
@@ -220,11 +224,11 @@ const csvdata = processData.map((item) => {
   };
 });
 
-  
-  
-console.log(csvdata) 
-  //TO완료DO 백과 연동해서 CSV 받아오는 api 설정 후, csv 받아오기 
- 
+
+
+console.log(csvdata)
+  //TO완료DO 백과 연동해서 CSV 받아오는 api 설정 후, csv 받아오기
+
 
 
   return (
@@ -327,7 +331,7 @@ console.log(csvdata)
                 <button onClick={() => handleCopyClipBoard(`http://172.16.210.22/Response/${encoded}`)}>
                   URL 복사하기
                 </button>
-                <div style={{ width: '100%', height: '4vh' }} /> 
+                <div style={{ width: '100%', height: '4vh' }} />
               </div>
             </div>
           </div>
@@ -339,7 +343,7 @@ console.log(csvdata)
   )
 }
 
-/* 
+/*
 const ToggleSwitch = styled(Switch)(({ theme }) => ({
   padding: 8,
   '& .MuiSwitch-track': {

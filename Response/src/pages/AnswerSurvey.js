@@ -26,7 +26,8 @@ function AnswerSurvey() {
     //http://localhost:8080/api/ survey-participate/${id}
     const loadSurveys=async()=>{
         // const result = await axios.get(`/api/load-survey/${decoded}`); // decoded = id 복호화된 것
-        const result = await axios.get(`/survey/external/load/${decoded}`); // decoded = id 복호화된 것
+        //06092200 수정완료 설문 참여
+        const result = await axios.get(`/api/answer/external/load/${decoded}`); // decoded = id 복호화된 것
         console.log(result)
         setSurveyList((prev) => {
             return {
@@ -113,7 +114,7 @@ function AnswerSurvey() {
         e.preventDefault();
         
         // axios.post(`/api /response/create`, answerList,
-        axios.post(`/survey/external/response/create`, answerList,
+        axios.post(`/api/answer/external/response/create`, answerList,
             {
                 headers: {
                     'Content-Type': 'application/json'

@@ -113,7 +113,7 @@ function MyPage() {
     console.log(isLogined.info);
      // axios.post(`/api /response/create`, answerList,
      //patch으로 변경+주소변셩 06072200
-     axios.patch(`api/user/external/updatepage`, {
+     axios.patch(`/api/user/external/updatepage`, {
         "nickname":isLogined.name,
         "description": isLogined.info
 
@@ -144,7 +144,7 @@ function MyPage() {
           window.location.reload()
           window.location.href = `http://172.16.210.80/`; 
           console.log(cookie)
-          axios.patch(`api/user/external/deleteuser`, {
+          axios.patch(`/api/user/external/deleteuser`, {
            
          },
          {

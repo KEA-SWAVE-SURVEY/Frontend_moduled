@@ -63,7 +63,7 @@ function Navbar(props) {
     },[])
     
     function GetMe(){
-        axios.get('/user/external/me',{
+        axios.get('/api/user/external/me',{
             headers: {
             Authorization: cookie,
             },

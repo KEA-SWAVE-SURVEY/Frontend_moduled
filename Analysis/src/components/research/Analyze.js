@@ -251,7 +251,8 @@ export default function Analyze({ documentId }) {
     async function fetchTestData() {
       try {
         // const response = await axios.get(`/api /research/2/${documentId}`, { timeout: 10000 });
-        const response = await axios.get(`/analyze/external/research/analyze/${documentId}`, { timeout: 10000 });
+        //06092200 수정완료
+        const response = await axios.get(`/api/analyze/external/research/analyze/${documentId}`, { timeout: 10000 });
         setSelectedData(response.data);
       } catch (error) {
       }
