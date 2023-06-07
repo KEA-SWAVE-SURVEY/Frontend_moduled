@@ -57,6 +57,8 @@ function AnswerSurvey() {
                 })
             }
         });
+        checkDate(surveyList.startDate,surveyList.endDate,surveyList.enable)
+
 
         setAnswerList((prev) => {
             return {
@@ -97,7 +99,17 @@ function AnswerSurvey() {
             return null;
         })
     };
+    function checkDate(startDate,endDate,enable){
+        const today = new Date()
+        if(startDate<=today && today<=endDate && enable === true){
+            console.log('정상')
+        }else{
+            //navigate('/survey/error')
+            window.location.href = `http://172.16.210.22/survey/error`
 
+        }
+
+    }
     function onClickSubmitButton(e) {
         e.preventDefault();
         
@@ -132,8 +144,8 @@ function AnswerSurvey() {
                 <div className="survey_container">
                     <div className='create_survey'>
                         <div className='problem_container'>
-                            <h1 style={{ textAlign: "left", margin: '0 0 0 0 ', fontSize: '50px' }}>{surveyList.title}</h1>
-                            <textarea value={surveyList.description} readOnly className='textarea'></textarea>
+                            <h1 style={{ textAlign: "left", margin: '0 0 0 0 ',fontSize: surveyList.design.fontSize+'vw' ,fontFamily:surveyList.design.font}}>{surveyList.title}</h1>
+                            <textarea value={surveyList.description} readOnly className='textarea' style={{fontSize: surveyList.design.fontSize+'vw' ,fontFamily:surveyList.design.font}}></textarea>
                         </div>
                     </div>
                     {surveyList.questionRequest && surveyList.questionRequest.map((survey, index) => <ViewSurvey key={index} id={survey.id} index={index} />)}
