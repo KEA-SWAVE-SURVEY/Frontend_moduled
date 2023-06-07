@@ -110,7 +110,7 @@ const result = {"id":0,"title":"2313","description":"412112","type":0,"reliabili
   // };
 // });
   const [processData,setProcessData] = useState(tempdata);
-
+//수정 여기 머지?
   const loadSurveys = async()=>{ 
     const result = await axios.get(`/survey/external/response/${documentId}`);
     setProcessData(result)
