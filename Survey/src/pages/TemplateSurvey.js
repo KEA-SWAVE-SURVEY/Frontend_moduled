@@ -440,7 +440,7 @@ function TemplateSurvey(props) {
                         )}
                         <div className='survey_contatiner_bottom'>
                             <div className="survey_button" onClick={(e) => onClickPreviewButton(e)}>{isPreview ? "Create" : "Preview"}</div>
-                            <div className="survey_button" onClick={handleDownload}>테스트 !</div>
+                             
                             <div className="survey_button" onClick={(e) => onClickSaveButton(e)}>Save</div>
                         </div>
                     </div>

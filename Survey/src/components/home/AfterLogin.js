@@ -113,7 +113,7 @@ function AfterLogin(props) {
 
     function onClickCreateTemplateSurvey(e,index) {
         e.preventDefault();
-        window.location.href = `http://172.16.210.22/TemplateSurvey/${index+1}`
+        window.location.href = `http://172.16.210.22/template/Survey/${index+1}`
         //window.location.href =`http://172.16.210.22//api/external/template-load/${index+1}`
         setIsModify((prev) => true);
         loadSurveys();

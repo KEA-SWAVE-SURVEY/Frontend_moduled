@@ -1,7 +1,8 @@
 import { React, useState } from 'react'
 import '../../styles/SurveyStyle.css';
-
-
+ 
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { surveyListState, answerListState, loginState, modifyState,fontState, fontSizeState,backColorState } from '../../contexts/atom';
 
 
 
@@ -15,22 +16,155 @@ import QRCode from 'qrcode.react';
 import CsvDownloadButton from 'react-json-to-csv'
 
 
+import { useEffect } from "react";
 import axios from 'axios';
 export default function Manage() {
 
+  const [surveyList, setSurveyList] = useState(null);
+  const [answerList, setAnswerList] = useState(null);
+ 
 
   const { documentId } = useParams();
   const [block, setBlock] = useState(false); //TODO: 서버로부터 받아온걸로 미리 체크설정해두기, toggleBlock에 block 넣기 등
-  const [check,setCheck] = useState('응답 받지않음')
+  const [check,setCheck] = useState('응답 받지않기')
+   
+   
   
-  const [firstDate, setFirstDate] = useState(null);
-  const [lastDate, setLastDate] = useState(null);
-  
-  const toggleBlock = () => {
-    setBlock(!block);
-    setCheck(prev=>prev==='응답 받지않음'?'응답 받음':'응답 받지않음')
-    console.log(block);
+const [firstDate, setFirstDate] = useState(null);
+const [lastDate, setLastDate] = useState(null);
+const result = {"id":0,"title":"2313","description":"412112","type":0,"reliability":false,"startDate":"2023-06-01T14:25:54.000Z","endDate":"2023-06-21T14:25:54.000Z","enable":false,"design":{"font":"","fontSize":3,"backColor":"#ffffff"},"questionRequest":[{"id":0,"type":2,"title":"12342141412","choiceList":[{"id":0,"choiceName":""}]}]}
+
+const isLogined = useRecoilValue(loginState);
+ 
+
+//로드가 몇개가 있어야할까 서베이로 싹다 긁어올 수 있나?
+//코드는 서베이로만
+//http://localhost:8080/api/ survey-participate/${id}
+
+useEffect(() => {
+  if (surveyList !== null) {
+    console.log(surveyList);
+    console.log(JSON.stringify(surveyList));
+    console.log(new Date(surveyList.endDate));
+    console.log(surveyList.startDate);
+    setFirstDate(new Date(surveyList.startDate));
+    setLastDate(new Date(surveyList.endDate));
+    setBlock(surveyList.enable);
+    console.log(surveyList.enable);
+    console.log(block); 
+    
+    setCheck(block===true?'응답 받기':'응답 받지않기')
   }
+}, [surveyList]);
+const loadSurveyData = async () => {
+  const result = {
+    data: {
+      id: 10,
+      title: "2313",
+      description: "412112",
+      type: 0,
+      reliability: false,
+      startDate: "2023-06-01T14:25:54.000Z",
+      endDate: "2023-06-21T14:25:54.000Z",
+      enable: false,
+      design: { font: "", fontSize: 3, backColor: "#ffffff" },
+      questionList: [
+        {
+          id: 0,
+          type: 2,
+          title: "12342141412",
+          choiceList: [{ id: 0, choiceName: "" }]
+        }
+      ]
+    }
+  };
+
+  setSurveyList(result.data);
+};
+
+useEffect(() => {
+  loadSurveyData();
+}, []);
+ 
+
+
+useEffect(() => {
+  if (surveyList !== null) {
+    console.log(surveyList);
+    console.log(JSON.stringify(surveyList));
+    console.log(surveyList);
+  }
+}, [surveyList]);
+  
+// 블록버튼 누르기
+const toggleBlock = () => { 
+    
+    setBlock(!block);
+    setCheck(prev=>prev==='응답 받지않기'?'응답 받기':'응답 받지않기')
+    console.log(block);
+    const dataToTransport = {
+      // id : surveyList.id,
+      title: surveyList.title,
+      description: surveyList.description,
+      type: surveyList.type,
+      reliability:surveyList.reliability,
+      startDate:surveyList.startDate,
+      endDate: surveyList.endDate,
+      enable : block,
+      design:surveyList.design,
+      questionRequest: surveyList.questionRequest.map((prev) => {
+          return {
+              //id : prev.id
+              type: prev.type,
+              title: prev.title,
+              choiceList: prev.choiceList
+          }
+      })
+  }
+  axios.post(`/api/external/update/${documentId}`, dataToTransport,
+    {
+        headers: {
+            'Application-Type': 'application/json',
+            'Authorization': isLogined.token
+        }
+    }
+) 
+  }
+
+
+  
+// 날짜 설정버튼 누르기
+const saveDate = () => { 
+      
+  const dataToTransport = {
+    // id : surveyList.id,
+    title: surveyList.title,
+    description: surveyList.description,
+    type: surveyList.type,
+    reliability:surveyList.reliability,
+    startDate:firstDate,
+    endDate: lastDate,
+    enable : surveyList.enable,
+    design:surveyList.design,
+    questionRequest: surveyList.questionRequest.map((prev) => {
+        return {
+            //id : prev.id
+            type: prev.type,
+            title: prev.title,
+            choiceList: prev.choiceList
+        }
+    })
+}
+axios.post(`/api/external/update/${documentId}`, dataToTransport,
+  {
+      headers: {
+          'Application-Type': 'application/json',
+          'Authorization': isLogined.token
+      }
+  }
+) 
+}
+
 
   let encoded = base64_encode(documentId)
 
@@ -41,7 +175,7 @@ export default function Manage() {
     } catch (error) {
     }
   };
-
+ 
   
   const tempdata =[
     {
@@ -129,6 +263,7 @@ console.log(csvdata)
   return (
     <div >
       <>
+            {JSON.stringify(surveyList)}
         <div className={'box'} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0', width: '70vw', height: '10vh', marginTop: '10px' }}>
           <p className={'manageFont'}>공개 여부 설정</p>
 
@@ -168,7 +303,7 @@ console.log(csvdata)
                   className={'date'}
                 />
               </div>
-              <button style={{margin: '20px'}}> 설정 저장하기 </button>
+              <button style={{margin: '20px'}} onClick={() =>  saveDate()}> 설정 저장하기 </button>
             </div>
           </div>
 
@@ -197,7 +332,7 @@ console.log(csvdata)
       }}
       delimiter = ","
   >
-    Good Data ✨
+    CSV로 저장하기
   </CsvDownloadButton>
 
         </div>
