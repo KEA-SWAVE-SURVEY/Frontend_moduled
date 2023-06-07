@@ -86,7 +86,7 @@ export const PieChartComponent = ({ data}) => {
       [setActiveIndex]
     );
     return(
-  <PieChart width={600} height={350}>
+  <PieChart width={600} height={350} fontSize={20}>
     <Pie
       activeIndex={activeIndex}
       activeShape={renderActiveShape}
@@ -121,13 +121,13 @@ export const BarChartComponent = ({ data }) => {
 
 return( 
   <div  style={{whiteSpace : 'pre-line'}}>
-<BarChart width={800} height={300} data={data} >
+<BarChart width={800} height={300} data={data} fontSize={15}>
     <YAxis type="number" />
     <XAxis dataKey="choiceTitle"  />
     <Tooltip content={({ active, payload }) => { 
       if (active) {
           return ( 
-              <div style={{ backgroundColor: 'white', padding: '5px' }}>
+              <div style={{ backgroundColor: 'white', padding: '5px', fontSize: '15px' }}>
               <p>{`${payload[0].payload.choiceTitle}`}</p>
                   <p>{`비율: ${payload[0].value}`}</p>
               </div>

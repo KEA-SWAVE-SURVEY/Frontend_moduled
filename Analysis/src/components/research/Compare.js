@@ -74,15 +74,15 @@ export default function Compare({ data }) {
       {data.questionAnalyzeList.map((question) => (
 
         <div className={'questionContainer'} style={{ background: 'rgb(255,255,255)', margin: '20px' }}>
-          <div className={'questionBox'}><p style={{ margin: '10px' }}>{question.questionTitle}</p></div>
+          <div className={'questionBox'}><p style={{ margin: '1px' }}>{question.questionTitle}</p></div>
          
-          <div  className = {'chartBox'} style={{height:'20vh' , overflowY : 'scroll' , marginTop : '20px'}} > 
+          <div  className = {'chartBox'} style={{height:'15vh' , overflowY : 'scroll' , marginTop : '20px'}} > 
             {question.compareAnalyzeList.map((compare) => (
               <div   > 
                   {compare.pvalue < 0.05 ?
                     (
                       <div>
-                        <p style={{ fontSize: '25px', color: '#1b0278' }}> <b>{compare.questionTitle}</b> 문항과 비교시 {compare.pvalue.toFixed(3)} 의 Pvalue로 평균이 어느정도 비슷한 경향을 띕니다.</p>
+                        <p style={{ fontSize: '25px', color: '#1b0278' }}> <b>{compare.questionTitle}</b> 문항과 비교시 {compare.pvalue.toFixed(3)} 의 Pvalue로 평균이 어느정도 비슷한 경향을 나타냅니다.</p>
 
 
                       </div>
@@ -91,7 +91,7 @@ export default function Compare({ data }) {
                     (
                       <div>
 
-                        <p style={{ fontSize: '25px', color: '#1b0278' }}> <b>{compare.questionTitle}</b> 문항과 비교시 {compare.pvalue.toFixed(3)} 의 Pvalue로 평균이 다른 경향을 띕니다.</p>
+                        <p style={{ fontSize: '25px', color: '#1b0278' }}> <b>{compare.questionTitle}</b> 문항과 비교시 {compare.pvalue.toFixed(3)} 의 Pvalue로 평균이 다른 경향을 나타냅니다.</p>
 
 
                       </div>

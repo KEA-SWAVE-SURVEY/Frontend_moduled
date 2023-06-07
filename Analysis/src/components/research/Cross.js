@@ -74,9 +74,9 @@ console.log(JSON.stringify(data))
       {data.questionAnalyzeList.map((question) => (
 
         <div className={'questionContainer'} style={{ background: 'rgb(255,255,255)', margin: '20px' }}>
-          <div className={'questionBox'}><p style={{ margin: '10px' }}>{question.questionTitle}</p></div>
+          <div className={'questionBox'}><p style={{ margin: '1px' }}>{question.questionTitle}</p></div>
          
-          <div  className = {'chartBox'} style={{height:'20vh' , overflowY : 'scroll' , marginTop : '20px'}} > 
+          <div  className = {'chartBox'} style={{height:'15vh' , overflowY : 'scroll' , marginTop : '20px'}} > 
             {question.chiAnalyzeList.map((chi) => (
               <div    > 
                   {chi.pvalue < 0.05 ?

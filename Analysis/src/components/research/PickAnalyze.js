@@ -130,7 +130,7 @@ value:  words.count
       {transformedData.map((question, index) => (
 
         <div className={'questionContainer'} onClick={() => toggleQuestion(index)} style={{ background: 'rgb(255,255,255)', margin: '20px' }}>
-          <div className={'questionBox'} style={{height:'10vh'}}>
+          <div className={'questionBox'} style={{height:'11vh'}}>
 
 
             {
@@ -162,7 +162,7 @@ value:  words.count
 {question.isOpen === true ? (  <div> {question.questionType === 0 ?
               (
 
-                <div className={'chartBox'} style={{ height:'350px' ,  margin: '10px',overflowY:'scroll'}}>
+                <div className={'chartBox'} style={{ height:'350px' , margin: '10px', overflowY:'scroll'}}>
 
 <div style={{ height: 400, width: '60%', fontSize:'10px' }}>
         {/* <ReactWordcloud callbacks ={callbacks} words={question.wordCloudDTOs} options = {{   fontSizes: [25, 50],}}/> */}

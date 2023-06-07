@@ -240,23 +240,24 @@ console.log(csvdata)
         <div className={'box'} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0', width: '70vw', height: '10vh', marginTop: '10px' }}>
           <p className={'manageFont'}>공개 여부 설정</p>
 
-          <button style={{width:'12vw'}} onClick={toggleBlock}> {check} </button>
+          <button style={{width:'12vw', margin:'10px'}} onClick={toggleBlock}> {check} </button>
 
 
 
         </div>
       </>
       <>
-        <div className={'box'} style={{ padding: '0', width: '70vw', height: '20vh', marginTop: '10px' }}>
+        <div className={'box'} style={{ padding: '0', width: '70vw', height: '25vh', marginTop: '10px' }}>
 
 
-          <div style={{ height: '100%' }} >
+          <div style={{ height: '100%', margin:'10px'}} >
             <div className={'manageBox'} >
-              <p className={'manageFont'}>응답 기간 설정</p>
+              <p className={'manageFont'} style={{margin:'30px 0px 10px 0px'}}>응답 기간 설정</p>
             </div>
-            <div style={{ height: '50%', display: 'flex', alignItems: 'center', justifyContent: 'left' }}>
+            <div style={{ height: '70%', display: 'flex', alignItems: 'center', justifyContent: 'left' }}>
               <div style={{ width: '50%' }}>
-                <p className={'manageMinorFont'}> 설문 시작 기간 설정 </p>
+                <p className={'manageMinorFont'} style={{fontSize:'20px'}}> 설문 시작 기간 설정 </p>
+                <p></p>
                 <DatePicker
                   selected={firstDate}
                   onChange={date => setFirstDate(date)}
@@ -267,7 +268,8 @@ console.log(csvdata)
                 />
               </div>
               <div style={{ width: '50%' }}>
-                <p className={'manageMinorFont'}> 설문 종료 기간 설정</p>
+                <p className={'manageMinorFont'} style={{fontSize:'20px'}}> 설문 종료 기간 설정</p>
+                <p></p>
                 <DatePicker
                   selected={lastDate}
                   onChange={date => setLastDate(date)}
@@ -277,7 +279,7 @@ console.log(csvdata)
                   className={'date'}
                 />
               </div>
-              <button style={{margin: '20px'}} onClick={() =>  saveDate()}> 설정 저장하기 </button>
+              <button style={{margin: '10px'}} onClick={() =>  saveDate()}> 설정 저장하기 </button>
             </div>
           </div>
 
@@ -288,30 +290,31 @@ console.log(csvdata)
           <p className={'manageFont'}>설문 결과 내보내기</p>
 
           <CsvDownloadButton
-    data={csvList}
-    filename="good_data.csv"
-    style={{ //pass other props, like styles
-      boxShadow:"inset 0px 1px 0px 0px #e184f3",
-      background:"linear-gradient(to bottom, #c123de 5%, #a20dbd 100%)",
-      backgroundColor:"#c123de",
-      borderRadius:"6px",
-      border:"1px solid #a511c0",
-      display:"inline-block",
-      cursor:"pointer","color":"#ffffff",
-      fontSize:"15px",
-      fontWeight:"bold",
-      padding:"6px 24px",
-      textDecoration:"none",
-      textShadow:"0px 1px 0px #9b14b3"
-      }}
-      delimiter = ","
-  >
-    CSV로 저장하기
-  </CsvDownloadButton>
+              data={csvList}
+              filename="good_data.csv"
+              style={{ //pass other props, like styles
+                // boxShadow:"inset 0px 1px 0px 0px",
+                // background:"linear-gradient(to bottom, #c123de 5%, #a20dbd 100%)",
+                backgroundColor:"#1b0278",
+                borderRadius:"6px",
+                // border:"1px solid",
+                display:"inline-block",
+                // cursor:"pointer","color":"#ffffff",
+                fontSize:"15px",
+                fontWeight:"bold",
+                padding:"10px 24px",
+                textDecoration:"none",
+                // textShadow:"0px 1px 0px #9b14b3",
+                margin:"20px"
+                }}
+                delimiter = ","
+            >
+              CSV로 저장하기
+          </CsvDownloadButton>
 
         </div>
       </>  <>
-        <div className={'box'} style={{ padding: '0', width: '70vw', height: '40vh', marginTop: '10px' }}>
+        <div className={'box'} style={{ padding: '0', width: '70vw', height: '40vh', marginTop: '10px', marginBottom: '20px', paddingBottom: '20px' }}>
 
 
           <div style={{ height: '100%' }} >
@@ -320,14 +323,15 @@ console.log(csvdata)
             </div>
             <div className={'manageBox'} style={{ height: '70%' }}>
               <div style={{ width: '50%' }}>
-                <div className={'box'} style={{ width: '50%', height: '50%', margin: '30%' }} >
+                <div className={'box'} style={{ width: '50%', height: '50%', margin: '50%', padding: '5px' }} >
 
-                  <p className={'manageFont'}>응답 페이지 QR</p>
-                  <QRCode value={`http://172.16.210.22/Response/${encoded}`} size={'256'} style={{ width: '60%', height: '60%', margin: '2.5%' }} />
+                  <p className={'manageFont'} style={{ margin: '20px 20px 20px 20px' }}>응답 페이지 QR</p>
+                  <QRCode value={`http://172.16.210.22/Response/${encoded}`} size={'256'} style={{ width: '60%', height: '60%', margin: '2.5% 2.5% 10% 2.5%' }} />
                 </div>
               </div>
               <div style={{ width: '50%' }}>
                 <p className={'manageMinorFont'}>URL 복사</p>
+                <p></p>
                 <button onClick={() => handleCopyClipBoard(`http://172.16.210.22/Response/${encoded}`)}>
                   URL 복사하기
                 </button>

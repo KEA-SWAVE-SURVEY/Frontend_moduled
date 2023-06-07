@@ -50,7 +50,7 @@ export default function AprioriAnalyze({ data }) {
  <div className={'questionContainer'} style={{background:'rgb(255,255,255)', margin:'20px'}}>
       
                         <div className={'questionBox'} >
-                            <p style={{margin:'10px'}}> {question.questionTitle}</p>
+                            <p style={{margin:'1px'}}> {question.questionTitle}</p>
                         </div>
 
                         {question.answerList.map((answer) => (
