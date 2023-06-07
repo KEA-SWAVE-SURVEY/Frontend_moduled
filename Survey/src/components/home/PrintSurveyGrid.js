@@ -24,17 +24,21 @@ function PrintSurveyGrid(props) {
             const result = await axios.get(`/api/document/external/survey-list/${id}`);
             console.log(result)
             setSurveyList((prev) => {
+                //수정 리스트 모르겠어
                 return {
                     id: result.data.id,
                     title: result.data.title,
                     description: result.data.description,
                     reliability: result.data.reliability,
-                    backColor:result.data.backColor,
+                    
                     startDate:result.data.startDate,
                     endDate: result.data.endDate,
                     enable: result.data.enable,
-                    font:result.data.font,
-                    fontSize:result.data.fontSize, 
+                    design:{
+                        font:result.data.design.font,
+                        fontSize:result.data.design.fontSize, 
+                        backColor:result.data.design.backColor,
+                        },
                     type: result.data.type,
                     questionRequest: result.data.questionList.map((questionList) => {
                         return {

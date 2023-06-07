@@ -20,6 +20,9 @@ export const surveyListState = atom({
                 description:"",
                 type:0,
                 reliability:1,
+                startDate:new Date(),
+                endDate: new Date(),
+                enable: true,
                 design:{
                     font:"",
                     fontSize:3,

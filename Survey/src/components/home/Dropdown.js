@@ -47,6 +47,9 @@ function Dropdown(props) {
                     title: result.data.title,
                     description: result.data.description,
                     reliability: result.data.reliability,
+                    startDate:result.data.startDate,
+                    endDate: result.data.endDate,
+                    enable: result.data.enable,
                     design:result.data.design,
                     type: result.data.type,
                     questionRequest: result.data.questionList.map((questionList) => {

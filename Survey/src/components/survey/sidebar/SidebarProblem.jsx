@@ -76,6 +76,9 @@ function SidebarProblem(props) {
                 title: prev.title,
                 type: prev.type,
                 reliability: prev.reliability,
+                startDate:prev.startDate,
+                endDate: prev.endDate,
+                enable: prev.enable,
                 design:prev.design,
                 questionRequest: deletedContent
             };
