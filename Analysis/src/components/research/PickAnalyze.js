@@ -170,7 +170,7 @@ value:  words.count
 
                 <div className={'chartBox'} style={{ height:'350px' , margin: '10px', overflowY:'scroll'}}>
 
-<div style={{ height: 400, width: '60%', fontSize:'10px' }}>
+<div style={{ height: 0, width: '60%', fontSize:'10px' }}>
         {/* <ReactWordcloud callbacks ={callbacks} words={question.wordCloudDTOs} options = {{   fontSizes: [25, 50],}}/> */}
       </div>
                   {
