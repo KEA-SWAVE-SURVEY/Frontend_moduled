@@ -13,8 +13,9 @@ const MenuProfile = () => {
             sessionStorage.removeItem('token')
             removeCookie('survey')
             //06072300 수정
-            //window.location.reload()
+            
             window.location.href = `http://172.16.210.80/`;
+            window.location.reload()
             console.log(cookie)
         }
         
