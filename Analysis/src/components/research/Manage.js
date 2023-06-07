@@ -33,8 +33,7 @@ export default function Manage() {
 
 const [firstDate, setFirstDate] = useState(null);
 const [lastDate, setLastDate] = useState(null);
-const result = {"id":0,"title":"2313","description":"412112","type":0,"reliability":false,"startDate":"2023-06-01T14:25:54.000Z","endDate":"2023-06-21T14:25:54.000Z","enable":false,"design":{"font":"","fontSize":3,"backColor":"#ffffff"},"questionRequest":[{"id":0,"type":2,"title":"12342141412","choiceList":[{"id":0,"choiceName":""}]}]}
-
+ 
 const isLogined = useRecoilValue(loginState);
 
 
@@ -66,23 +65,23 @@ const loadSurveyData = async () => {
   //     enable: false,
 
   // };
-  //06092200 수정완료 enable,startdate,enddate
-const result  = await axios.get(`/api/document/external/manage/${documentId}`, { timeout: 10000 });
+  // 06092200 수정완료 설문상세분석 조회
+const result  = await axios.get(`/api/analyze/external/research/analyze/${documentId}`, { timeout: 10000 }); 
 // survey/external/response/{id}
 //06092200 수정완료 설문 응답 csv
 const resultCSV  = await axios.get(`/api/answer/external/response/${documentId}`, { timeout: 10000 });
 
 
-setSurveyList(result);
+setSurveyList(result); 
 setCsvList(resultCSV);
-};
-
+}; 
+ 
 useEffect(() => {
   loadSurveyData();
 }, []);
 
 
-
+ 
 // 블록버튼 누르기
 const toggleBlock = () => {
 
@@ -94,7 +93,13 @@ const toggleBlock = () => {
       // id : surveyList.id,
       enable : cblock,
   }
-  setSurveyList(dataToTransport);
+  
+  const dataToSync = {
+    // id : surveyList.id,
+    ...surveyList,
+    enable : cblock,
+}
+  setSurveyList(dataToSync);
   axios.patch(`/api/document/external/manage/enable/${documentId}`, dataToTransport,
     {
         headers: {
@@ -112,12 +117,18 @@ console.log(block);
 // 날짜 설정버튼 누르기
 const saveDate = () => {
 
-  const dataToTransport = {
-    //id : surveyList.id,
+  const dataToTransport = { 
     startDate:firstDate,
     endDate: lastDate,
 }
 
+const dataToSync = {
+  // id : surveyList.id,
+  ...surveyList,
+  startDate:firstDate,
+  endDate: lastDate,
+  enable: dataToTransport.startDate < new Date() ?  true:false 
+} 
 console.log(dataToTransport.startDate <  new Date());
 setBlock(dataToTransport.startDate < new Date() ?  true:false);
 setCheck(dataToTransport.startDate < new Date()?'공개 중':'비공개 중')
@@ -125,7 +136,7 @@ console.log(dataToTransport.startDate < new Date() ?  true:false);
 console.log(dataToTransport.startDate < new Date()?'공개 중':'비공개 중')
 console.log(dataToTransport);
 console.log(new Date());
-setSurveyList(dataToTransport);
+setSurveyList(dataToSync);
 axios.patch(`/api/document/external/manage/date/${documentId}`, dataToTransport,
 {
     headers: {
@@ -240,24 +251,23 @@ console.log(csvdata)
         <div className={'box'} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0', width: '70vw', height: '10vh', marginTop: '10px' }}>
           <p className={'manageFont'}>공개 여부 설정</p>
 
-          <button style={{width:'12vw', margin:'10px'}} onClick={toggleBlock}> {check} </button>
+          <button style={{width:'12vw'}} onClick={toggleBlock}> {check} </button>
 
 
 
         </div>
       </>
       <>
-        <div className={'box'} style={{ padding: '0', width: '70vw', height: '25vh', marginTop: '10px' }}>
+        <div className={'box'} style={{ padding: '0', width: '70vw', height: '20vh', marginTop: '10px' }}>
 
 
-          <div style={{ height: '100%', margin:'10px'}} >
+          <div style={{ height: '100%' }} >
             <div className={'manageBox'} >
-              <p className={'manageFont'} style={{margin:'30px 0px 10px 0px'}}>응답 기간 설정</p>
+              <p className={'manageFont'}>응답 기간 설정</p>
             </div>
-            <div style={{ height: '70%', display: 'flex', alignItems: 'center', justifyContent: 'left' }}>
+            <div style={{ height: '50%', display: 'flex', alignItems: 'center', justifyContent: 'left' }}>
               <div style={{ width: '50%' }}>
-                <p className={'manageMinorFont'} style={{fontSize:'20px'}}> 설문 시작 기간 설정 </p>
-                <p></p>
+                <p className={'manageMinorFont'}> 설문 시작 기간 설정 </p>
                 <DatePicker
                   selected={firstDate}
                   onChange={date => setFirstDate(date)}
@@ -268,8 +278,7 @@ console.log(csvdata)
                 />
               </div>
               <div style={{ width: '50%' }}>
-                <p className={'manageMinorFont'} style={{fontSize:'20px'}}> 설문 종료 기간 설정</p>
-                <p></p>
+                <p className={'manageMinorFont'}> 설문 종료 기간 설정</p>
                 <DatePicker
                   selected={lastDate}
                   onChange={date => setLastDate(date)}
@@ -279,7 +288,7 @@ console.log(csvdata)
                   className={'date'}
                 />
               </div>
-              <button style={{margin: '10px'}} onClick={() =>  saveDate()}> 설정 저장하기 </button>
+              <button style={{margin: '20px'}} onClick={() =>  saveDate()}> 설정 저장하기 </button>
             </div>
           </div>
 
@@ -290,31 +299,30 @@ console.log(csvdata)
           <p className={'manageFont'}>설문 결과 내보내기</p>
 
           <CsvDownloadButton
-              data={csvList}
-              filename="good_data.csv"
-              style={{ //pass other props, like styles
-                // boxShadow:"inset 0px 1px 0px 0px",
-                // background:"linear-gradient(to bottom, #c123de 5%, #a20dbd 100%)",
-                // backgroundColor:"#1b0278",
-                borderRadius:"6px",
-                // border:"1px solid",
-                display:"inline-block",
-                // cursor:"pointer","color":"#ffffff",
-                fontSize:"15px",
-                fontWeight:"bold",
-                padding:"10px 24px",
-                textDecoration:"none",
-                // textShadow:"0px 1px 0px #9b14b3",
-                margin:"20px"
-                }}
-                delimiter = ","
-            >
-              CSV로 저장하기
-          </CsvDownloadButton>
+    data={csvList}
+    filename="good_data.csv"
+    style={{ //pass other props, like styles
+      boxShadow:"inset 0px 1px 0px 0px #e184f3",
+      background:"linear-gradient(to bottom, #c123de 5%, #a20dbd 100%)",
+      backgroundColor:"#c123de",
+      borderRadius:"6px",
+      border:"1px solid #a511c0",
+      display:"inline-block",
+      cursor:"pointer","color":"#ffffff",
+      fontSize:"15px",
+      fontWeight:"bold",
+      padding:"6px 24px",
+      textDecoration:"none",
+      textShadow:"0px 1px 0px #9b14b3"
+      }}
+      delimiter = ","
+  >
+    CSV로 저장하기
+  </CsvDownloadButton>
 
         </div>
       </>  <>
-        <div className={'box'} style={{ padding: '0', width: '70vw', height: '40vh', marginTop: '10px', marginBottom: '20px', paddingBottom: '20px' }}>
+        <div className={'box'} style={{ padding: '0', width: '70vw', height: '40vh', marginTop: '10px' }}>
 
 
           <div style={{ height: '100%' }} >
@@ -323,15 +331,14 @@ console.log(csvdata)
             </div>
             <div className={'manageBox'} style={{ height: '70%' }}>
               <div style={{ width: '50%' }}>
-                <div className={'box'} style={{ width: '50%', height: '50%', margin: '50%', padding: '5px' }} >
+                <div className={'box'} style={{ width: '50%', height: '50%', margin: '30%' }} >
 
-                  <p className={'manageFont'} style={{ margin: '20px 20px 20px 20px' }}>응답 페이지 QR</p>
-                  <QRCode value={`http://172.16.210.22/Response/${encoded}`} size={'256'} style={{ width: '60%', height: '60%', margin: '2.5% 2.5% 10% 2.5%' }} />
+                  <p className={'manageFont'}>응답 페이지 QR</p>
+                  <QRCode value={`http://172.16.210.22/Response/${encoded}`} size={'256'} style={{ width: '60%', height: '60%', margin: '2.5%' }} />
                 </div>
               </div>
               <div style={{ width: '50%' }}>
                 <p className={'manageMinorFont'}>URL 복사</p>
-                <p></p>
                 <button onClick={() => handleCopyClipBoard(`http://172.16.210.22/Response/${encoded}`)}>
                   URL 복사하기
                 </button>
@@ -346,38 +353,3 @@ console.log(csvdata)
     </div>
   )
 }
-
-/*
-const ToggleSwitch = styled(Switch)(({ theme }) => ({
-  padding: 8,
-  '& .MuiSwitch-track': {
-    borderRadius: 22 / 2,
-    '&:before, &:after': {
-      content: '""',
-      position: 'absolute',
-      top: '50%',
-      transform: 'translateY(-50%)',
-      width: 16,
-      height: 16,
-    },
-    '&:before': {
-      backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 24 24"><path fill="${encodeURIComponent(
-        theme.palette.getContrastText(theme.palette.primary.main),
-      )}" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"/></svg>')`,
-      left: 12,
-    },
-    '&:after': {
-      backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 24 24"><path fill="${encodeURIComponent(
-        theme.palette.getContrastText(theme.palette.primary.main),
-      )}" d="M19,13H5V11H19V13Z" /></svg>')`,
-      right: 12,
-    },
-  },
-  '& .MuiSwitch-thumb': {
-    boxShadow: 'none',
-    width: 16,
-    height: 16,
-    margin: 2,
-  },
-}));
- */
