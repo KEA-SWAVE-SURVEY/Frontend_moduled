@@ -1,29 +1,7 @@
-import React , {useState, useEffect} from 'react';
+import React , {useState} from 'react';
 import '../../styles/SurveyStyle.css';
 import { PieChartComponent } from './chart'
 import randomColor from 'randomcolor';  
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
-import "firebase/compat/database";
-import "firebase/compat/storage";
-
-// Your web app's Firebase configuration
-const firebaseConfig = { 
-};
-
-try {
-  firebase.initializeApp(firebaseConfig)
-  } catch (err) {
-  // we skip the "already exists" message which is
-  // not an actual error when we're hot-reloading
-  if (!/already exists/.test(err.message)) {
-  console.error('Firebase initialization error raised', err.stack)
-}}
-
-const app = firebase.initializeApp(firebaseConfig);
-
-const storage = firebase.storage();
 
 
 //import ReactDOM from "react-dom";
@@ -117,43 +95,29 @@ export default function PickAnalyze({ data }) {
     onWordMouseOver: getCallback("onWordMouseOver")
   };
  */
-  const [transformedData, setTransformedData] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const transformed = await Promise.all(data.questionList.map(async (question) => {
-        let downloadUrl = '';
-
-  if (question.questionType === 0) {
-    downloadUrl = await storage
-      .ref(`wordcloud/${data.id}/${question.id}.jpg`)
-      .getDownloadURL() 
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-        return {
-          testData: downloadUrl,
-          isOpen: true,
-          question: question.title,
-          questionType: question.questionType,
-          questionId: question.questionId, 
-          lists: question.choiceList.map((choice) => ({
-            name: choice.title,
-            value: choice.count,
-            fill: randomColor({ luminosity: 'liight', hue: 'random' })
-          })), 
-        };
-      }));
-      setTransformedData(transformed);
-    };
   
-    fetchData();
-  }, []);
-  console.log(transformedData)
- 
+  const [transformedData, setTransformedData] = useState(data.questionList.map((question) => ({
+    
+    isOpen : true,
+    question: question.title,
+    questionType: question.questionType,
+    
+    wordCloudDTOs :question.wordCloudDtos.map((words) => ({
+    
+text: words.title,
+value:  words.count 
 
+    })), 
+    lists: question.choiceList.map((choice) => ({
+      name: choice.title,
+      value: choice.count,
 
+      fill: randomColor({ luminosity: 'liight', hue: 'random' })
+    })),
+
+    
+  }))
+  );
   const toggleQuestion = (index) => {
     setTransformedData((prevData) => {
       const newData = [...prevData];
@@ -161,7 +125,8 @@ export default function PickAnalyze({ data }) {
       return newData;
     });
   };
-    return (
+  console.log(typeof(transformedData[2].wordCloudDTOs[0].value) + " " + transformedData[2].wordCloudDTOs[0].value+" " + (transformedData[2].wordCloudDTOs[0].value + transformedData[2].wordCloudDTOs[0].value))
+  return (
     <div className={'analyzeBox'} style={{ padding: '0', width: '100%', height: '100%', overflowY: 'scroll', scrollbarWidth: 'none', msOverflowStyle: 'none', margin: '10' }}>
      <div className={'questionBox'} style={{height:'10vh',  margin: '10px'}}>
       <p style={{ margin: '5px'}}> {data.countAnswer} 명이 응답함 </p>
@@ -205,12 +170,8 @@ export default function PickAnalyze({ data }) {
 
                 <div className={'chartBox'} style={{ height:'350px' , margin: '10px', overflowY:'scroll'}}>
 
-<div style={{ height: '400px', width: '100%', fontSize:'10px',   display: "flex", justifyContent: "center", alignItems: "center"}}>
+<div style={{ height: 0, width: '60%', fontSize:'10px' }}>
         {/* <ReactWordcloud callbacks ={callbacks} words={question.wordCloudDTOs} options = {{   fontSizes: [25, 50],}}/> */}
-        <div className='word_cloud' style={{ width:'400px', height:'400px', backgroundImage: `url(${question.testData})`, backgroundRepeat:'no-repeat', backgroundSize:'cover'}}>
-        </div>
-
-     
       </div>
                   {
                     question.lists.map((answers) => (
