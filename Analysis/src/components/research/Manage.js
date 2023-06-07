@@ -23,12 +23,11 @@ export default function Manage() {
   const [surveyList, setSurveyList] = useState(null);
   const [csvList, setCsvList] = useState(null);
   const [answerList, setAnswerList] = useState(null);
-  const [enableAndDate,setEnableAndDate] = useState('')
  
 
   const { documentId } = useParams();
-  const [block, setBlock] = useState(0); //TODO강훈님: 서버로부터 받아온걸로 미리 체크설정해두기, toggleBlock에 block 넣기 등 이거 해야함
-  const [check,setCheck] = useState('응답 받지않기')
+  const [block, setBlock] = useState(0); //TO완료DO: 서버로부터 받아온걸로 미리 체크설정해두기, toggleBlock에 block 넣기 등
+  const [check,setCheck] = useState('비공개 중')
    
    
   
@@ -49,95 +48,49 @@ useEffect(() => {
     console.log(JSON.stringify(surveyList));
     console.log(new Date(surveyList.endDate));
     console.log(surveyList.startDate);
-    //setFirstDate(new Date(surveyList.startDate));
-    //setLastDate(new Date(surveyList.endDate));
-    //setBlock(surveyList.enable);
+    setFirstDate(new Date(surveyList.startDate));
+    setLastDate(new Date(surveyList.endDate));
+    setBlock(surveyList.enable);
     console.log(surveyList.enable);
     console.log(block); 
     
-    setCheck(block===true?'응답 받기':'응답 받지않기')
+    setCheck(block===true?'공개 중':'비공개 중')
   }
 }, [surveyList]);
 const loadSurveyData = async () => {
   // const result = {
     
-  //     id: 10,
-  //     title: "2313",
-  //     description: "412112",
-  //     type: 0,
-  //     reliability: false,
+  //     id: 10, 
   //     startDate: "2023-06-01T14:25:54.000Z",
   //     endDate: "2023-06-21T14:25:54.000Z",
-  //     enable: false,
-  //     design: { font: "", fontSize: 3, backColor: "#ffffff" },
-  //     questionList: [
-  //       {
-  //         id: 0,
-  //         type: 2,
-  //         title: "12342141412",
-  //         choiceList: [{ id: 0, choiceName: "" }]
-  //       }
-  //     ]
+  //     enable: false, 
     
   // };
-const result  = await axios.get(`/analyze/external/research/analyze/${documentId}`, { timeout: 10000 });
+const data = axios.get(`/api/surveydocument/external/manage/${documentId}` ,  { timeout: 10000 }); 
 // survey/external/response/{id} 
-const resultCSV  = await axios.get(`/survey/external/response/${documentId}`, { timeout: 10000 });
-
-
-setSurveyList(result);
+ const resultCSV  = await axios.get(`/survey/external/response/${documentId}`, { timeout: 10000 });
+setSurveyList(data);
 setCsvList(resultCSV);
 };
 
 useEffect(() => {
   loadSurveyData();
 }, []);
-//강훈님 확인 부탁 드립니다
-//공용에서 데이터 주기 1번 여기부터시작
-useEffect(()=>{
-const data = axios.get(`/api/surveydocument/external/manage/${documentId}`); 
-        console.log(result)
-        setEnableAndDate((prev) => {
-            return {
-              //id?
-                enable : data.enable,
-                
-                startDate:data.startDate,
-                endDate: data.endDate,
-                enable: data.enable,
-            }
-        });
-        setFirstDate(new Date(enableAndDate.startDate));
-        setLastDate(new Date(enableAndDate.endDate));
-        setBlock(enableAndDate.enable);
-      })
-      
+ 
  
   
 // 블록버튼 누르기
-//강훈님1
-//todo date 수정
-//불러오고 쏘는거 patch
-//공용구 api/surveydocument/external
-//date와 enable을 같이 가지고 온다 get /manage/{id}
-//enable쏘기 patch manage/enable/{id}
-//2.데이터 삽입
 const toggleBlock = () => { 
-  console.log(enableAndDate)
-  const cblock = enableAndDate.enable===true? false:true;
-  //const cblock = block===true? false:true;
+    
+  const cblock = block===true? false:true;
   console.log(cblock);  
-  setCheck(prev=>prev==='응답 받지않기'?'응답 받기':'응답 받지않기');
+  setCheck(prev=>prev==='비공개 중'?'공개 중':'비공개 중');
     setBlock(cblock);  
     const dataToTransport = {
-      // id : surveyList.id, 
-      //...surveyList,
+      // id : surveyList.id,  
       enable : cblock, 
   }
-  //setSurveyList(dataToTransport);
-  setEnableAndDate(dataToTransport)
-  //axios.post(`/api/external/update/${documentId}`
-  //수정06072100
+  setSurveyList(dataToTransport);
   axios.patch(`/api/document/external/manage/enable/${documentId}`, dataToTransport,
     {
         headers: {
@@ -149,41 +102,34 @@ const toggleBlock = () => {
 
 console.log(block);
   }
-//todo 다른서비스로 가는 api콜이 있는지 0607 해결
-//todo 날짜 수정 api/external/management/${id}
-//startDate string
-//endDate string
-//axios.patch
-//강훈님2
+
 
   
 // 날짜 설정버튼 누르기
-//date쏘기 patch external/manage/date/{id}
 const saveDate = () => { 
-  
       
   const dataToTransport = {
-    // id : surveyList.id,
-      //...surveyList,
+    id : surveyList.id, 
     startDate:firstDate,
     endDate: lastDate, 
-  }
-  console.log(dataToTransport);
-  //값저장해주고
-  //setSurveyList(dataToTransport);
-  setEnableAndDate(dataToTransport);
+}
 
-  //api/surveydocument/external
-  //axios.post(`/api/external/update/${documentId}`
-  //수정06072100
-  axios.patch(`/api/document/external/manage/date/${documentId}`, dataToTransport,
-    {
-        headers: {
-            'Application-Type': 'application/json',
-            'Authorization': isLogined.token
-        }
+console.log(dataToTransport.startDate <  new Date());
+setBlock(dataToTransport.startDate < new Date() ?  true:false);
+setCheck(dataToTransport.startDate < new Date()?'공개 중':'비공개 중')
+console.log(dataToTransport.startDate < new Date() ?  true:false);
+console.log(dataToTransport.startDate < new Date()?'공개 중':'비공개 중')
+console.log(dataToTransport);
+console.log(new Date());
+setSurveyList(dataToTransport);
+axios.patch(`/api/document/external/manage/date/${documentId}`, dataToTransport,
+{
+    headers: {
+        'Application-Type': 'application/json',
+        'Authorization': isLogined.token
     }
-  ) 
+}
+) 
 }
 
 
@@ -277,11 +223,9 @@ const csvdata = processData.map((item) => {
   
   
 console.log(csvdata) 
-  //TODO : 백과 연동해서 CSV 받아오는 api 설정 후, csv 받아오기 
-  //0607아님 강훈님3
+  //TO완료DO 백과 연동해서 CSV 받아오는 api 설정 후, csv 받아오기 
  
-  //selected={firstDate}
-  //selected={lastDate}
+
 
   return (
     <div >
@@ -310,7 +254,6 @@ console.log(csvdata)
               <div style={{ width: '50%' }}>
                 <p className={'manageMinorFont'}> 설문 시작 기간 설정 </p>
                 <DatePicker
-                
                   selected={firstDate}
                   onChange={date => setFirstDate(date)}
                   dateFormat='dd/MM/yyyy'
@@ -376,12 +319,12 @@ console.log(csvdata)
                 <div className={'box'} style={{ width: '50%', height: '50%', margin: '30%' }} >
 
                   <p className={'manageFont'}>응답 페이지 QR</p>
-                  <QRCode value={`http://172.16.210.80/Response/${encoded}`} size={'256'} style={{ width: '60%', height: '60%', margin: '2.5%' }} />
+                  <QRCode value={`http://172.16.210.22/Response/${encoded}`} size={'256'} style={{ width: '60%', height: '60%', margin: '2.5%' }} />
                 </div>
               </div>
               <div style={{ width: '50%' }}>
                 <p className={'manageMinorFont'}>URL 복사</p>
-                <button onClick={() => handleCopyClipBoard(`http://172.16.210.80/Response/${encoded}`)}>
+                <button onClick={() => handleCopyClipBoard(`http://172.16.210.22/Response/${encoded}`)}>
                   URL 복사하기
                 </button>
                 <div style={{ width: '100%', height: '4vh' }} /> 
