@@ -3,36 +3,17 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { surveyListState, answerListState, loginState, modifyState,fontState, fontSizeState,backColorState } from '../contexts/atom';
 import ReactDragList from 'react-drag-list';
 import axios from 'axios';
-//최신 0607 17:00
+
 import '../styles/SurveyStyle.css';
 import CreateSurvey from '../components/survey/create/CreateSurvey';
 import ViewSurvey from '../components/survey/view/ViewSurvey';
-import Sidebar from '../components/survey/sidebar/Sidebar';
-import { useNavigate } from 'react-router-dom';
-
-import {setCookie,getCookie,removeCookie} from '../components/login/cookie'
+import Sidebar from '../components/survey/sidebar/Sidebar'; 
 
 
 import html2canvas from "html2canvas";
-import saveAs from "file-saver"; 
- import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
-import "firebase/compat/database";
-import "firebase/compat/storage"; 
-// Import the functions you need from the SDKs you need 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-const firebaseConfig = { 
-};
-
-const app = firebase.initializeApp(firebaseConfig);
-
-const storage = firebase.storage();
-
-
+import saveAs from "file-saver";
+import {setCookie,getCookie,removeCookie} from '../components/login/cookie'
+ 
 
 function Survey(props) {
     const isLogined = useRecoilValue(loginState);
@@ -47,19 +28,17 @@ function Survey(props) {
     const [font,setFont] = useRecoilState(fontState);
     const [fontSize,setFontSize] = useRecoilState(fontSizeState);
     const [backColor,setBackColor] = useRecoilState(backColorState);
-
     const [isPreview, setIsPreview] = useState(false);
 
     const scrollRef = useRef();
-
-    const navigate = useNavigate();
+ 
     const divRef = useRef(null);
+    
+    const topRef = useRef(null);
     const today = new Date().toLocaleDateString(); 
 
     const [size, setSize] = useState(`30px`);
-    
 
-    const [imageUrl, setImageUrl] = useState('');
 
 
     const changeSize=(e)=>{
@@ -68,46 +47,16 @@ function Survey(props) {
 
     }
 
-    const handleDownload = async (dataToTransport) => {
-        if (!divRef.current) return;
-        console.log(dataToTransport)
-        console.log(JSON.stringify(dataToTransport))
-      
-        try {
-          const div = divRef.current;
-          const canvas = await html2canvas(div, {
-            x:0,        // 캡처할 부분의 x 좌표
-            y: 0,        // 캡처할 부분의 y 좌표
-              // 캡처할 부분의 가로 크기
-            height: 400  // 캡처할 부분의 세로 크기
-          });
-          const imageBlob = await new Promise((resolve) => {
-            canvas.toBlob(resolve, 'image/jpeg');
-          }); 
+   
 
-          
-    const storageRef = firebase.storage().ref();
-    const imageRef = storageRef.child(`tumbnail/${dataToTransport.id}.jpg`);
 
-    imageRef.put(imageBlob).then(() => { 
-        console.log('Image uploaded successfully!');
-        imageRef.getDownloadURL().then((url) => setImageUrl(url));
-      }).catch((error) => {
-        console.error('Error uploading image:', error);
-      });
-    
-        } catch (error) {
-          console.error('Error converting div to image:', error);
-        }
-      };
+
+
 
     useEffect(() => {
-        
         scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
     }, [surveyList?.questionRequest.length]);
-
     const surveyCookie = getCookie("survey");
-    
     useEffect(() => {
         if (!isModify) {
             checkCookie()
@@ -121,6 +70,9 @@ function Survey(props) {
                         description: "",
                         type: 0,
                         reliability: 1,
+                        startDate:new Date(),
+                        endDate: new Date(),
+                        enable: true, 
                         design:
                             {
                         font:"",
@@ -153,6 +105,9 @@ function Survey(props) {
                         title: surveyCookie.title,
                         description: surveyCookie.description,
                         reliability: surveyCookie.reliability,
+                        startDate:surveyCookie.startDate,
+                        endDate: surveyCookie.endDate,
+                        enable: surveyCookie.enable,
                         design:surveyCookie.design,
                         type: surveyCookie.type,
                         questionRequest: surveyCookie.questionRequest.map((questionList) => {
@@ -176,6 +131,39 @@ function Survey(props) {
         }
     }, []);
 
+    /* useEffect(() => {
+        if (!isModify) {
+            //console.log(Rel)
+            setSurveyList((prev) => {
+                return {
+                    id: 0,
+                    title: "",
+                    description: "",
+                    type: 0,
+                    reliability: 1,
+                    
+                    startDate:new Date(),
+                    endDate: new Date(),
+                    enable: false, 
+                    design:
+                            {
+                        font:"",
+                        fontSize:3,
+                        backColor:'#ffffff'
+                            },
+                    questionRequest: [
+                        {
+                            id: 0,
+                            type: 0,
+                            title: "",
+                            choiceList: ""
+                        }
+                    ]
+                }
+            });
+        }
+    }, []); */
+
     const onUpdateList = (e, updated) => {
         console.log(updated);
         setSurveyList((prev) => {
@@ -185,6 +173,10 @@ function Survey(props) {
                 description: prev.description,
                 type: prev.type,
                 reliability: prev.reliability,
+                
+                startDate:prev.startDate,
+                endDate: prev.endDate,
+                enable: prev.enable,
                 design:prev.design,
                 questionRequest: [...updated]
             }
@@ -208,7 +200,12 @@ function Survey(props) {
                 description: prev.description,
                 type: prev.type,
                 reliability:prev.reliability,
+                
+                startDate:prev.startDate,
+                endDate: prev.endDate,
+                enable: prev.enable,
                 design:prev.design,
+                
                 questionRequest: [
                     ...prev.questionRequest,
                     {
@@ -220,7 +217,6 @@ function Survey(props) {
                 ]
             };
         });
-        
         console.log(surveyList);
     }
 
@@ -240,7 +236,11 @@ function Survey(props) {
                 title: e.target.value,
                 description: prev.description,
                 type: prev.type,
-                reliability:prev.reliability,
+                reliability:prev.reliability, 
+                
+                startDate:prev.startDate,
+                endDate: prev.endDate,
+                enable: prev.enable,
                 design:prev.design,
                 questionRequest: prev.questionRequest
             };
@@ -255,6 +255,7 @@ function Survey(props) {
           });
     }
 
+
     function onChangeTextArea(e) {
         e.preventDefault();
         setSurveyList((prev) => {
@@ -264,6 +265,10 @@ function Survey(props) {
                 description: e.target.value,
                 type: prev.type,
                 reliability:prev.reliability,
+                
+                startDate:prev.startDate,
+                endDate: prev.endDate,
+                enable: prev.enable,
                 design:prev.design,
                 questionRequest: prev.questionRequest
             };
@@ -331,6 +336,41 @@ function Survey(props) {
         setSidebarIsOpen({ open: false, isSetting: false, isGPT: false });
     }
 
+    const handleDownload = async () => {
+        if (!divRef.current) return;
+      
+        try {
+          const div = divRef.current;
+          const canvas = await html2canvas(div, {
+            x:0,        // 캡처할 부분의 x 좌표
+            y: 0,        // 캡처할 부분의 y 좌표
+              // 캡처할 부분의 가로 크기
+            height: 400  // 캡처할 부분의 세로 크기
+          });
+          canvas.toBlob(async (blob) => {
+            if (blob !== null) {
+              const formData = new FormData();
+              formData.append('blobData', blob);
+              saveAs(blob, "result.png");
+            console.log('try to axios');
+       
+              try {
+                await axios.post('/processBlob', formData, {
+                  headers: {
+                    'Content-Type': 'application/octet-stream',
+                  },
+                });
+                console.log('Blob sent to backend successfully');
+              } catch (error) {
+                console.error('Error sending blob to backend:', error);
+              }
+            }
+          });
+        } catch (error) {
+          console.error('Error converting div to image:', error);
+        }
+      };
+
     function onClickSaveButton(e) {
         e.preventDefault();
         console.log(surveyList);
@@ -341,6 +381,9 @@ function Survey(props) {
             description: surveyList.description,
             type: surveyList.type,
             reliability:surveyList.reliability,
+            startDate:surveyList.startDate,
+            endDate: surveyList.endDate,
+            enable: surveyList.enable,
             design:surveyList.design,
             questionRequest: surveyList.questionRequest.map((prev) => {
                 return {
@@ -354,10 +397,81 @@ function Survey(props) {
 
 
         console.log(isLogined.token);
-        var url = '/api/create';
+        var url = '/api/document/external/create';
         console.log(url);
-        //수정 0606
-        if (isModify) url = `/api/external/update/${surveyList.id}` //임시
+        //if (isModify) url = `/api/modify-survey/${surveyList.id}` //임시
+        //todo 수정완료 수정은 put으로
+        //수정06072100
+        if (isModify){
+             url = `/api/docuemnt/external/update/${surveyList.id}`
+             axios.put(url, dataToTransport,
+                {
+                    headers: {
+                        'Application-Type': 'application/json',
+                        'Authorization': isLogined.token
+                    }
+                }
+            )
+                .then((response) => {//api의 응답을 제대로 받은경우
+                    setSurveyList((prev) => {
+                        return {
+                            id: 0,
+                            title: "",
+                            description: "",
+                            type: 0,
+                            reliability:1, //notion상에서는 Boolean인데 이거 변경할지
+                             // design쪽 notion에는 없는데 일단 유지 
+                            startDate:new Date(),
+                            endDate: new Date(),
+                            enable: true,
+                            design:
+                                {
+                                font:"",
+                                fontSize:0,
+                                backColor:"#ffffff"
+                                },
+                            questionRequest: [
+                                {
+                                    id: 0,
+                                    type: 0,
+                                    title: "",
+                                    choiceList: ""/*[
+                                                    id:0;
+                                                    choiceName:null;
+                                                ]*/
+                                }
+                            ]
+                        }
+                    });
+                    setAnswerList((prev) => {
+                        return {
+                            id: 0,
+                            title: null,
+                            description: null,
+                            type: null,
+                            responseId: 0,
+                            questionResponse: [/*
+                                        {
+                                            title:null,
+                                            type:null,
+                                            answer:null,
+                                            answerId:null,
+                                        }*/
+                            ]
+                        }
+                    });
+                    console.log('Saved'); 
+                    window.location.href = `http://172.16.210.80/`; 
+                    if(surveyCookie){
+                        removeCookie('survey')
+                        }
+                })
+                .catch((response) => {//종류불문 에러
+                    console.log('Error');
+                    console.log(dataToTransport);
+                });
+                handleDownload();
+        } 
         axios.post(url, dataToTransport,
             {
                 headers: {
@@ -373,7 +487,11 @@ function Survey(props) {
                         title: "",
                         description: "",
                         type: 0,
-                        reliability:1,
+                        reliability:1, //notion상에서는 Boolean인데 이거 변경할지
+                         // design쪽 notion에는 없는데 일단 유지 
+                        startDate:new Date(),
+                        endDate: new Date(),
+                        enable: true,
                         design:
                             {
                             font:"",
@@ -410,19 +528,17 @@ function Survey(props) {
                         ]
                     }
                 });
-                console.log('Saved');
-                handleDownload(response);
-                navigate('/');
+                console.log('Saved'); 
+                window.location.href = `http://172.16.210.80/`; 
                 if(surveyCookie){
                     removeCookie('survey')
                     }
             })
-            
             .catch((response) => {//종류불문 에러
                 console.log('Error');
                 console.log(dataToTransport);
             });
-            
+            handleDownload();
         }
         function checkCookie(){
             if(surveyCookie){
@@ -437,9 +553,11 @@ function Survey(props) {
         }
 
     return (
-        <div style={{backgroundColor:backColor}}  ref={divRef}>
+       
+        <div style={{backgroundColor:backColor}}  >
             <div className="survey_area" style={!sidebarIsOpen.open ? { paddingRight: "0px" } : { paddingRight: "30vw" }}>
-                <div className="survey_container">
+                <div className="survey_container" ref={divRef}> 
+                    <div ref ={topRef}> <p> </p></div>
                     
 
                     <div ref={scrollRef}>
@@ -447,8 +565,7 @@ function Survey(props) {
                             <div >
                                 <div className='create_survey'>
                                     <div className='problem_container'>
-                                        
-                                    
+                                    {font}
                                             <input placeholder="설문 제목" value={surveyList?.title} onChange={(e) => onChangeTitleInput(e)} className='survey_input' style={{ fontSize: fontSize+'vw' ,fontFamily:font }}></input>
                                             <textarea placeholder="부연 설명을 입력해 주세요" value={surveyList?.description} onChange={(e) => onChangeTextArea(e) }style={{ fontSize: fontSize+`vw` ,fontFamily:font }} className='textarea'></textarea>
 
@@ -457,7 +574,6 @@ function Survey(props) {
                                 <>
                                     {surveyList && <ReactDragList dataSource={[...surveyList.questionRequest]} rowKey='id' row={dragList} handles={false} ghostClass="dragGhost" onUpdate={onUpdateList} />}
                                 </>
-                                
                             </div>) : (
                             <>
 
