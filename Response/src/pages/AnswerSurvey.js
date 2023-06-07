@@ -57,7 +57,7 @@ function AnswerSurvey() {
                 })
             }
         });
-        checkDate(surveyList.startDate,surveyList.endDate,surveyList.enable)
+        checkDate(result.data.startDate,result.data.endDate,result.data.enable)
 
 
         setAnswerList((prev) => {

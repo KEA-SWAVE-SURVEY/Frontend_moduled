@@ -47,6 +47,7 @@ const BeforeLogin = (props) => {
   function onClickLogin(e) {
     e.preventDefault();
     console.log(process.env);
+    //수정? 확인필요 로컬도 똑같긴해
     window.location.href = `http://172.16.210.80/Login`; 
   }
   const [position, setPosition] = useState(0);
@@ -153,7 +154,7 @@ const BeforeLogin = (props) => {
           </div>
         </div>
       
-      <button onClick={handleDownload}>다운로드</button>
+      
       </div>
       </>
       
