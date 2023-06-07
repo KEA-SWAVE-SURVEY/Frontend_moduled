@@ -2,28 +2,28 @@ import React , {useState, useEffect} from 'react';
 import '../../styles/SurveyStyle.css';
 import { PieChartComponent } from './chart'
 import randomColor from 'randomcolor';  
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
-import "firebase/compat/database";
-import "firebase/compat/storage";
+// import firebase from 'firebase/compat/app';
+// import 'firebase/compat/auth';
+// import 'firebase/compat/firestore';
+// import "firebase/compat/database";
+// import "firebase/compat/storage";
 
 // Your web app's Firebase configuration
-const firebaseConfig = { 
-};
+// const firebaseConfig = { 
+// };
 
-try {
-  firebase.initializeApp(firebaseConfig)
-  } catch (err) {
-  // we skip the "already exists" message which is
-  // not an actual error when we're hot-reloading
-  if (!/already exists/.test(err.message)) {
-  console.error('Firebase initialization error raised', err.stack)
-}}
+// try {
+//   firebase.initializeApp(firebaseConfig)
+//   } catch (err) {
+//   // we skip the "already exists" message which is
+//   // not an actual error when we're hot-reloading
+//   if (!/already exists/.test(err.message)) {
+//   console.error('Firebase initialization error raised', err.stack)
+// }}
 
-const app = firebase.initializeApp(firebaseConfig);
+// const app = firebase.initializeApp(firebaseConfig);
 
-const storage = firebase.storage();
+// const storage = firebase.storage();
 
 
 //import ReactDOM from "react-dom";
@@ -124,14 +124,14 @@ export default function PickAnalyze({ data }) {
       const transformed = await Promise.all(data.questionList.map(async (question) => {
         let downloadUrl = '';
 
-  if (question.questionType === 0) {
-    downloadUrl = await storage
-      .ref(`wordcloud/${data.id}/${question.id}.jpg`)
-      .getDownloadURL() 
-      .catch((error) => {
-        console.error(error);
-      });
-  }
+  // if (question.questionType === 0) {
+  //   downloadUrl = await storage
+  //     .ref(`wordcloud/${data.id}/${question.id}.jpg`)
+  //     .getDownloadURL() 
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }
         return {
           testData: downloadUrl,
           isOpen: true,

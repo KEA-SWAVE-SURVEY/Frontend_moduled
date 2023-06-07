@@ -8,29 +8,29 @@ import { surveyListState, modifyState } from '../../contexts/atom';
 import axios from 'axios';
 
 
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
-import "firebase/compat/database";
-import "firebase/compat/storage";
-import html2canvas from 'html2canvas';
+// import firebase from 'firebase/compat/app';
+// import 'firebase/compat/auth';
+// import 'firebase/compat/firestore';
+// import "firebase/compat/database";
+// import "firebase/compat/storage";
+// import html2canvas from 'html2canvas';
 // Import the functions you need from the SDKs you need 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = { 
-};
+// const firebaseConfig = { 
+// };
 
-try {
-    firebase.initializeApp(firebaseConfig)
-    } catch (err) {
-    // we skip the "already exists" message which is
-    // not an actual error when we're hot-reloading
-    if (!/already exists/.test(err.message)) {
-    console.error('Firebase initialization error raised', err.stack)
-    }}
-const storage = firebase.storage();
+// try {
+//     firebase.initializeApp(firebaseConfig)
+//     } catch (err) {
+//     // we skip the "already exists" message which is
+//     // not an actual error when we're hot-reloading
+//     if (!/already exists/.test(err.message)) {
+//     console.error('Firebase initialization error raised', err.stack)
+//     }}
+// const storage = firebase.storage();
 function PrintSurveyGrid(props) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const setSurveyList = useSetRecoilState(surveyListState)
@@ -39,18 +39,17 @@ function PrintSurveyGrid(props) {
 
     const survey = props.survey;
 
-    const [downloadUrl, setDownloadUrl] = useState(''); 
-    const imageName ='15.jpg`${survey.id}.jpg`; // Replace with the name of the specific image you want to retrieve
-
-    storage
-      .ref(`tumbnail/${imageName}`)
-      .getDownloadURL()
-      .then((url) => {
-        setDownloadUrl(url);
-      })
-      .catch((error) => {
-        console.error(error);
-      }); 
+    // const [downloadUrl, setDownloadUrl] = useState(''); 
+    // const imageName =`15.jpg` //${survey.id}.jpg`;  
+    // storage
+    //   .ref(`tumbnail/${imageName}`)
+    //   .getDownloadURL()
+    //   .then((url) => {
+    //     setDownloadUrl(url);
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   }); 
     function onClickGrid(e, id) {
         e.preventDefault();
         const loadSurveys = async()=>{
@@ -95,7 +94,7 @@ function PrintSurveyGrid(props) {
 
     return (
         <>
-            <div className='grid_box' style={{ backgroundImage: `url(${downloadUrl})`,backgroundRepeat:'no-repeat', backgroundSize:'cover'}} onClick={(e) => onClickGrid(e, survey.id)}>
+            <div className='grid_box' style={{ backgroundImage: `url(${'placeholder'})`,backgroundRepeat:'no-repeat', backgroundSize:'cover'}} onClick={(e) => onClickGrid(e, survey.id)}>
                 <ul className='dropdown' style={isDropdownOpen ? { maxHeight: "100vh" } : { maxHeight: "1.5vw" }}>
                     <img className='setting_icon' src={setting} alt="img" onClick={(e) => onClickSettingButton(e)} />
                     {isDropdownOpen && <Dropdown id={survey.id} />}

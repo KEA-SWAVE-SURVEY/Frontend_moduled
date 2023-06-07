@@ -14,8 +14,7 @@ import BeforeAnswer from './pages/BeforeAnswer';
 import AfterAnswer from './pages/AfterAnswer';
 import ErrorSurvey from './pages/ErrorSurvey';
 import Login from './pages/Login';  
-import Auth from './pages/Auth'; 
-import Footer from './components/Footer';
+import Auth from './pages/Auth';  
 //논의 사항 : 응답관련 페이지들은 넵바와 푸터가 필요없지 않나? 로그인 불필요 + 바들 제거
 
 

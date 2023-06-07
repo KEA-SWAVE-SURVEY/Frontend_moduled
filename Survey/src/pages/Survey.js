@@ -15,22 +15,22 @@ import {setCookie,getCookie,removeCookie} from '../components/login/cookie'
 
 import html2canvas from "html2canvas";
 import saveAs from "file-saver"; 
- import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
-import "firebase/compat/database";
-import "firebase/compat/storage"; 
+//  import firebase from 'firebase/compat/app';
+// import 'firebase/compat/auth';
+// import 'firebase/compat/firestore';
+// import "firebase/compat/database";
+// import "firebase/compat/storage"; 
 // Import the functions you need from the SDKs you need 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = { 
-};
+// const firebaseConfig = { 
+// };
 
-const app = firebase.initializeApp(firebaseConfig);
+// const app = firebase.initializeApp(firebaseConfig);
 
-const storage = firebase.storage();
+// const storage = firebase.storage();
 
 
 
@@ -68,38 +68,38 @@ function Survey(props) {
 
     }
 
-    const handleDownload = async (dataToTransport) => {
-        if (!divRef.current) return;
-        console.log(dataToTransport)
-        console.log(JSON.stringify(dataToTransport))
+    // const handleDownload = async (dataToTransport) => {
+    //     if (!divRef.current) return;
+    //     console.log(dataToTransport)
+    //     console.log(JSON.stringify(dataToTransport))
       
-        try {
-          const div = divRef.current;
-          const canvas = await html2canvas(div, {
-            x:0,        // 캡처할 부분의 x 좌표
-            y: 0,        // 캡처할 부분의 y 좌표
-              // 캡처할 부분의 가로 크기
-            height: 400  // 캡처할 부분의 세로 크기
-          });
-          const imageBlob = await new Promise((resolve) => {
-            canvas.toBlob(resolve, 'image/jpeg');
-          }); 
+    //     try {
+    //       const div = divRef.current;
+    //       const canvas = await html2canvas(div, {
+    //         x:0,        // 캡처할 부분의 x 좌표
+    //         y: 0,        // 캡처할 부분의 y 좌표
+    //           // 캡처할 부분의 가로 크기
+    //         height: 400  // 캡처할 부분의 세로 크기
+    //       });
+    //       const imageBlob = await new Promise((resolve) => {
+    //         canvas.toBlob(resolve, 'image/jpeg');
+    //       }); 
 
           
-    const storageRef = firebase.storage().ref();
-    const imageRef = storageRef.child(`tumbnail/${dataToTransport.id}.jpg`);
+    // const storageRef = firebase.storage().ref();
+    // const imageRef = storageRef.child(`tumbnail/${dataToTransport.id}.jpg`);
 
-    imageRef.put(imageBlob).then(() => { 
-        console.log('Image uploaded successfully!');
-        imageRef.getDownloadURL().then((url) => setImageUrl(url));
-      }).catch((error) => {
-        console.error('Error uploading image:', error);
-      });
+    // imageRef.put(imageBlob).then(() => { 
+    //     console.log('Image uploaded successfully!');
+    //     imageRef.getDownloadURL().then((url) => setImageUrl(url));
+    //   }).catch((error) => {
+    //     console.error('Error uploading image:', error);
+    //   });
     
-        } catch (error) {
-          console.error('Error converting div to image:', error);
-        }
-      };
+    //     } catch (error) {
+    //       console.error('Error converting div to image:', error);
+    //     }
+    //   };
 
     useEffect(() => {
         
@@ -411,7 +411,7 @@ function Survey(props) {
                     }
                 });
                 console.log('Saved');
-                handleDownload(response);
+                // handleDownload(response);
                 navigate('/');
                 if(surveyCookie){
                     removeCookie('survey')
@@ -479,7 +479,7 @@ function Survey(props) {
                         )}
                         <div className='survey_contatiner_bottom'>
                             <div className="survey_button" onClick={(e) => onClickPreviewButton(e)}>{isPreview ? "Create" : "Preview"}</div>
-                            <div className="survey_button" onClick={handleDownload}>테스트 !</div>
+                            {/* <div className="survey_button" onClick={handleDownload}>테스트 !</div> */}
                             <div className="survey_button" onClick={(e) => onClickSaveButton(e)}>Save</div>
                         </div>
                     </div>
