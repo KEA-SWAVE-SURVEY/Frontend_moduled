@@ -1354,11 +1354,6 @@
   "resolved" "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz"
   "version" "1.2.1"
 
-"@icons/material@^0.2.4":
-  "integrity" "sha512-QPcGmICAPbGLGb6F/yNf/KzKqvFx8z5qx3D1yFqVAjoFmXK35EgyW+cJ57Te3CNsmzblwtzakLGFqHPqrfb4Tw=="
-  "resolved" "https://registry.npmjs.org/@icons/material/-/material-0.2.4.tgz"
-  "version" "0.2.4"
-
 "@ionic/core@7.0.10":
   "integrity" "sha512-twpnJdS/1XEXISuUGqQ1x4hp24J+8Pl++7syDWLpOG7fFQk/RIYXDPA9/NPY8Fi1jUngnA6ivdSmkFSpFES07Q=="
   "resolved" "https://registry.npmjs.org/@ionic/core/-/core-7.0.10.tgz"
@@ -7095,11 +7090,6 @@
   dependencies:
     "p-locate" "^5.0.0"
 
-"lodash-es@^4.17.15":
-  "integrity" "sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw=="
-  "resolved" "https://registry.npmjs.org/lodash-es/-/lodash-es-4.17.21.tgz"
-  "version" "4.17.21"
-
 "lodash.clonedeep@^4.5.0":
   "integrity" "sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ=="
   "resolved" "https://registry.npmjs.org/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz"
@@ -7130,7 +7120,7 @@
   "resolved" "https://registry.npmjs.org/lodash.uniq/-/lodash.uniq-4.5.0.tgz"
   "version" "4.5.0"
 
-"lodash@^4.0.1", "lodash@^4.17.15", "lodash@^4.17.19", "lodash@^4.17.20", "lodash@^4.17.21", "lodash@^4.7.0":
+"lodash@^4.17.15", "lodash@^4.17.19", "lodash@^4.17.20", "lodash@^4.17.21", "lodash@^4.7.0":
   "integrity" "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
   "resolved" "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
   "version" "4.17.21"
@@ -7188,11 +7178,6 @@
   "version" "1.0.12"
   dependencies:
     "tmpl" "1.0.5"
-
-"material-colors@^1.2.1":
-  "integrity" "sha512-6qE4B9deFBIa9YSpOc9O0Sgc43zTeVYbgDT5veRKSlB2+ZuHNoVVxA1L/ckMUayV9Ay9y7Z/SZCLcGteW9i7bg=="
-  "resolved" "https://registry.npmjs.org/material-colors/-/material-colors-1.2.6.tgz"
-  "version" "1.2.6"
 
 "mdn-data@2.0.14":
   "integrity" "sha512-dn6wd0uw5GsdswPFfsgMp5NSB0/aDe6fK94YJV/AJDYXL6HVLWBsxeq7js7Ad+mU2K9LAlwpk6kN2D5mwCPVow=="
@@ -8410,7 +8395,7 @@
     "react-is" "^16.3.2"
     "warning" "^4.0.0"
 
-"prop-types@^15.5.10", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@^15.8.1":
+"prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@^15.8.1":
   "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   "version" "15.8.1"
@@ -8532,19 +8517,6 @@
     "react-transition-group" "^4.4.5"
     "uncontrollable" "^7.2.1"
     "warning" "^4.0.3"
-
-"react-color@^2.19.3":
-  "integrity" "sha512-LEeGE/ZzNLIsFWa1TMe8y5VYqr7bibneWmvJwm1pCn/eNmrabWDh659JSPn9BuaMpEfU83WTOJfnCcjDZwNQTA=="
-  "resolved" "https://registry.npmjs.org/react-color/-/react-color-2.19.3.tgz"
-  "version" "2.19.3"
-  dependencies:
-    "@icons/material" "^0.2.4"
-    "lodash" "^4.17.15"
-    "lodash-es" "^4.17.15"
-    "material-colors" "^1.2.1"
-    "prop-types" "^15.5.10"
-    "reactcss" "^1.2.0"
-    "tinycolor2" "^1.4.1"
 
 "react-cookie@^4.1.1":
   "integrity" "sha512-ffn7Y7G4bXiFbnE+dKhHhbP+b8I34mH9jqnm8Llhj89zF4nPxPutxHT1suUqMeCEhLDBI7InYwf1tpaSoK5w8A=="
@@ -8813,13 +8785,6 @@
   "version" "18.2.0"
   dependencies:
     "loose-envify" "^1.1.0"
-
-"reactcss@^1.2.0":
-  "integrity" "sha512-KiwVUcFu1RErkI97ywr8nvx8dNOpT03rbnma0SSalTYjkrPYaEajR4a/MRt6DZ46K6arDRbWMNHF+xH7G7n/8A=="
-  "resolved" "https://registry.npmjs.org/reactcss/-/reactcss-1.2.3.tgz"
-  "version" "1.2.3"
-  dependencies:
-    "lodash" "^4.0.1"
 
 "read-cache@^1.0.0":
   "integrity" "sha512-Owdv/Ft7IjOgm/i0xvNDZ1LrRANRfew4b2prF3OWMQLxLfu3bS8FVhCsrSCMK4lR56Y9ya+AThoTpDCTxCmpRA=="
@@ -9975,11 +9940,6 @@
   "integrity" "sha512-eHY7nBftgThBqOyHGVN+l8gF0BucP09fMo0oO/Lb0w1OF80dJv+lDVpXG60WMQvkcxAkNybKsrEIE3ZtKGmPrA=="
   "resolved" "https://registry.npmjs.org/thunky/-/thunky-1.1.0.tgz"
   "version" "1.1.0"
-
-"tinycolor2@^1.4.1":
-  "integrity" "sha512-XPaBkWQJdsf3pLKJV9p4qN/S+fm2Oj8AIPo1BTUhg5oxkvm9+SVEGFdhyOz7tTdUTfvxMiAs4sp6/eZO2Ew+pw=="
-  "resolved" "https://registry.npmjs.org/tinycolor2/-/tinycolor2-1.6.0.tgz"
-  "version" "1.6.0"
 
 "tippy.js@^6.2.6":
   "integrity" "sha512-E1d3oP2emgJ9dRQZdf3Kkn0qJgI6ZLpyS5z6ZkY1DF3kaQaBsGZsndEpHwx+eC+tYM41HaSNvNtLx8tU57FzTQ=="
