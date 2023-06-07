@@ -128,9 +128,9 @@ value:  words.count
   console.log(typeof(transformedData[2].wordCloudDTOs[0].value) + " " + transformedData[2].wordCloudDTOs[0].value+" " + (transformedData[2].wordCloudDTOs[0].value + transformedData[2].wordCloudDTOs[0].value))
   return (
     <div className={'analyzeBox'} style={{ padding: '0', width: '100%', height: '100%', overflowY: 'scroll', scrollbarWidth: 'none', msOverflowStyle: 'none', margin: '10' }}>
-     <div className={'questionBox'} style={{height:'10vh'}}>
-      <p> {data.countAnswer} 명이 응답함 </p>
-</div>
+     <div className={'questionBox'} style={{height:'10vh',  margin: '10px'}}>
+      <p style={{ margin: '5px'}}> {data.countAnswer} 명이 응답함 </p>
+    </div>
      
      
       {transformedData.map((question, index) => (

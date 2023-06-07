@@ -295,7 +295,7 @@ console.log(csvdata)
               style={{ //pass other props, like styles
                 // boxShadow:"inset 0px 1px 0px 0px",
                 // background:"linear-gradient(to bottom, #c123de 5%, #a20dbd 100%)",
-                backgroundColor:"#1b0278",
+                // backgroundColor:"#1b0278",
                 borderRadius:"6px",
                 // border:"1px solid",
                 display:"inline-block",
