@@ -24,7 +24,7 @@ function PrintSurveyGrid(props) {
             const result = await axios.get(`/api/document/external/survey-list/${id}`);
             console.log(result)
             setSurveyList((prev) => {
-                //수정 리스트 모르겠어
+                //수정 리스트 모르겠어 -> 이거 맞아
                 return {
                     id: result.data.id,
                     title: result.data.title,
