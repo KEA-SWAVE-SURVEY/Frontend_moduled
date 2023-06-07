@@ -3,7 +3,7 @@ import '../../../App.css';
 import '../../../styles/NavbarStyles.css';
 import styles from "../../../styles/sidebar.module.css";
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { startDateState,endDateState, enableState, surveyListState } from '../../../contexts/atom';
+import { startDateState,endDateState, enableState, enableViewState,surveyListState } from '../../../contexts/atom';
 //import * as ReactBootStrap from 'react-bootstrap';
 
 import {setCookie} from '../../../components/login/cookie'
@@ -21,6 +21,7 @@ const SideDate = () => {
   const [endDate, setEndDate] = useRecoilState(endDateState)
 
   const [enable, setEnable] = useRecoilState(enableState)
+  const [enableView, setEnableView] = useRecoilState(enableViewState)
  
    
  console.log(startDate)
@@ -41,6 +42,8 @@ const SideDate = () => {
    console.log(cStartDate);
    console.log(cEndDate);
    console.log(cStartDate < new Date());
+   setEnableView(cStartDate < new Date()?'설문 응답 받는 중':'설문 응답 받지 않는 중')
+   setEnable(cStartDate < new Date());
    const cEnable = cStartDate < new Date();
    console.log(cEnable)  
 
@@ -123,7 +126,7 @@ const SideDate = () => {
     <div className='menuProfile1'>
                 <div style={{display:'flex', width:'100%',flexDirection:'column',alignItems:'center', justifyContent:'center' }}>
 
-
+{enable}
                 <p className={'manageMinorFont'}> 설문 시작 기간 설정 </p> 
                 
                 <DatePicker 

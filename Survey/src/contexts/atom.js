@@ -118,3 +118,9 @@ export const enableState = atom({
     key: "enableState",
     default: `false`
 });
+
+
+export const enableViewState = atom({
+    key: "enableViewState",
+    default: `설문 응답 보지 않기`
+});

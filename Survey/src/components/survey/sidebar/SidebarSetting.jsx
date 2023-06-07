@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "../../../styles/sidebar.module.css";
 import { useRecoilState, useRecoilValue } from 'recoil';
 
-import { surveyListState, relState, enableState } from '../../../contexts/atom';
+import { surveyListState, relState, enableState, enableViewState } from '../../../contexts/atom';
 import SideFont from "./SideFont";
 import SideSize from "./SideSize";
 import SideColor from "./SideColor";
@@ -18,14 +18,15 @@ function SidebarSetting(props){
   
   const [surveyList, setSurveyList] = useRecoilState(surveyListState);
   const [isTheme, setIsTheme] = useState(true);
-  const [viewRel, setViewRel] = useState('진정성 검사 미사용');
-  const [viewEnable, setViewEnable] = useState('설문 응답 받지 않기');
+  const [viewRel, setViewRel] = useState('진정성 검사 미사용'); 
   const [fontOpen,setFontOpen] = useState(false)
   const [sizeOpen,setSizeOpen] = useState(false)
   const [colorOpen,setColorOpen] = useState(false)
   const [dateOpen,setDateOpen] = useState(false)
   const [Rel, setRel] = useRecoilState(relState)
   const [enable, setEnable] = useRecoilState(enableState)
+  const [viewEnable, setEnableView] = useRecoilState(enableViewState)
+ 
   const [font,setFont] = useState(false)
 
   function onClickThemeButton(e){
@@ -42,7 +43,7 @@ function SidebarSetting(props){
   const toggleRel = (e) => {
     console.log(Rel)
     console.log(JSON.stringify(surveyList))
-    setViewRel(prev=>prev==='진정성 검사 사용'?'진정성 검사 미사용':'진정성 검사 사용')
+    setViewRel(prev=>prev==='진정성 검사 사용중'?'진정성 검사 미사용중':'진정성 검사 사용중 ')
     const prel = Rel;
     setRel (prev=>prev===1?0:1);
     
@@ -64,7 +65,7 @@ function SidebarSetting(props){
 
   const toggleEnable = (e) => {
     console.log(enable)
-    setViewEnable(prev=>prev==='설문 응답 받지 않기'?'설문 응답 받기':'설문 응답 받지 않기')
+    setEnableView(!enable?'설문 응답 받는 중':'설문 응답 받지 않는 중 ')
     const prevEnable = enable;
     setEnable(prev=>prev===true?false:true);
     
