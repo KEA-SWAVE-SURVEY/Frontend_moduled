@@ -80,9 +80,11 @@ const loadSurveyData = async () => {
   //     ]
     
   // };
-const result  = await axios.get(`/analyze/external/research/analyze/${documentId}`, { timeout: 10000 });
+  //06092200 수정완료 설문상세분석 조회
+const result  = await axios.get(`/api/analyze/external/research/analyze/${documentId}`, { timeout: 10000 });
 // survey/external/response/{id} 
-const resultCSV  = await axios.get(`/survey/external/response/${documentId}`, { timeout: 10000 });
+//06092200 수정완료 설문 응답 csv
+const resultCSV  = await axios.get(`/api/answer/external/response/${documentId}`, { timeout: 10000 });
 
 
 setSurveyList(result);
@@ -94,8 +96,9 @@ useEffect(() => {
 }, []);
 //강훈님 확인 부탁 드립니다
 //공용에서 데이터 주기 1번 여기부터시작
+//06092200 수정완료
 useEffect(()=>{
-const data = axios.get(`/api/surveydocument/external/manage/${documentId}`); 
+const data = axios.get(`/api/document/external/manage/${documentId}`); 
         console.log(result)
         setEnableAndDate((prev) => {
             return {
@@ -257,9 +260,9 @@ const saveDate = () => {
   // };
 // });
   const [processData,setProcessData] = useState(tempdata);
-//수정 여기 머지?
+//수정 여기 머지? //06092200 수정완료
   const loadSurveys = async()=>{ 
-    const result = await axios.get(`/survey/external/response/${documentId}`);
+    const result = await axios.get(`/api/answer/external/response/${documentId}`);
     setProcessData(result)
   } 
    

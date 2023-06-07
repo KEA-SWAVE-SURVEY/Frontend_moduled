@@ -88,6 +88,7 @@ function Dropdown(props) {
   function onClickDelete(e){
     e.preventDefault();
     e.stopPropagation();
+    //06092200 수정완료 설문 삭제
     axios.patch(`/api/user/external/delete/${id}`);
     window.location.reload()
   }

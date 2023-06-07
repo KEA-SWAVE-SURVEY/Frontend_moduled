@@ -24,8 +24,8 @@ const Auth = () => {
       //url의 인가코드
       try {
         // const res = await axios.post(`/api/oauth/token?code=${code}&provider=${provider}`);
-        
-        const res = await axios.post(`/user/external/oauth/token?code=${code}&provider=${provider}`);
+        //06072200 수정완료 //로그인
+        const res = await axios.post(`/api/user/external/oauth/token?code=${code}&provider=${provider}`);
         //인가코드를 백엔드로 보내고 헤더에서 엑세스 토큰 받아옴
         const token = res.headers.authorization;
         sessionStorage.setItem('token',token)
@@ -52,7 +52,8 @@ const Auth = () => {
         window.location.href = `http://172.16.210.80/`; 
           try {
                 //axios.get('/api/me',{
-                axios.get('/api/oauth/external/me',{
+                ///api/oauth/external/me 2306072200 수정완료
+                axios.get('/api/user/external/me',{
                   headers: {
                     Authorization: token,
                   },

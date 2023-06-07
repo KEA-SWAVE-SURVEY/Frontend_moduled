@@ -19,8 +19,9 @@ function PrintSurveyGrid(props) {
             // const result = await axios.get(`/api/load-survey/${id}`); 이부분 POST인데 GET으로 되어있음
             //기존 /survey/external/load/${id}
             //수정 /api/external/survey-list/{id}
+            //`api/answer/external/load/${id}`
             //수정06072100
-            const result = await axios.get(`api/answer/external/load/${id}`);
+            const result = await axios.get(`/api/document/external/survey-list/${id}`);
             console.log(result)
             setSurveyList((prev) => {
                 return {
