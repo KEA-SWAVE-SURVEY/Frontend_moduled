@@ -133,7 +133,7 @@ function AnswerSurvey() {
             });
         // na vigate('/survey/afteranswer');
         
-    window.location.href = `http://172.16.210.80/survey/afteranswer`; 
+    window.location.href = `http://172.16.210.80/response/afteranswer`; 
     }
     //,fontSize: surveyList.design.fontSize+'vw' ,fontFamily:surveyList.design.font
         //style={{fontSize: surveyList.design.fontSize+'vw' ,fontFamily:surveyList.design.font}}
