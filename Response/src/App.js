@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import AnswerSurvey from './pages/AnswerSurvey';
 import BeforeAnswer from './pages/BeforeAnswer';
 import AfterAnswer from './pages/AfterAnswer';
+import ErrorSurvey from './pages/ErrorSurvey';
 
 //논의 사항 : 응답관련 페이지들은 넵바와 푸터가 필요없지 않나? 로그인 불필요 + 바들 제거
 
