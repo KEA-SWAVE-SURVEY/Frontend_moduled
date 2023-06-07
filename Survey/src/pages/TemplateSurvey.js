@@ -8,7 +8,7 @@ import '../styles/SurveyStyle.css';
 import CreateSurvey from '../components/survey/create/CreateSurvey';
 import ViewSurvey from '../components/survey/view/ViewSurvey';
 import Sidebar from '../components/survey/sidebar/Sidebar';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 
 import {setCookie,getCookie,removeCookie} from '../components/login/cookie'
 
@@ -19,7 +19,7 @@ import saveAs from "file-saver";
 
 function TemplateSurvey(props) {
     const isLogined = useRecoilValue(loginState);
-    const isModify = useRecoilValue(modifyState);
+    //const isModify = useRecoilValue(modifyState);
 
     const [sidebarIsOpen, setSidebarIsOpen] = useState({ open: false, isSetting: false });
     const [sidebarSelected, setSidebarSelected] = useState(0);
@@ -27,15 +27,15 @@ function TemplateSurvey(props) {
     const [surveyList, setSurveyList] = useRecoilState(surveyListState);
     const [answerList, setAnswerList] = useRecoilState(answerListState);
 
-    const [font,setFont] = useRecoilState(fontState);
-    const [fontSize,setFontSize] = useRecoilState(fontSizeState);
-    const [backColor,setBackColor] = useRecoilState(backColorState);
+    const font = useRecoilValue(fontState);
+    const fontSize = useRecoilValue(fontSizeState);
+    const backColor = useRecoilValue(backColorState);
 
     const [isPreview, setIsPreview] = useState(false);
 
     const scrollRef = useRef();
 
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     const divRef = useRef(null);
     const today = new Date().toLocaleDateString(); 
 
@@ -353,7 +353,7 @@ function TemplateSurvey(props) {
                         type: 0,
                         reliability:1,
                         startDate: new Date(),
-                        endDate: new Date,
+                        endDate: new Date(),
                         enable: true,
                         
                         design:

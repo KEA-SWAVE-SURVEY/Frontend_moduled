@@ -76,7 +76,7 @@ function AnswerSurvey() {
             console.log(survey.questionType);
             if (survey.questionType === 1) contentDefault = true; //찬부식은 true
             else if (survey.questionType === 2) contentDefault = 0; //객관식은 0
-//todo 확인완료 setAnswerList 확인 AnswerList는 객관식 주관식 찬불식 뷰에서 모아서 리코일로 세팅한걸을 여기서 모아서 던진다
+//todo 확인완료 setAnswerList 확인 AnswerList는 객관식 주관식 찬불식 뷰에서 모아서 리코일로 세팅한것을 여기서 모아서 던진다
             setAnswerList((prev) => {
                 return {
                     id: result.data.id,
