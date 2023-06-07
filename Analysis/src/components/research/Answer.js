@@ -9,11 +9,12 @@ import axios from 'axios';
 export default function Research2({ documentId }) {
  
   //sample data for no connection
-  
+  //todo 강훈님 5 countanswer??? 응답자수 백에서 쏴주는데 프론트에서 받은곳이 없음
 const [data , setData] = useState({
   "id": 1,
   "title": "설문 테스트",
   "description": "설문 설명",
+  //"countAnswer":"",
   "questionList": [
       {
           "id": 1,

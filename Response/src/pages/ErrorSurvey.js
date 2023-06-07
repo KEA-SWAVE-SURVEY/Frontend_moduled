@@ -8,7 +8,7 @@ const navigate = useNavigate();
 function onClickMovetoMain(e) {
     e.preventDefault();
     //navigate('/');
-    window.location.href = `http://172.16.210.22/`
+    window.location.href = `http://172.16.210.80/`
   }
 
   return (

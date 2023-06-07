@@ -38,8 +38,9 @@ function MyPage() {
   const [tempName, setTempName] = useState(loginState.name);
   const [tempInfo, setTempInfo] = useState(loginState.info);
   function sendRequestSurveyList(method, page, sort1, sort2) {
-    var uri = '/api/external/survey-list';
-    if (isGridView) uri = '/api/external/survey-list-grid';
+    //수정06072100
+    var uri = '/api/document/external/survey-list';
+    if (isGridView) uri = '/api/document/external/survey-list-grid';
     axios.post(uri,
       {
         'method': method, // string grid,list
@@ -110,9 +111,10 @@ function MyPage() {
     console.log(isLogined.name);
     console.log(isLogined.info);
      // axios.post(`/api /response/create`, answerList,
-     axios.post(`/user/external/updatepage`, {
-"nickname":isLogined.name,
-"description": isLogined.info
+     //patch으로 변경 0607
+     axios.patch(`/user/external/updatepage`, {
+        "nickname":isLogined.name,
+        "description": isLogined.info
 
      },
      {

@@ -11,7 +11,7 @@ import {setCookie} from '../../../components/login/cookie'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
- 
+//todo 강훈님 기본값 false는 미래에 현재는 true로 되있는지 확인하기0607
 
 const SideDate = () => {
   const [surveyList, setSurveyList] = useRecoilState(surveyListState);
@@ -37,6 +37,7 @@ const SideDate = () => {
     const cEnable = enable; 
    console.log(cStartDate);
    console.log(cEndDate);
+   console.log(cStartDate > new Date());
     setSurveyList((prev) => {
       return {
           id: prev.id,
@@ -117,8 +118,7 @@ const SideDate = () => {
                 <div style={{display:'flex', width:'100%',flexDirection:'column',alignItems:'center', justifyContent:'center' }}>
 
 
-                <p className={'manageMinorFont'}> 설문 시작 기간 설정 </p>
-                {startDate.toString()}
+                <p className={'manageMinorFont'}> 설문 시작 기간 설정 </p> 
                 
                 <DatePicker 
                   selected={startDate}

@@ -14,7 +14,7 @@ const Footer = () =>{
     function onClickLogout() {
         //removeCookie('token') 
         sessionStorage.removeItem('token')
-        window.location.href = `http://172.16.210.22/`; 
+        window.location.href = `http://172.16.210.80/`; 
     }
     return(
         <>

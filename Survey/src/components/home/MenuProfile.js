@@ -11,7 +11,7 @@ const MenuProfile = () => {
             sessionStorage.removeItem('token')
             removeCookie('survey')
             window.location.reload()
-            window.location.href = `http://172.16.210.22/`; 
+            window.location.href = `http://172.16.210.80/`; 
             console.log(cookie)
         }
         
@@ -19,7 +19,7 @@ const MenuProfile = () => {
     function onClickMypage(e){
         e.preventDefault(); 
         
-        window.location.href = `http://172.16.210.22/mypage`; 
+        window.location.href = `http://172.16.210.80/mypage`; 
     }
   return (
     <div className='menuProfile'>

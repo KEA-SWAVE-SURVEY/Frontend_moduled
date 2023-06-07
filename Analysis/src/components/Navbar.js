@@ -40,20 +40,20 @@ function Navbar(props) {
 
     function onClickTitle(e) {
         e.preventDefault(); 
-        window.location.href = `http://172.16.210.22/`; 
+        window.location.href = `http://172.16.210.80/`; 
     }
 
     function onClickLogin(e){
         e.preventDefault();
         setNavItem((prev)=> []); 
         
-        window.location.href = `http://172.16.210.22/login`; 
+        window.location.href = `http://172.16.210.80/login`; 
     }
 
     function onClickMypage(e){
         e.preventDefault(); 
         
-        window.location.href = `http://172.16.210.22/mypage`; 
+        window.location.href = `http://172.16.210.80/mypage`; 
     }
     useEffect(()=>{
         if(cookie){

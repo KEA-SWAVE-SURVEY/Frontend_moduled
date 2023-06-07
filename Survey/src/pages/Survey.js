@@ -381,6 +381,9 @@ function Survey(props) {
             description: surveyList.description,
             type: surveyList.type,
             reliability:surveyList.reliability,
+            startDate:surveyList.startDate,
+            endDate: surveyList.endDate,
+            enable: surveyList.enable,
             design:surveyList.design,
             questionRequest: surveyList.questionRequest.map((prev) => {
                 return {
@@ -394,11 +397,81 @@ function Survey(props) {
 
 
         console.log(isLogined.token);
-        var url = '/api/external/create';
+        var url = '/api/document/external/create';
         console.log(url);
         //if (isModify) url = `/api/modify-survey/${surveyList.id}` //임시
-        //수정 0606
-        if (isModify) url = `/api/external/update/${surveyList.id}` //임시
+        //todo 수정완료 수정은 put으로
+        //수정06072100
+        if (isModify){
+             url = `/api/docuemnt/external/update/${surveyList.id}`
+             axios.put(url, dataToTransport,
+                {
+                    headers: {
+                        'Application-Type': 'application/json',
+                        'Authorization': isLogined.token
+                    }
+                }
+            )
+                .then((response) => {//api의 응답을 제대로 받은경우
+                    setSurveyList((prev) => {
+                        return {
+                            id: 0,
+                            title: "",
+                            description: "",
+                            type: 0,
+                            reliability:1, //notion상에서는 Boolean인데 이거 변경할지
+                             // design쪽 notion에는 없는데 일단 유지 
+                            startDate:new Date(),
+                            endDate: new Date(),
+                            enable: true,
+                            design:
+                                {
+                                font:"",
+                                fontSize:0,
+                                backColor:"#ffffff"
+                                },
+                            questionRequest: [
+                                {
+                                    id: 0,
+                                    type: 0,
+                                    title: "",
+                                    choiceList: ""/*[
+                                                    id:0;
+                                                    choiceName:null;
+                                                ]*/
+                                }
+                            ]
+                        }
+                    });
+                    setAnswerList((prev) => {
+                        return {
+                            id: 0,
+                            title: null,
+                            description: null,
+                            type: null,
+                            responseId: 0,
+                            questionResponse: [/*
+                                        {
+                                            title:null,
+                                            type:null,
+                                            answer:null,
+                                            answerId:null,
+                                        }*/
+                            ]
+                        }
+                    });
+                    console.log('Saved'); 
+                    window.location.href = `http://172.16.210.80/`; 
+                    if(surveyCookie){
+                        removeCookie('survey')
+                        }
+                })
+                .catch((response) => {//종류불문 에러
+                    console.log('Error');
+                    console.log(dataToTransport);
+                });
+                handleDownload();
+        } 
         axios.post(url, dataToTransport,
             {
                 headers: {
@@ -456,7 +529,7 @@ function Survey(props) {
                     }
                 });
                 console.log('Saved'); 
-                window.location.href = `http://172.16.210.22/`; 
+                window.location.href = `http://172.16.210.80/`; 
                 if(surveyCookie){
                     removeCookie('survey')
                     }

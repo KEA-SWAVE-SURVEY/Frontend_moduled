@@ -62,7 +62,7 @@ export default function BeforeAnswer() {
 
     function onClickStart(e) {
         e.preventDefault(); 
-        window.location.href = `/survey/answer/`
+        window.location.href = `http://172.16.210.80/survey/answer/`
       }
 
   return (

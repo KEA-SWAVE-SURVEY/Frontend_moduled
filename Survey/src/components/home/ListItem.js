@@ -17,7 +17,10 @@ function ListItem(props) {
         e.preventDefault();
         const loadSurveys = async()=>{
             // const result = await axios.get(`/api/load-survey/${id}`);
-            const result = await axios.get(`/survey/external/load/${id}`);
+            //기존 /survey/external/load/${id}
+            //수정 /api/external/survey-list/${id}수정완료
+            //수정06072100
+            const result = await axios.get(`/api/document/external/survey-list/${id}`);
             setSurveyList((prev) => {
                 return {
                     id: result.data.id,
@@ -46,7 +49,7 @@ function ListItem(props) {
                 }
             });
             setIsModify((prev) => true);
-            window.location.href = `http://172.16.210.22/survey`; 
+            window.location.href = `http://172.16.210.80/survey`; 
         }
         loadSurveys();
     }
@@ -56,7 +59,8 @@ function ListItem(props) {
         e.stopPropagation();
         setIsDropdownOpen((prev) => { return !prev })
     }
-
+//todo-확인완료 왜 deadline인지 grid랑 연구하기 -> 임시로 만들어진듯 수정이 필요해 startDate, endDate
+  
     return (
         <>
             <div className={styles.Wrapper} key={index} onClick={(e) => onClickList(e, survey.id)}>

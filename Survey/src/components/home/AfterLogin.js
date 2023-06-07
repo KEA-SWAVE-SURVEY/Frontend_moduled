@@ -49,8 +49,9 @@ function AfterLogin(props) {
      ];
 
     function sendRequestSurveyList(method, page, sort1, sort2) {
-        var uri = '/api/external/survey-list';
-        if (isGridView) uri = '/api/external/survey-list-grid';
+        //수정06072100
+        var uri = '/api/document/external/survey-list';
+        if (isGridView) uri = '/api/document/external/survey-list-grid';
         axios.post(uri,
             {
                 'method': method, // string grid,list
@@ -107,25 +108,32 @@ function AfterLogin(props) {
     function onClickCreateSurvey(e) {
         e.preventDefault();
         setIsModify((prev) => false);
-        window.location.href = `http://172.16.210.22/survey`; 
+        window.location.href = `http://172.16.210.80/survey`; 
     }
     
-
+//todo 확인완료 2000 0607여기까지
+//todo주소확인 템플릿
     function onClickCreateTemplateSurvey(e,index) {
         e.preventDefault();
-        window.location.href = `http://172.16.210.22/template/Survey/${index+1}`
-        //window.location.href =`http://172.16.210.22//api/external/template-load/${index+1}`
+        
         setIsModify((prev) => true);
         loadSurveys();
+        ////수정06072100 외부주소라 변경할 필요 없음
+        window.location.href = `http://172.16.210.80/template/Survey/${index+1}`
+        //window.location.href =`http://172.16.210.80/api/external/template-load/${index+1}`
+        //수정06072100
             const loadSurveys = async()=>{
-                const result = await axios.get(`/api/external/template-load/${index+1}`);
-                console.log(result)
+                const result = await axios.get(`/api/document/external/template-load/${index+1}`);
+                console.log(result)// todo 확인완료 날짜추가 끝 수정필요>? 날짜 없음
                 setSurveyList((prev) => {
                     return {
                         id: result.data.id,
                         title: result.data.title,
                         description: result.data.description,
                         reliability: result.data.reliability,
+                        startDate:result.data.startDate,
+                        endDate: result.data.endDate,
+                        enable: result.data.enable,
                         design:result.data.design,
                         type: result.data.type,
                         questionRequest: result.data.questionList.map((questionList) => {

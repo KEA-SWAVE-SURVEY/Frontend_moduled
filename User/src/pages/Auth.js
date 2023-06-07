@@ -49,7 +49,7 @@ const Auth = () => {
           };
         });
 
-        window.location.href = `http://172.16.210.22/`; 
+        window.location.href = `http://172.16.210.80/`; 
           try {
                 //axios.get('/api/me',{
                 axios.get('/api/oauth/external/me',{
@@ -78,7 +78,7 @@ const Auth = () => {
 
        catch (e) {
         console.error(e);
-        window.location.href = `http://172.16.210.22/`; 
+        window.location.href = `http://172.16.210.80/`; 
       }
     })();
   }, []);

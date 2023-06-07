@@ -19,10 +19,13 @@ function Question() {
     //로드가 몇개가 있어야할까 서베이로 싹다 긁어올 수 있나?
     //코드는 서베이로만
     //http://localhost:8080/api/ survey-participate/${id}
+    // todo 확인완료 확인해보기/api/external/survey-list 0607 
+    ////api/external/research/survey/load/${documentId} -> analyze/external/research/survey/load/${documentId}
     const loadSurveys=async()=>{
     //    const result = await axios.get(`/api/load-survey/${documentId}`);
-       
-       const result = await axios.get(`/api/external/research/survey/load/${documentId}`);
+       //질문 애매한 수정 docu인지 user인지 일단은 docu
+       //수정06072100
+       const result = await axios.get(`/api/document/external/survey-list/${documentId}`);
     //    const result = {data:{
     //     "id": 1,
     //     "title": "설문 테스트",

@@ -17,7 +17,10 @@ function PrintSurveyGrid(props) {
         e.preventDefault();
         const loadSurveys = async()=>{
             // const result = await axios.get(`/api/load-survey/${id}`); 이부분 POST인데 GET으로 되어있음
-            const result = await axios.get(`/survey/external/load/${id}`);
+            //기존 /survey/external/load/${id}
+            //수정 /api/external/survey-list/{id}
+            //수정06072100
+            const result = await axios.get(`api/answer/external/load/${id}`);
             console.log(result)
             setSurveyList((prev) => {
                 return {
@@ -48,7 +51,7 @@ function PrintSurveyGrid(props) {
                 }
             });
             setIsModify((prev) => true); 
-            window.location.href = `http://172.16.210.22/survey`; 
+            window.location.href = `http://172.16.210.80/survey`; 
         }
         loadSurveys();
     }

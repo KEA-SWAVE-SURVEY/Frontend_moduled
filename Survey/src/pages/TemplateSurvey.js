@@ -373,7 +373,8 @@ function TemplateSurvey(props) {
                     }
                 });
                 console.log('Saved');
-                navigate('/');
+                //navigate('/');
+                window.location.href = `http://172.16.210.80/`
                 if(surveyCookie){
                     removeCookie('survey')
                     }
