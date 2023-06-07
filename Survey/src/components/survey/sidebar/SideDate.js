@@ -32,12 +32,18 @@ const SideDate = () => {
      
 
   //return index
+  const today = new Date();
     const cStartDate = startDate;
-    const cEndDate = endDate; 
-    const cEnable = enable; 
+    const cEndDate = endDate;  
+    console.log(cStartDate > today);
+    console.log(today);
+    console.log(cStartDate);
    console.log(cStartDate);
    console.log(cEndDate);
-   console.log(cStartDate > new Date());
+   console.log(cStartDate < new Date());
+   const cEnable = cStartDate < new Date();
+   console.log(cEnable)  
+
     setSurveyList((prev) => {
       return {
           id: prev.id,
@@ -48,7 +54,7 @@ const SideDate = () => {
           
           startDate:cStartDate,
           endDate: cEndDate,
-          enable: cEnable,
+          enable:cEnable,
           design:prev.design,
           questionRequest: prev.questionRequest
       }
