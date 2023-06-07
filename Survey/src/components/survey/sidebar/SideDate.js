@@ -11,7 +11,7 @@ import {setCookie} from '../../../components/login/cookie'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-//todo 강훈님 기본값 false는 미래에 현재는 true로 되있는지 확인하기0607
+//to 완료 do 강훈님 기본값 false는 미래에 현재는 true로 되있는지 확인하기0607
 
 const SideDate = () => {
   const [surveyList, setSurveyList] = useRecoilState(surveyListState);
