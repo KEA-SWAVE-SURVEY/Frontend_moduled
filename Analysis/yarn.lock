@@ -1335,11 +1335,6 @@
   "resolved" "https://registry.npmjs.org/@eslint/js/-/js-8.42.0.tgz"
   "version" "8.42.0"
 
-"@hcorta/react-to-image@^1.0.0":
-  "integrity" "sha512-Flp/zLXMTZWmjRwVGLeTtI0c7a6AwzWFysnILFPro0maTW+DIurue2FhmdcZW2dMmpOYay/u5IQHCpVEPkmTjA=="
-  "resolved" "https://registry.npmjs.org/@hcorta/react-to-image/-/react-to-image-1.0.0.tgz"
-  "version" "1.0.0"
-
 "@humanwhocodes/config-array@^0.11.10":
   "integrity" "sha512-KVVjQmNUepDVGXNuoRRdmmEjruj0KfiGSbS8LVc12LMsWDQzRXJ0qdhN8L8uUigKpfEHRhlaQFY0ib1tnUbNeQ=="
   "resolved" "https://registry.npmjs.org/@humanwhocodes/config-array/-/config-array-0.11.10.tgz"
