@@ -59,6 +59,10 @@ function PrintSurveyGrid(props) {
             setSurveyList((prev) => {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+                //수정 리스트 모르겠어
+>>>>>>> parent of a2d17bf (2개 변경)
 =======
                 //수정 리스트 모르겠어
 >>>>>>> parent of a2d17bf (2개 변경)
