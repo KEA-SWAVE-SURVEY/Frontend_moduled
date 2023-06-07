@@ -19,7 +19,7 @@ function App() {
         {/* <Navbar scrollTo={scrollTo} scrollRef={scrollRef} /> */}
         <div style={{width:"100%",minHeight:"100vh",height:"auto"}}>
           <Routes> 
-            <Route path="/login" element={<Login />} /> 
+            <Route path="/" element={<Login />} /> 
             <Route path="/oauth/callback/:provider" element={<Auth />} /> 
 
             </Routes>
