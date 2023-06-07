@@ -21,6 +21,7 @@ import axios from 'axios';
 export default function Manage() {
 
   const [surveyList, setSurveyList] = useState(null);
+  const [csvList, setCsvList] = useState(null);
   const [answerList, setAnswerList] = useState(null);
  
 
@@ -79,7 +80,12 @@ const loadSurveyData = async () => {
     
   // };
 const result  = await axios.get(`/analyze/external/research/analyze/${documentId}`, { timeout: 10000 });
-  setSurveyList(result);
+// survey/external/response/{id} 
+const resultCSV  = await axios.get(`/survey/external/response/${documentId}`, { timeout: 10000 });
+
+
+setSurveyList(result);
+setCsvList(resultCSV);
 };
 
 useEffect(() => {
@@ -288,7 +294,7 @@ console.log(csvdata)
           <p className={'manageFont'}>설문 결과 내보내기</p>
 
           <CsvDownloadButton
-    data={csvdata}
+    data={csvList}
     filename="good_data.csv"
     style={{ //pass other props, like styles
       boxShadow:"inset 0px 1px 0px 0px #e184f3",
