@@ -40,7 +40,7 @@ function PrintSurveyGrid(props) {
     const survey = props.survey;
 
     const [downloadUrl, setDownloadUrl] = useState(''); 
-    const imageName ='15.jpg`${survey.id}.jpg`; // Replace with the name of the specific image you want to retrieve
+    const imageName ='15.jpg${survey.id}.jpg'; // Replace with the name of the specific image you want to retrieve
 
     storage
       .ref(`tumbnail/${imageName}`)
