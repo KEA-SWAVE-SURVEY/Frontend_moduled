@@ -27,7 +27,7 @@ export default function Swipers() {
                 effect={'coverflow'}
                 fade={true}
                 grapCursor={true}
-                roop={true}
+                loop={true}
                 centeredSlides={true}
                 autoplay={{
                     delay: 1300,
@@ -105,7 +105,7 @@ export default function Swipers() {
                     <img src={answer} alt="black"/>
                     <div className="swiperFont">
                     비로그인 응답
-                    
+                    <br/>
                     응답자는 응답만 빠르게!
                     </div>
                 </SwiperSlide>
