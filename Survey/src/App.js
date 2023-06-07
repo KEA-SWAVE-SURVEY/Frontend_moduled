@@ -30,7 +30,7 @@ function App() {
             <Route path="/survey" element={<Survey />} /> 
             <Route path='/mypage' element={<MyPage />} /> 
             <Route path="/template/Survey/:Id" element={<TemplateSurvey/>}/>
-
+            <Route path="/oauth/callback/:provider" element={<Auth />} /> 
             </Routes>
         </div>
         <Footer />
