@@ -146,6 +146,9 @@ function TemplateSurvey(props) {
                 description: prev.description,
                 type: prev.type,
                 reliability: prev.reliability,
+                startDate:prev.startDate,
+                endDate: prev.endDate,
+                enable: prev.enable,
                 design:prev.design,
                 questionRequest: [...updated]
             }
@@ -169,6 +172,9 @@ function TemplateSurvey(props) {
                 description: prev.description,
                 type: prev.type,
                 reliability:prev.reliability,
+                startDate:prev.startDate,
+                endDate: prev.endDate,
+                enable: prev.enable,
                 design:prev.design,
                 questionRequest: [
                     ...prev.questionRequest,
@@ -202,6 +208,9 @@ function TemplateSurvey(props) {
                 description: prev.description,
                 type: prev.type,
                 reliability:prev.reliability,
+                startDate:prev.startDate,
+                endDate: prev.endDate,
+                enable: prev.enable,
                 design:prev.design,
                 questionRequest: prev.questionRequest
             };
@@ -225,6 +234,9 @@ function TemplateSurvey(props) {
                 description: e.target.value,
                 type: prev.type,
                 reliability:prev.reliability,
+                startDate:prev.startDate,
+                endDate: prev.endDate,
+                enable: prev.enable,
                 design:prev.design,
                 questionRequest: prev.questionRequest
             };
@@ -302,6 +314,9 @@ function TemplateSurvey(props) {
             description: surveyList.description,
             type: surveyList.type,
             reliability:surveyList.reliability,
+            startDate:surveyList.startDate,
+            endDate: surveyList.endDate,
+            enable: surveyList.enable,
             design:surveyList.design,
             questionRequest: surveyList.questionRequest.map((prev) => {
                 return {
@@ -337,6 +352,10 @@ function TemplateSurvey(props) {
                         description: "",
                         type: 0,
                         reliability:1,
+                        startDate: new Date(),
+                        endDate: new Date,
+                        enable: true,
+                        
                         design:
                             {
                             font:"",

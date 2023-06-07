@@ -20,6 +20,9 @@ export const surveyListState = atom({
                 description:"",
                 type:0,
                 reliability:1,
+                startDate:new Date(),
+                endDate: new Date(),
+                enable: true,
                 design:{
                     font:"",
                     fontSize:3,
@@ -117,4 +120,10 @@ export const endDateState = atom({
 export const enableState = atom({
     key: "enableState",
     default: `false`
+});
+
+
+export const enableViewState = atom({
+    key: "enableViewState",
+    default: `설문 응답 보지 않기`
 });

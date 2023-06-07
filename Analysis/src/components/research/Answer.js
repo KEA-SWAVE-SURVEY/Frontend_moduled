@@ -14,7 +14,7 @@ const [data , setData] = useState({
   "id": 1,
   "title": "설문 테스트",
   "description": "설문 설명",
-  //"countAnswer":"",
+  "countAnswer":5,
   "questionList": [
       {
           "id": 1,

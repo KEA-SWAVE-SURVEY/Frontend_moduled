@@ -72,7 +72,7 @@ function Survey(props) {
                         reliability: 1,
                         startDate:new Date(),
                         endDate: new Date(),
-                        enable: false, 
+                        enable: true, 
                         design:
                             {
                         font:"",

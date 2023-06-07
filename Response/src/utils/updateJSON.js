@@ -6,6 +6,9 @@ export function updateSurveyContent(json, newContent, indexToUpdate) {
         description : json.description,
         type : json.type,
         reliability:json.reliability,
+        startDate:json.startDate,
+        endDate: json.endDate,
+        enable: json.enable,
         design:{
             font:json.design.font,
             fontSize:json.design.fontSize,

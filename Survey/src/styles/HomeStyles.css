@@ -210,12 +210,14 @@
 .drop_ul{
     position: relative;
     z-index: 30;
+    width: 10vw;
 }
 
 .dropdown{
     position: relative;
     max-height: 100vh;
     left: 9vw;
+    width: 10vw;
     top: 11vh;
     overflow: hidden;
     z-index: 10;
@@ -230,7 +232,7 @@
     position: relative;
     cursor: pointer;
     text-align: center;
-    width: 7.5rem;
+    width: 10vw;
     padding: 0.5vw;
     background: #fff;
     color: #1b0278 ;

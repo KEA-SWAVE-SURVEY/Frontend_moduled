@@ -111,6 +111,8 @@
 
 .initWrapper {
   display: grid;
+  padding-top: 1vh;
+  font-size: 2.5vw;
   width: 100%;
   grid-template-columns: 30% 25% 30% 15%;
   border: 0;
@@ -125,10 +127,11 @@
 
 .Wrapper {
   position: relative;
-  width: 100%;
+  width: 120%;
   display: grid;
   grid-template-columns: 30% 25% 30% 15%;
-
+  padding-top: 1vh;
+  font-size: 1.7vw;
   white-space: nowrap;
   text-overflow: ellipsis;
   transition: all 0.5s;
@@ -137,6 +140,7 @@
 
 .listContainer {
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -207,11 +211,12 @@
 
 
 .setting_icon {
-  width: 1.5vw;
-  height: 1.5vw;
+  width: 2.5vw;
+  height: 2.5vw;
+  margin-top: 1vh;
   box-shadow: 0 10px 20px rgba(2, 4, 142, 0.15);
   z-index: 10;
-  text-align: right;
+  text-align: left;
 }
 
 .dropdown {
@@ -221,9 +226,11 @@
   left: 85%;
   margin: 0;
   padding-bottom: 20px;
-  text-align: right;
+  text-align: leftt;
   list-style: none;
   transition: all 1s;
   z-index: 10;
+  display: grid;
+  grid-template-columns: 20% 70%;
 }
 

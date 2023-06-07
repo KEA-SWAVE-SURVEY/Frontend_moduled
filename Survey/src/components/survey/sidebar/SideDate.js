@@ -3,7 +3,7 @@ import '../../../App.css';
 import '../../../styles/NavbarStyles.css';
 import styles from "../../../styles/sidebar.module.css";
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { startDateState,endDateState, enableState, surveyListState } from '../../../contexts/atom';
+import { startDateState,endDateState, enableState, enableViewState,surveyListState } from '../../../contexts/atom';
 //import * as ReactBootStrap from 'react-bootstrap';
 
 import {setCookie} from '../../../components/login/cookie'
@@ -11,7 +11,7 @@ import {setCookie} from '../../../components/login/cookie'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-//todo 강훈님 기본값 false는 미래에 현재는 true로 되있는지 확인하기0607
+//to 완료 do 강훈님 기본값 false는 미래에 현재는 true로 되있는지 확인하기0607
 
 const SideDate = () => {
   const [surveyList, setSurveyList] = useRecoilState(surveyListState);
@@ -21,6 +21,7 @@ const SideDate = () => {
   const [endDate, setEndDate] = useRecoilState(endDateState)
 
   const [enable, setEnable] = useRecoilState(enableState)
+  const [enableView, setEnableView] = useRecoilState(enableViewState)
  
    
  console.log(startDate)
@@ -32,12 +33,20 @@ const SideDate = () => {
      
 
   //return index
+  const today = new Date();
     const cStartDate = startDate;
-    const cEndDate = endDate; 
-    const cEnable = enable; 
+    const cEndDate = endDate;  
+    console.log(cStartDate > today);
+    console.log(today);
+    console.log(cStartDate);
    console.log(cStartDate);
    console.log(cEndDate);
-   console.log(cStartDate > new Date());
+   console.log(cStartDate < new Date());
+   setEnableView(cStartDate < new Date()?'설문 응답 받는 중':'설문 응답 받지 않는 중')
+   setEnable(cStartDate < new Date());
+   const cEnable = cStartDate < new Date();
+   console.log(cEnable)  
+
     setSurveyList((prev) => {
       return {
           id: prev.id,
@@ -48,7 +57,7 @@ const SideDate = () => {
           
           startDate:cStartDate,
           endDate: cEndDate,
-          enable: cEnable,
+          enable:cEnable,
           design:prev.design,
           questionRequest: prev.questionRequest
       }
@@ -117,7 +126,7 @@ const SideDate = () => {
     <div className='menuProfile1'>
                 <div style={{display:'flex', width:'100%',flexDirection:'column',alignItems:'center', justifyContent:'center' }}>
 
-
+{enable}
                 <p className={'manageMinorFont'}> 설문 시작 기간 설정 </p> 
                 
                 <DatePicker 
