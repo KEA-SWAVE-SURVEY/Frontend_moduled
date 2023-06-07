@@ -57,6 +57,10 @@ function PrintSurveyGrid(props) {
             const result = await axios.get(`/api/load-survey/${id}`);
             console.log(result)
             setSurveyList((prev) => {
+<<<<<<< HEAD
+=======
+                //수정 리스트 모르겠어
+>>>>>>> parent of a2d17bf (2개 변경)
                 return {
                     id: result.data.id,
                     title: result.data.title,
