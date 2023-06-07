@@ -8,5 +8,8 @@ export default function socialLogin() {
 
 
 export function SocialLogin(provider){
-    //window.location.href = API_BASE_URL + "/auth/authorize/" + provider + "?redirect_url=" + window.location.origin;
+  
+        navigate('/mypage');
+    }
+    //wind ow.location.href = API_BASE_URL + "/auth/authorize/" + provider + "?redirect_url=" + window.location.origin;
 }

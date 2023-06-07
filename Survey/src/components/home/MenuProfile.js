@@ -3,7 +3,9 @@ import '../../styles/NavbarStyles.css';
  
 import {removeCookie} from '../login/cookie'
 
+import { useNavigate } from "react-router-dom";
 const MenuProfile = () => { 
+    const navigate = useNavigate();
     const cookie = sessionStorage.getItem('token')
     function onClickLogout() { 
         if(window.confirm("로그아웃 하시겠습니까?")){
@@ -12,8 +14,8 @@ const MenuProfile = () => {
             removeCookie('survey')
             //06072300 수정
             
-            window.location.href = `http://172.16.210.80/`; 
-            window.location.reload()
+        navigate('/');
+            // windo w.location.reload()
             console.log(cookie)
         }
         
@@ -21,7 +23,8 @@ const MenuProfile = () => {
     function onClickMypage(e){
         e.preventDefault(); 
         
-        window.location.href = `http://172.16.210.80/mypage`; 
+        navigate('/mypage');
+        // wind ow.location.href = `http://172.16.210.80/mypage`; 
     }
   return (
     <div className='menuProfile'>

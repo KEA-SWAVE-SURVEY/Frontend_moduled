@@ -32,9 +32,10 @@ import saveAs from "file-saver";
 
 // const storage = firebase.storage();
 
-
+ 
 
 function Survey(props) {
+    const navigate = useNavigate();
     const isLogined = useRecoilValue(loginState);
     const isModify = useRecoilValue(modifyState);
 
@@ -51,8 +52,7 @@ function Survey(props) {
     const [isPreview, setIsPreview] = useState(false);
 
     const scrollRef = useRef();
-
-    const navigate = useNavigate();
+ 
     const divRef = useRef(null);
     const today = new Date().toLocaleDateString(); 
 
@@ -430,7 +430,9 @@ function Survey(props) {
                     
                 }
                 else{removeCookie('survey')
-                window.location.replace("/survey")    
+                
+        navigate('/survey');
+                // windo w.location.replace("/survey")    
             }
 
             }

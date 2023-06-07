@@ -8,6 +8,7 @@ import { navbarItemState } from '../../contexts/selector';
 import SkeletonGrid from '../skeleton/SkeletonGrid';
 import { loginState, modifyState } from '../../contexts/atom';
 
+import { useNavigate } from "react-router-dom";
 import '../../styles/HomeStyles.css'
 import spring from '../../assets/spring.JPG';
 import product1 from '../../assets/product1.JPG';
@@ -19,7 +20,7 @@ import ascending from '../../assets/ascending.png';
 import descending from '../../assets/descending.png';
 import alphabet from '../../assets/alphabet.png';
 import time from '../../assets/time.png';
-import HaveNoSurvey from './HaveNoSurvey';
+import HaveNoSurvey from './HaveNoSurvey'; 
 
 import {getCookie} from '../login/cookie'
 
@@ -29,6 +30,7 @@ function AfterLogin(props) {
     const setNavItem = useSetRecoilState(navbarItemState);
     const isLogined = useRecoilValue(loginState);
 
+    const navigate = useNavigate();
     const setIsModify = useSetRecoilState(modifyState);
     const [surveyList, setSurveyList] = useState(undefined);
 
@@ -108,7 +110,7 @@ function AfterLogin(props) {
     function onClickCreateSurvey(e) {
         e.preventDefault();
         setIsModify((prev) => false);
-        window.location.href = `http://172.16.210.80/survey`; 
+        navigate('/survey');
     }
     
 //todo 확인완료 2000 0607여기까지
@@ -119,8 +121,10 @@ function AfterLogin(props) {
         setIsModify((prev) => true);
         loadSurveys();
         ////수정06072100 외부주소라 변경할 필요 없음
-        window.location.href = `http://172.16.210.80/template/Survey/${index+1}`
-        //window.location.href =`http://172.16.210.80/api/external/template-load/${index+1}`
+        // w indow.locati on.hr ef = `http://172.16.210.80/template/Survey/${index+1}`
+        
+        navigate(`/template/Survey/${index+1}`);
+        //win ow.loca tion.hr ef =`http://172.16.210.80/api/external/template-load/${index+1}`
         //수정06072100
             const loadSurveys = async()=>{
                 const result = await axios.get(`/api/document/external/template-load/${index+1}`);

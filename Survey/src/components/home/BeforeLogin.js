@@ -15,6 +15,7 @@ import { navbarItemState, navbarSelectedState } from '../../contexts/selector'
 import { HomeItems } from '../../constants/MenuItems'
 import Swipers from './Swipers'
 
+import { useNavigate } from "react-router-dom";
 
 import Navbar from '../../components/Navbar';
 
@@ -22,6 +23,7 @@ import html2canvas from "html2canvas";
 import saveAs from "file-saver";
 
 const BeforeLogin = (props) => {
+  const navigate = useNavigate();
   const [scrollPosition, setScrollPosition] = useState(0);
   const setNavItem = useSetRecoilState(navbarItemState);
   const setSelected = useSetRecoilState(navbarSelectedState);
@@ -48,7 +50,8 @@ const BeforeLogin = (props) => {
     e.preventDefault();
     console.log(process.env);
     //수정? 확인필요 로컬도 똑같긴해
-    window.location.href = `http://172.16.210.80/Login`; 
+    // wind ow.lo cation.href = `http://172.16.210.80/Login`; 
+        navigate('/Login');
   }
   const [position, setPosition] = useState(0);
 

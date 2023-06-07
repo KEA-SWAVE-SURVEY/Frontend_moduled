@@ -9,8 +9,10 @@ import {decode as base64_decode} from 'base-64';
 
 import '../styles/SurveyStyle.css';
 import ViewSurvey from '../components/survey/view/ViewSurvey';
+import { useNavigate } from "react-router-dom";
 
 function AnswerSurvey() {
+    const navigate = useNavigate();
     const [surveyList, setSurveyList] = useRecoilState(surveyListState);
     const [answerList, setAnswerList] = useRecoilState(answerListState);
     const { documentId } = useParams();
@@ -104,8 +106,8 @@ function AnswerSurvey() {
         if(startDate<=today && today<=endDate && enable === true){
             console.log('정상')
         }else{
-            //navigate('/survey/error')
-            window.location.href = `http://172.16.210.80/survey/error`
+            navigate('/survey/error')
+            // wind ow.location.href = `http://172.16.210.80/survey/error`
 
         }
 
@@ -131,9 +133,9 @@ function AnswerSurvey() {
                 console.log('Error');
                 console.log(JSON.stringify(answerList));
             });
-        // na vigate('/survey/afteranswer');
+        navigate('/survey/afteranswer');
         
-    window.location.href = `http://172.16.210.80/survey/afteranswer`; 
+    // win dow.location.href = `http://172.16.210.80/survey/afteranswer`; 
     }
     //,fontSize: surveyList.design.fontSize+'vw' ,fontFamily:surveyList.design.font
         //style={{fontSize: surveyList.design.fontSize+'vw' ,fontFamily:surveyList.design.font}}

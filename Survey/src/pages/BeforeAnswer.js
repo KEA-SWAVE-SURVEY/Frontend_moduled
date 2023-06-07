@@ -8,8 +8,10 @@ import { useParams } from 'react-router-dom';
 
 import {decode as base64_decode} from 'base-64';
 
+import { useNavigate } from "react-router-dom";
 export default function BeforeAnswer() {
 
+    const navigate = useNavigate();
 
     const [surveyList, setSurveyList] = useRecoilState(surveyListState);
     const { documentId } = useParams();
@@ -63,7 +65,9 @@ export default function BeforeAnswer() {
 
     function onClickStart(e) {
         e.preventDefault(); 
-        window.location.href = `http://172.16.210.80/survey/answer/`
+        
+        navigate('/survey/answer/');
+        // windo w.location.href = `http://172.16.210.80/survey/answer/`
       }
 
   return (

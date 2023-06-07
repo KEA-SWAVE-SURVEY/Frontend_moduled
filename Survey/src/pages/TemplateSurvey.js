@@ -13,6 +13,7 @@ import Sidebar from '../components/survey/sidebar/Sidebar';
 import {setCookie,getCookie,removeCookie} from '../components/login/cookie'
 
 
+import { useNavigate } from "react-router-dom";
 import html2canvas from "html2canvas";
 import saveAs from "file-saver";
 
@@ -43,6 +44,7 @@ function TemplateSurvey(props) {
     
 
 
+    const navigate = useNavigate();
 
 
     const handleDownload = async () => {
@@ -393,8 +395,8 @@ function TemplateSurvey(props) {
                     }
                 });
                 console.log('Saved');
-                //navigate('/');
-                window.location.href = `http://172.16.210.80/`
+                navigate('/');
+                // windo w.location.href = `http://172.16.210.80/`
                 if(surveyCookie){
                     removeCookie('survey')
                     }
@@ -412,7 +414,8 @@ function TemplateSurvey(props) {
                     
                 }
                 else{removeCookie('survey')
-                window.location.replace("/survey")    
+                navigate('/survey');
+                // win dow.location.replace("/survey")    
             }
 
             }
