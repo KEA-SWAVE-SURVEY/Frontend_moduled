@@ -65,8 +65,8 @@ const loadSurveyData = async () => {
   //     enable: false,
 
   // };
-  // 06092200 수정완료 설문상세분석 조회
-const result  = await axios.get(`/api/analyze/external/research/analyze/${documentId}`, { timeout: 10000 }); 
+  //06092200 수정완료 설문상세분석 조회
+const result  = await axios.get(`/api/document/external/manage/${documentId}`, { timeout: 10000 });
 // survey/external/response/{id}
 //06092200 수정완료 설문 응답 csv
 const resultCSV  = await axios.get(`/api/answer/external/response/${documentId}`, { timeout: 10000 });
