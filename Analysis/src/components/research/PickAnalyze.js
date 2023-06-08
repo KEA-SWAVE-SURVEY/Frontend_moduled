@@ -48,7 +48,7 @@ useEffect(() => {
         if (question.questionType === 0) {
           try {
             const url = await storage
-              .ref(`wordcloud/1/3.jpg`)
+              .ref(`wordcloud/${data.id}/${question.id}.jpg`)
               .getDownloadURL();
             temp = url;
             console.log(url);

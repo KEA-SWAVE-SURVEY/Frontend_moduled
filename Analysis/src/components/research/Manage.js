@@ -72,8 +72,8 @@ const result  = await axios.get(`/api/document/external/manage/${documentId}`, {
 const resultCSV  = await axios.get(`/api/answer/external/response/${documentId}`, { timeout: 10000 });
 
 
-setSurveyList(result); 
-setCsvList(resultCSV);
+setSurveyList(result.data); 
+setCsvList(resultCSV.data);
 }; 
  
 useEffect(() => {
