@@ -97,7 +97,7 @@ function Dropdown(props) {
     e.preventDefault();
     e.stopPropagation();
     //06092200 수정완료 설문 삭제
-    axios.patch(`/api/user/external/delete/${id}`
+    axios.patch(`/api/document/external/delete/${id}`
     ,{
       headers: {
       Authorization: cookie,
