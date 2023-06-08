@@ -105,7 +105,7 @@ function AnswerSurvey() {
             console.log('정상')
         }else{
             //navigate('/survey/error')
-            window.location.href = `http://172.16.210.80/survey/error`
+            window.location.href = `http://172.16.210.80/response/error`
 
         }
 

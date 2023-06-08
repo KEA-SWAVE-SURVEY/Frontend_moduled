@@ -5,11 +5,15 @@ import settingIcon from "../../assets/setting.png";
 import { useSetRecoilState } from 'recoil'; 
 import { surveyListState, modifyState, fontSizeState } from '../../contexts/atom';
 import axios from 'axios';
+
+import { useNavigate } from "react-router-dom";
+
 function ListItem(props) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const setSurveyList = useSetRecoilState(surveyListState)
     const setIsModify = useSetRecoilState(modifyState); 
     const cookie = sessionStorage.getItem('token')
+    const navigate = useNavigate();
 
     const survey = props.survey;
     const index = props.index;
@@ -54,7 +58,7 @@ function ListItem(props) {
                 }
             });
             setIsModify((prev) => true);
-            window.location.href = `http://172.16.210.80/survey`; 
+            navigate("/survey");
         }
         loadSurveys();
     }
