@@ -101,7 +101,7 @@ function AnswerSurvey() {
     };
     function checkDate(startDate,endDate,enable){
         const today = new Date()
-        if(startDate<=today && today<=endDate && enable === true){
+        if(Date(startDate)<=Date(today) && Date(today)<=Date(endDate)){
             console.log('정상')
         }else{
             //navigate('/survey/error')
@@ -135,7 +135,7 @@ function AnswerSurvey() {
         
     window.location.href = `http://172.16.210.80/response/afteranswer`; 
     }
-    //,fontSize: surveyList.design.fontSize+'vw' ,fontFamily:surveyList.design.font
+    //,fontSize:f surveyList.design.fontSize+'vw' ,fontFamily:surveyList.design.font
         //style={{fontSize: surveyList.design.fontSize+'vw' ,fontFamily:surveyList.design.font}}
 
     return (
