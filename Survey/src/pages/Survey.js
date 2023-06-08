@@ -99,6 +99,7 @@ function Survey(props) {
             }
             else{
                 console.log(surveyCookie)
+                try{
                 setSurveyList((prev) => {
                     return {
                         id: 0,
@@ -124,7 +125,11 @@ function Survey(props) {
                             }
                         })
                     }
-                });
+                });}
+                catch{
+                    console.log('error')
+                }
+
                 //쿠키 템플릿 보여주기
                 console.log('형 여기 안와?')
                 console.log(surveyList.description)
