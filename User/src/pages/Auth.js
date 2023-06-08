@@ -10,7 +10,7 @@ import {setCookie} from '../components/login/cookie'
 //auth에서 정보를 뿌릴까?
 const Auth = () => { 
   const [isLogined,setIsLogined] = useRecoilState(loginState);
-  
+  const cookie = sessionStorage.getItem('token')
   
   console.log("sdafafsadfsads");
   const id=useParams();
