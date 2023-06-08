@@ -17,37 +17,6 @@ import html2canvas from "html2canvas";
 import saveAs from "file-saver";
 import {setCookie,getCookie,removeCookie} from '../components/login/cookie'
 
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
-import "firebase/compat/database";
-import "firebase/compat/storage";
-
-// Import the functions you need from the SDKs you need
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyDvoih7Ruz_SNLaVdtpvtlD1I_yrfNpfWo",
-authDomain: "swave-ba582.firebaseapp.com",
-projectId: "swave-ba582",
-storageBucket: "swave-ba582.appspot.com",
-messagingSenderId: "196469817614",
-appId: "1:196469817614:web:531d20200d12e6953a175f"
-};
-
-try {
-    firebase.initializeApp(firebaseConfig)
-    } catch (err) {
-    // we skip the "already exists" message which is
-    // not an actual error when we're hot-reloading
-    if (!/already exists/.test(err.message)) {
-    console.error('Firebase initialization error raised', err.stack)
-  }}
-
-
-const storage = firebase.storage();
 
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
