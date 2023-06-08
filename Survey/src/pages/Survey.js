@@ -516,7 +516,7 @@ function Survey(props) {
                     console.log('Error');
                     console.log(dataToTransport);
                 });
-                handleDownload();
+                handleDownload(response.id);
         } 
         axios.post(url, dataToTransport,
             {
@@ -641,7 +641,7 @@ function Survey(props) {
                         )}
                         <div className='survey_contatiner_bottom'>
                             <div className="survey_button" onClick={(e) => onClickPreviewButton(e)}>{isPreview ? "Create" : "Preview"}</div>
-                            <div className="survey_button" onClick={handleDownload}>테스트 !</div>
+                            {/* <div className="survey_button" onClick={handleDownload}>테스트 !</div> */}
                             <div className="survey_button" onClick={(e) => onClickSaveButton(e)}>Save</div>
                         </div>
                     </div>

@@ -159,14 +159,19 @@ axios.patch(`/api/document/external/management/date/${documentId}`, dataToTransp
 
   let encoded = base64_encode(documentId)
 
-  const handleCopyClipBoard = async (text) => {
-    console.log(text)
-    try {
-      await navigator.clipboard.writeText(text);
-
-    } catch (error) {
-    }
-  };
+  const   myFunction(text) {
+    var copyText = document.getElementById(text);
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    navigator.clipboard
+      .writeText(copyText.value)
+      .then(() => {
+        alert("successfully copied");
+      })
+      .catch(() => {
+        alert("something went wrong");
+      });
+}
 
 
   const tempdata =[
