@@ -68,7 +68,7 @@ function Dropdown(props) {
 } 
  
   
-  const handleCopyClipBoard = async (text) => {
+  const handleCopyClipBoard = async (text, e) => {
     e.stopPropagation();
     try {
       await navigator.clipboard.writeText(text);
@@ -93,7 +93,7 @@ function Dropdown(props) {
     <>
     <ul className='drop_ui'>
       <li className="dropdown_item" style={{borderRadius: "5px 5px 0 0"}} onClick={(e)=>onClickResearch(e)}>설문 분석</li>
-      <li className="dropdown_item" onclick={() => handleCopyClipBoard(`http://172.16.210.80/Response/${encoded}`)} >URL 복사</li>
+      <li className="dropdown_item" onclick={(e) => handleCopyClipBoard(`http://172.16.210.80/Response/${encoded}`,e)} >URL 복사</li>
       <li className="dropdown_item" style={{borderRadius: "0 0 5px 5px"}} onClick={(e)=>onClickDelete(e)}>삭제</li>
       </ul>
     </>
