@@ -18,7 +18,7 @@ function SidebarSetting(props){
   
   const [surveyList, setSurveyList] = useRecoilState(surveyListState);
   const [isTheme, setIsTheme] = useState(true);
-  const [viewRel, setViewRel] = useState('진정성 검사 사용중'); 
+  const [viewRel, setViewRel] = useState('진정성 검사 미사용중'); 
   const [fontOpen,setFontOpen] = useState(false)
   const [sizeOpen,setSizeOpen] = useState(false)
   const [colorOpen,setColorOpen] = useState(false)

@@ -27,7 +27,7 @@ export default function Manage() {
 
   const { documentId } = useParams();
   const [block, setBlock] = useState(0); //TO완료DO: 서버로부터 받아온걸로 미리 체크설정해두기, toggleBlock에 block 넣기 등
-  const [check,setCheck] = useState('비공개 중')
+  const [check,setCheck] = useState('공개 중')
 
 
 
@@ -52,10 +52,13 @@ useEffect(() => {
     setBlock(surveyList.enable);
     console.log(surveyList.enable);
     console.log(block);
+    
 
-    setCheck(block===true?'공개 중':'비공개 중')
+    setCheck(block===true?'비공개 중':'공개 중')
   }
 }, [surveyList]);
+console.log(surveyList)
+console.log(JSON.stringify(surveyList))
 const loadSurveyData = async () => {
   // const result = {
 
@@ -93,7 +96,7 @@ const toggleBlock = () => {
 
   const cblock = block===true? false:true;
   console.log(cblock);
-  setCheck(prev=>prev==='비공개 중'?'공개 중':'비공개 중');
+  setCheck(prev=>prev==='공개 중'?'비공개 중':'공개 중');
     setBlock(cblock);
     const dataToTransport = {
       // id : surveyList.id,
