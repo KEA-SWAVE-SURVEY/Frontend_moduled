@@ -75,7 +75,7 @@ function Survey(props) {
                         enable: true, 
                         design:
                             {
-                        font:"",
+                        font:`"Calibri", "Roboto", sans-serif`,
                         fontSize:3,
                         backColor:'#ffffff'
                             },
@@ -426,7 +426,7 @@ function Survey(props) {
                             enable: true,
                             design:
                                 {
-                                font:"",
+                                font:`"Calibri", "Roboto", sans-serif`,
                                 fontSize:0,
                                 backColor:"#ffffff"
                                 },
@@ -494,7 +494,7 @@ function Survey(props) {
                         enable: true,
                         design:
                             {
-                            font:"",
+                            font:`"Calibri", "Roboto", sans-serif`,
                             fontSize:0,
                             backColor:"#ffffff"
                             },
@@ -554,7 +554,7 @@ function Survey(props) {
 
     return (
        
-        <div style={{backgroundColor:backColor}}  >
+        <div style={{backgroundColor:surveyList.backColor}}  >
             <div className="survey_area" style={!sidebarIsOpen.open ? { paddingRight: "0px" } : { paddingRight: "30vw" }}>
                 <div className="survey_container" ref={divRef}> 
                     <div ref ={topRef}> <p> </p></div>

@@ -21,7 +21,7 @@ export const surveyListState = atom({
                 type:0,
                 reliability:1,
                 design:{
-                    font:"",
+                    font:`"Calibri", "Roboto", sans-serif`,
                     fontSize:3,
                     backColor:'#ffffff'
                 },

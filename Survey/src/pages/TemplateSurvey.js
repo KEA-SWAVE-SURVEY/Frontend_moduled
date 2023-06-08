@@ -358,7 +358,7 @@ function TemplateSurvey(props) {
                         
                         design:
                             {
-                            font:"",
+                            font:`"Calibri", "Roboto", sans-serif`,
                             fontSize:0,
                             backColor:"#ffffff"
                             },
