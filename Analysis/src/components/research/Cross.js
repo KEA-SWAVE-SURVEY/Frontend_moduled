@@ -71,13 +71,13 @@ console.log(JSON.stringify(data))
 
   return (
     <div className={'analyzeBox'} style={{ padding: '0', width: '100%', height: '100%', overflowY: 'scroll', scrollbarWidth: 'none', msOverflowStyle: 'none', margin: '10' }}>
-      {data.questionAnalyzeList.map((question) => (
+      {data?.questionAnalyzeList.map((question) => (
 
         <div className={'questionContainer'} style={{ background: 'rgb(255,255,255)', margin: '20px' }}>
           <div className={'questionBox'}><p style={{ margin: '1px' }}>{question.questionTitle}</p></div>
          
           <div  className = {'chartBox'} style={{height:'15vh' , overflowY : 'scroll' , marginTop : '20px'}} > 
-            {question.chiAnalyzeList.map((chi) => (
+            {question?.chiAnalyzeList.map((chi) => (
               <div    > 
                   {chi.pvalue < 0.05 ?
                     (

@@ -25,6 +25,7 @@ import {getCookie} from '../login/cookie'
 
 function AfterLogin(props) {
     //const cookie = getCookie("token");
+    const navigate = useNavigate();
     const cookie = sessionStorage.getItem('token')
     const setNavItem = useSetRecoilState(navbarItemState);
     const isLogined = useRecoilValue(loginState);
@@ -117,9 +118,8 @@ function AfterLogin(props) {
         e.preventDefault();
         
         setIsModify((prev) => true);
-        loadSurveys();
         ////수정06072100 외부주소라 변경할 필요 없음
-        window.location.href = `http://172.16.210.80/template/Survey/${index+1}`
+        navigate(`http://172.16.210.80/template/Survey/${index+1}`)
         //window.location.href =`http://172.16.210.80/api/external/template-load/${index+1}`
         //수정06072100
             const loadSurveys = async()=>{
@@ -157,6 +157,7 @@ function AfterLogin(props) {
                 });
            
         }
+        loadSurveys();
     }
 
 
