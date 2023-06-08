@@ -23,7 +23,7 @@ export default function Manage() {
   const [surveyList, setSurveyList] = useState(null);
   const [csvList, setCsvList] = useState(null);
   const [answerList, setAnswerList] = useState(null);
-
+  const cookie = sessionStorage.getItem('token')
 
   const { documentId } = useParams();
   const [block, setBlock] = useState(0); //TO완료DO: 서버로부터 받아온걸로 미리 체크설정해두기, toggleBlock에 block 넣기 등

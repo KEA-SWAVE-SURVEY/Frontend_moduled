@@ -11,6 +11,7 @@ import axios from 'axios';
 
 
 export default function Analyze({ documentId }) {
+    const cookie = sessionStorage.getItem('token')
   console.log(documentId)
 
   //sample data for no connection

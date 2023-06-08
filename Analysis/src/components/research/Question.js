@@ -10,6 +10,7 @@ import ViewSurvey from '../survey/view/ViewSurvey';
 function Question() {
     const [surveyList, setSurveyList] = useRecoilState(surveyListState);
     const [answerList, setAnswerList] = useRecoilState(answerListState);
+    const cookie = sessionStorage.getItem('token')
 
     const { documentId } = useParams();
     useEffect(() => {
