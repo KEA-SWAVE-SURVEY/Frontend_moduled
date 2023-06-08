@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import '../styles/SurveyStyle.css';
 import CreateSurvey from '../components/survey/create/CreateSurvey';
 import ViewSurvey from '../components/survey/view/ViewSurvey';
-import Sidebar from '../components/survey/sidebar/Sidebar'; 
+import Sidebar from '../components/survey/sidebar/Sidebar';
 
 
 import html2canvas from "html2canvas";
@@ -22,8 +22,8 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import "firebase/compat/database";
 import "firebase/compat/storage";
- 
-// Import the functions you need from the SDKs you need 
+
+// Import the functions you need from the SDKs you need
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -45,10 +45,39 @@ try {
     if (!/already exists/.test(err.message)) {
     console.error('Firebase initialization error raised', err.stack)
   }}
-  
+
 
 const storage = firebase.storage();
 
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import "firebase/compat/database";
+import "firebase/compat/storage";
+// Import the functions you need from the SDKs you need
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyDvoih7Ruz_SNLaVdtpvtlD1I_yrfNpfWo",
+authDomain: "swave-ba582.firebaseapp.com",
+projectId: "swave-ba582",
+storageBucket: "swave-ba582.appspot.com",
+messagingSenderId: "196469817614",
+appId: "1:196469817614:web:531d20200d12e6953a175f"
+};
+try {
+    firebase.initializeApp(firebaseConfig)
+    } catch (err) {
+    // we skip the "already exists" message which is
+    // not an actual error when we're hot-reloading
+    if (!/already exists/.test(err.message)) {
+    console.error('Firebase initialization error raised', err.stack)
+  }}
+
+
+const storage = firebase.storage();
 function Survey(props) {
     const isLogined = useRecoilValue(loginState);
     const isModify = useRecoilValue(modifyState);
@@ -67,11 +96,11 @@ function Survey(props) {
     const [isPreview, setIsPreview] = useState(false);
 
     const scrollRef = useRef();
- 
+
     const divRef = useRef(null);
-    
+
     const topRef = useRef(null);
-    const today = new Date().toLocaleDateString(); 
+    const today = new Date().toLocaleDateString();
 
     const [size, setSize] = useState(`30px`);
 
@@ -88,7 +117,7 @@ function Survey(props) {
     useEffect(() => {
         scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
     }, [surveyList?.questionRequest.length]);
-    
+
     useEffect(() => {
         if (!location.state) {
             checkCookie()
@@ -104,7 +133,7 @@ function Survey(props) {
                         reliability: 1,
                         startDate:new Date(),
                         endDate: new Date(),
-                        enable: true, 
+                        enable: true,
                         design:
                             {
                         font:`"Calibri", "Roboto", sans-serif`,
@@ -127,7 +156,7 @@ function Survey(props) {
                 setBackColor(()=>{'#ffffff'})
                 setFontSize(()=>3)
                 setFont(()=>{'`"Calibri", "Roboto", sans-serif`'})
-                 
+
             }
             else{
                 console.log(surveyCookie)
@@ -162,9 +191,9 @@ function Survey(props) {
                     console.log('error')
                 }
 
-                
+
             }
-            
+
         }
         //쿠키 템플릿 보여주기
         console.log('형 여기 안와?')
@@ -174,7 +203,7 @@ function Survey(props) {
         setFontSize(()=>surveyList.design.fontSize)
         setFont(()=>surveyList.design.font)
         console.log(font,fontSize,backColor)
-        
+
     }, []);
 
     /* useEffect(() => {
@@ -187,10 +216,10 @@ function Survey(props) {
                     description: "",
                     type: 0,
                     reliability: 1,
-                    
+
                     startDate:new Date(),
                     endDate: new Date(),
-                    enable: false, 
+                    enable: false,
                     design:
                             {
                         font:"",
@@ -219,7 +248,7 @@ function Survey(props) {
                 description: prev.description,
                 type: prev.type,
                 reliability: prev.reliability,
-                
+
                 startDate:prev.startDate,
                 endDate: prev.endDate,
                 enable: prev.enable,
@@ -246,12 +275,12 @@ function Survey(props) {
                 description: prev.description,
                 type: prev.type,
                 reliability:prev.reliability,
-                
+
                 startDate:prev.startDate,
                 endDate: prev.endDate,
                 enable: prev.enable,
                 design:prev.design,
-                
+
                 questionRequest: [
                     ...prev.questionRequest,
                     {
@@ -282,8 +311,8 @@ function Survey(props) {
                 title: e.target.value,
                 description: prev.description,
                 type: prev.type,
-                reliability:prev.reliability, 
-                
+                reliability:prev.reliability,
+
                 startDate:prev.startDate,
                 endDate: prev.endDate,
                 enable: prev.enable,
@@ -297,7 +326,7 @@ function Survey(props) {
             path:"/",
             sameSite: "strict",
             expires: expirationTime
-    
+
           });
     }
 
@@ -311,7 +340,7 @@ function Survey(props) {
                 description: e.target.value,
                 type: prev.type,
                 reliability:prev.reliability,
-                
+
                 startDate:prev.startDate,
                 endDate: prev.endDate,
                 enable: prev.enable,
@@ -325,7 +354,7 @@ function Survey(props) {
             path:"/",
             sameSite: "strict",
             expires: expirationTime
-    
+
           });
 
     }
@@ -338,7 +367,7 @@ function Survey(props) {
             path:"/",
             sameSite: "strict",
             expires: expirationTime
-    
+
           });
         if (!isPreview) {
             surveyList.questionRequest.map((survey) => {
@@ -382,9 +411,10 @@ function Survey(props) {
         setSidebarIsOpen({ open: false, isSetting: false, isGPT: false });
     }
 
-    const handleDownload = async () => {
+    const handleDownload = async (data) => {
+        console.log(props)
         if (!divRef.current) return;
-      
+
         try {
           const div = divRef.current;
           const canvas = await html2canvas(div, {
@@ -393,25 +423,17 @@ function Survey(props) {
               // 캡처할 부분의 가로 크기
             height: 400  // 캡처할 부분의 세로 크기
           });
-          canvas.toBlob(async (blob) => {
-            if (blob !== null) {
-              const formData = new FormData();
-              formData.append('blobData', blob);
-              saveAs(blob, "result.png");
-            console.log('try to axios');
-       
-              try {
-                await axios.post('/processBlob', formData, {
-                  headers: {
-                    'Content-Type': 'application/octet-stream',
-                  },
-                });
-                console.log('Blob sent to backend successfully');
-              } catch (error) {
-                console.error('Error sending blob to backend:', error);
-              }
-            }
+          const storageRef = storage.ref();
+          const fileRef = storageRef.child(`tumbnail/${props.id}.jpg`);
+          console.log(fileRef)
+          console.log()
+          const blob = await new Promise((resolve) => canvas.toBlob(resolve));
+          fileRef.put(blob).then((snapshot) => {
+            console.log('Image uploaded successfully');
+          }).catch((error) => {
+            console.error('Error uploading image:', error);
           });
+
         } catch (error) {
           console.error('Error converting div to image:', error);
         }
@@ -466,7 +488,7 @@ function Survey(props) {
                             description: "",
                             type: 0,
                             reliability:1, //notion상에서는 Boolean인데 이거 변경할지
-                             // design쪽 notion에는 없는데 일단 유지 
+                             // design쪽 notion에는 없는데 일단 유지
                             startDate:new Date(),
                             endDate: new Date(),
                             enable: true,
@@ -506,8 +528,9 @@ function Survey(props) {
                             ]
                         }
                     });
-                    console.log('Saved'); 
-                    window.location.href = `http://172.16.210.80/`; 
+                    console.log(response);
+                    console.log('Saved');
+                    window.location.href = `http://172.16.210.80/`;
                     if(surveyCookie){
                         removeCookie('survey')
                         }
@@ -517,7 +540,7 @@ function Survey(props) {
                     console.log(dataToTransport);
                 });
                 handleDownload(response.id);
-        } 
+        }
         axios.post(url, dataToTransport,
             {
                 headers: {
@@ -534,7 +557,7 @@ function Survey(props) {
                         description: "",
                         type: 0,
                         reliability:1, //notion상에서는 Boolean인데 이거 변경할지
-                         // design쪽 notion에는 없는데 일단 유지 
+                         // design쪽 notion에는 없는데 일단 유지
                         startDate:new Date(),
                         endDate: new Date(),
                         enable: true,
@@ -574,8 +597,8 @@ function Survey(props) {
                         ]
                     }
                 });
-                console.log('Saved'); 
-                window.location.href = `http://172.16.210.80/`; 
+                console.log('Saved');
+                window.location.href = `http://172.16.210.80/`;
                 if(surveyCookie){
                     removeCookie('survey')
                     }
@@ -589,29 +612,29 @@ function Survey(props) {
         function checkCookie(){
             if(surveyCookie){
                 if(window.confirm("이전 저장 내용을 불러오시겠습니까")){
-                    
+
                 }
                 else{removeCookie('survey')
-                window.location.replace("/survey")    
+                window.location.replace("/survey")
             }
 
             }
         }
 
     return (
-       
+
         <div style={{backgroundColor:backColor}}  >
             <div className="survey_area" style={!sidebarIsOpen.open ? { paddingRight: "0px" } : { paddingRight: "30vw" }}>
-                <div className="survey_container" ref={divRef}> 
+                <div className="survey_container" ref={divRef}>
                     <div ref ={topRef}> <p> </p></div>
-                    
+
 
                     <div ref={scrollRef}>
                         {!isPreview ? (
                             <div >
                                 <div className='create_survey'>
                                     <div className='problem_container'>
-                                    
+
                                             <input placeholder="설문 제목" value={surveyList?.title} onChange={(e) => onChangeTitleInput(e)} className='survey_input' style={{ fontSize: fontSize+'vw' ,fontFamily:font }}></input>
                                             <textarea placeholder="부연 설명을 입력해 주세요" value={surveyList?.description} onChange={(e) => onChangeTextArea(e) }style={{ fontSize: fontSize+`vw` ,fontFamily:font }} className='textarea'></textarea>
 

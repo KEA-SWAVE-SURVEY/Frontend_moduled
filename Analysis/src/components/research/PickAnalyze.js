@@ -1,123 +1,84 @@
-import React , {useState} from 'react';
+import React , {useState, useEffect} from 'react';
 import '../../styles/SurveyStyle.css';
 import { PieChartComponent } from './chart'
 import randomColor from 'randomcolor';  
 
+ 
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import "firebase/compat/database";
+import "firebase/compat/storage"; 
+// Import the functions you need from the SDKs you need 
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-//import ReactDOM from "react-dom";
-//import ReactWordcloud from "react-wordcloud";
-//import "d3-transition";
-//import { select } from "d3-selection";
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyDvoih7Ruz_SNLaVdtpvtlD1I_yrfNpfWo",
+authDomain: "swave-ba582.firebaseapp.com",
+projectId: "swave-ba582",
+storageBucket: "swave-ba582.appspot.com",
+messagingSenderId: "196469817614",
+appId: "1:196469817614:web:531d20200d12e6953a175f"
+};
+try {
+    firebase.initializeApp(firebaseConfig)
+    } catch (err) {
+    // we skip the "already exists" message which is
+    // not an actual error when we're hot-reloading
+    if (!/already exists/.test(err.message)) {
+    console.error('Firebase initialization error raised', err.stack)
+  }}
+  
 
-// {
-//   "id": 1,
-//   "title": "설문 테스트",
-//   "description": "설문 설명",
-//   "questionList": [
-//       {
-//           "id": 1,
-//           "title": "찬부식",
-//           "questionType": 1,
-//           "choiceList": [
-//               {
-//                   "id": 1,
-//                   "title": "true",
-//                   "count": 19
-//               },
-//               {
-//                   "id": 2,
-//                   "title": "false",
-//                   "count": 1
-//               }
-//           ]
-//       },
-//       {
-//           "id": 2,
-//           "title": "객관식",
-//           "questionType": 2,
-//           "choiceList": [
-//               {
-//                   "id": 3,
-//                   "title": "짜장",
-//                   "count": 19
-//               },
-//               {
-//                   "id": 4,
-//                   "title": "짬뽕",
-//                   "count": 1
-//               }
-//           ]
-//       },
-//       {
-//           "id": 3,
-//           "title": "주관식",
-//           "questionType": 0,
-//           "choiceList": [
-//               {
-//                   "id": 3,
-//                   "title": "11111111",
-//                   "count": 0
-//               },
-//               {
-//                   "id": 6,
-//                   "title": "22222",
-//                   "count": 0
-//               },
-//               {
-//                   "id": 9,
-//                   "title": "22222",
-//                   "count": 0
-//               }            ]
-//       }
-//   ]
-// }
+const storage = firebase.storage();
+
 export default function PickAnalyze({ data }) { 
-  console.log(data)
-/* 
-  function getCallback(callback) {
-    return function (word, event) {
-      const isActive = callback !== "onWordMouseOut";
-      const element = event.target;
-      const text = select(element);
-      text
-        .transition()
-        .attr("background", "white") 
-        .attr("text-decoration", isActive ? "underline" : "none");
-    };
-  }
+  console.log(data) 
+
   
-  const callbacks = {
-    getWordColor: (word) => (word.value > 2 ? "orange" : "purple"),
-    getWordTooltip: (word) =>
-      `단어 중, "${word.text}" 단어가 ${word.value} 번 보였습니다.`,
-    onWordClick: getCallback("onWordClick"),
-    onWordMouseOut: getCallback("onWordMouseOut"),
-    onWordMouseOver: getCallback("onWordMouseOver")
+  const [transformedData, setTransformedData] = useState([]);
+
+useEffect(() => {
+  const fetchData = async () => {
+    const transformedData = await Promise.all(
+      data.questionList.map(async (question) => {
+        let temp = '';
+        if (question.questionType === 0) {
+          try {
+            const url = await storage
+              .ref(`wordcloud/1/3.jpg`)
+              .getDownloadURL();
+            temp = url;
+            console.log(url);
+            console.log(temp);
+          } catch (error) {
+            console.error(error);
+          }
+        }
+        console.log(temp);
+        return {
+          isOpen: true,
+          question: question.title,
+          questionType: question.questionType,
+          lists: question.choiceList.map((choice) => ({
+            name: choice.title,
+            value: choice.count,
+            fill: randomColor({ luminosity: 'light', hue: 'random' })
+          })),
+          test: temp // "test" 속성 추가
+        };
+      })
+    );
+    setTransformedData(transformedData);
   };
- */
-  
-  const [transformedData, setTransformedData] = useState(data.questionList.map((question) => ({
-    
-    isOpen : true,
-    question: question.title,
-    questionType: question.questionType,
-    
-    wordCloudDTOs :question.wordCloudDtos.map((words) => ({
-    
-text: words.title,
-value:  words.count 
 
-    })), 
-    lists: question.choiceList.map((choice) => ({
-      name: choice.title,
-      value: choice.count,
-
-      fill: randomColor({ luminosity: 'liight', hue: 'random' })
-    })),
-
-    
-  }))
-  );
+  fetchData();
+}, []);
+ 
+  console.log(JSON.stringify(transformedData))
+  console.log(transformedData)
   const toggleQuestion = (index) => {
     setTransformedData((prevData) => {
       const newData = [...prevData];
@@ -125,8 +86,7 @@ value:  words.count
       return newData;
     });
   };
-  console.log(typeof(transformedData[2].wordCloudDTOs[0].value) + " " + transformedData[2].wordCloudDTOs[0].value+" " + (transformedData[2].wordCloudDTOs[0].value + transformedData[2].wordCloudDTOs[0].value))
-  return (
+     return (
     <div className={'analyzeBox'} style={{ padding: '0', width: '100%', height: '100%', overflowY: 'scroll', scrollbarWidth: 'none', msOverflowStyle: 'none', margin: '10' }}>
      <div className={'questionBox'} style={{height:'10vh',  margin: '10px'}}>
       <p style={{ margin: '5px'}}> {data.countAnswer} 명이 응답함 </p>
@@ -168,9 +128,10 @@ value:  words.count
 {question.isOpen === true ? (  <div> {question.questionType === 0 ?
               (
 
-                <div className={'chartBox'} style={{ height:'350px' , margin: '10px', overflowY:'scroll'}}>
+                <div className={'chartBox'} style={{width: '100%', height: '700px' }}>
+ <div  style={{ width:'400px', height:'400px', backgroundImage: `url(${question.test})`,backgroundRepeat:'no-repeat', backgroundSize:'cover' ,margin:'auto'} }>
 
-<div style={{ height: 0, width: '60%', fontSize:'10px' }}>
+
         {/* <ReactWordcloud callbacks ={callbacks} words={question.wordCloudDTOs} options = {{   fontSizes: [25, 50],}}/> */}
       </div>
                   {
