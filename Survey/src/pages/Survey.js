@@ -550,12 +550,12 @@ function Survey(props) {
                     }
                 });
                 console.log('Saved');
-                
-            handleDownload(response.id);
-                navigate(`/`); 
+                console.log( response.id)
+            handleDownload(response.id); 
                 if(surveyCookie){
                     removeCookie('survey')
                     }
+                    navigate(`/`); 
             })
             .catch((response) => {//종류불문 에러
                 console.log('Error');
