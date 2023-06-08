@@ -27,9 +27,9 @@ function ViewSureveyQuestion(props) {
 
     return (
         <div className="problem_container" style={{marginBottom: "30px" }}>
-            <h1 style={{ textAlign: "left" ,fontSize: fontSize+'vw' ,fontFamily:font }} className='survey_input'>{surveyList.questionRequest[props.index].title} </h1>
+            <h1 style={{ textAlign: "left" ,fontSize: surveyList.design.fontSize+'vw' ,fontFamily:surveyList.design.font }} className='survey_input'>{surveyList.questionRequest[props.index].title} </h1>
             <div className="small_button_container" style={{ marginTop: "20px", fontSize: "20px" }}>
-                <input placeholder="답변을 입력해 주세요" onChange={(e) => onChangeInput(e)} className='survey_input'style={{ fontSize: fontSize+'vw' ,fontFamily:font }}></input>
+                <input placeholder="답변을 입력해 주세요" onChange={(e) => onChangeInput(e)} className='survey_input'style={{ fontSize: surveyList.design.fontSize+'vw' ,fontFamily:surveyList.design.font }}></input>
             </div>
         </div>
     );

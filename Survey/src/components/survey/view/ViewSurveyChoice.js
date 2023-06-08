@@ -36,14 +36,14 @@ function ViewSurveyChoice(props) {
         return (
             <label className="radio_container">
                 <input className="radio" type="radio" value={value} checked={checked} onChange={onChange} />
-                <div className="label_container" style={{ width: "20%", fontSize: fontSize+'vw' ,fontFamily:font }}>{label}</div>
+                <div className="label_container" style={{ width: "20%", fontSize: surveyList.design.fontSize+'vw' ,fontFamily:surveyList.design.font }}>{label}</div>
             </label>
         );
     };
 
     return (
         <div className="problem_container" style={{ marginBottom: "30px" }}>
-            <h1 style={{ textAlign: "left" ,fontSize: fontSize+'vw' ,fontFamily:font }}>{surveyList.questionRequest[props.index].title} </h1>
+            <h1 style={{ textAlign: "left" ,fontSize: surveyList.design.fontSize+'vw' ,fontFamily:surveyList.design.font }}>{surveyList.questionRequest[props.index].title} </h1>
             <div>
                 {choiceList.map((choice,index) => {
                     return <RadioButton key={index} label={choice.label} value={choice.value} checked={choice.value === answer} onChange={(e) => onChangeRadioButton(e, index)}/>

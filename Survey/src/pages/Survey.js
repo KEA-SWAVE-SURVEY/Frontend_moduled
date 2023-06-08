@@ -554,7 +554,7 @@ function Survey(props) {
 
     return (
        
-        <div style={{backgroundColor:surveyList.backColor}}  >
+        <div style={{backgroundColor:surveyList.design.backColor}}  >
             <div className="survey_area" style={!sidebarIsOpen.open ? { paddingRight: "0px" } : { paddingRight: "30vw" }}>
                 <div className="survey_container" ref={divRef}> 
                     <div ref ={topRef}> <p> </p></div>
@@ -566,8 +566,8 @@ function Survey(props) {
                                 <div className='create_survey'>
                                     <div className='problem_container'>
                                     
-                                            <input placeholder="설문 제목" value={surveyList?.title} onChange={(e) => onChangeTitleInput(e)} className='survey_input' style={{ fontSize: fontSize+'vw' ,fontFamily:font }}></input>
-                                            <textarea placeholder="부연 설명을 입력해 주세요" value={surveyList?.description} onChange={(e) => onChangeTextArea(e) }style={{ fontSize: fontSize+`vw` ,fontFamily:font }} className='textarea'></textarea>
+                                            <input placeholder="설문 제목" value={surveyList?.title} onChange={(e) => onChangeTitleInput(e)} className='survey_input' style={{ fontSize: surveyList.design.fontSize+'vw' ,fontFamily:surveyList.design.font }}></input>
+                                            <textarea placeholder="부연 설명을 입력해 주세요" value={surveyList?.description} onChange={(e) => onChangeTextArea(e) }style={{ fontSize: surveyList.design.fontSize+`vw` ,fontFamily:surveyList.design.font }} className='textarea'></textarea>
 
                                     </div>
                                 </div>
@@ -580,8 +580,8 @@ function Survey(props) {
                                 <div className='create_survey'>
                                     <div className='problem_container' >
 
-                                        <h1 style={{ textAlign: "left", margin: '0 0 0 0 ',  fontSize: fontSize+'vw' ,fontFamily:font }} className='survey_input'>{surveyList?.title}</h1>
-                                        <textarea readOnly className='textarea'style={{ fontSize: fontSize+'vw' ,fontFamily:font }}>{surveyList?.description}</textarea>
+                                        <h1 style={{ textAlign: "left", margin: '0 0 0 0 ',  fontSize: surveyList.design.fontSize+'vw' ,fontFamily:surveyList.design.font }} className='survey_input'>{surveyList?.title}</h1>
+                                        <textarea readOnly className='textarea'style={{ fontSize: surveyList.design.fontSize+'vw' ,fontFamily:surveyList.design.font }}>{surveyList?.description}</textarea>
                                     </div>
                                 </div>
                                 {surveyList?.questionRequest.map((survey, index) => <ViewSurvey key={index} id={survey.id} index={index} />)}
