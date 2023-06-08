@@ -1,31 +1,32 @@
- 
+
 import '../../styles/DropdownStyles.css';
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import { encode as base64_encode} from 'base-64'; 
-  
+import { encode as base64_encode} from 'base-64';
+
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { loginState, modifyState } from '../../contexts/atom'; 
+import { loginState, modifyState } from '../../contexts/atom';
 
 import { useRecoilState } from 'recoil';
 import { surveyListState , answerListState} from '../../contexts/atom';
 
 
 function Dropdown(props) {
-  /* 현재 기능 아예 없음 */  
- 
+  /* 현재 기능 아예 없음 */
+
   const id = props.id;
   let encoded = base64_encode(id);
+  const cookie = sessionStorage.getItem('token')
 
 
 
   const scrollRef = useRef();
 
   const divRef = useRef(null);
-  
+
   const topRef = useRef(null);
-  const today = new Date().toLocaleDateString(); 
- 
+  const today = new Date().toLocaleDateString();
+
   const setIsModify = useSetRecoilState(modifyState);
   const [surveyList, setSurveyList] = useRecoilState(surveyListState);
 
@@ -38,7 +39,7 @@ function Dropdown(props) {
     loadSurveys();
         const loadSurveys = async()=>{
             const result = await axios.get(`/api/external/survey-list/${id}`);
-            
+
             console.log(result)
             setSurveyList((prev) => {
                 return {
@@ -63,11 +64,11 @@ function Dropdown(props) {
                     })
                 }
             });
-       
+
     }
-} 
- 
-  
+}
+
+
   const handleCopyClipBoard = async (text, e) => {
     e.stopPropagation();
     try {
@@ -75,18 +76,23 @@ function Dropdown(props) {
 
     } catch (error) {
     }
-  }; 
-   
+  };
+
   function onClickResearch(e){
     e.preventDefault();
     e.stopPropagation();
-    window.location.href = `http://172.16.210.80/research/${id}`; 
+    window.location.href = `http://172.16.210.80/research/${id}`;
   }
   //삭제 구현 복사 제거 수정 -> ip있어야 하나?
   function onClickDelete(e){
     e.preventDefault();
     e.stopPropagation();
-    axios.post(`http://172.16.210.80/api/external/delete/${id}`);
+    //06092200 수정완료 설문 삭제
+    axios.patch(`/api/document/external/delete/${id}`
+    ,{
+      headers: {
+      Authorization: cookie,
+      }});
     window.location.reload()
   }
   return (
