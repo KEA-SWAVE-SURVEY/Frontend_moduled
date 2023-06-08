@@ -125,6 +125,9 @@ function Survey(props) {
                         })
                     }
                 });
+                //쿠키 템플릿 보여주기
+                console.log('형 여기 안와?')
+                console.log(surveyList.description)
                 console.log(surveyList.design.font,surveyList.design.fontSize,surveyList.design.backColor)
                 setBackColor(()=>surveyList.design.backColor)
                 setFontSize(()=>surveyList.design.fontSize)
