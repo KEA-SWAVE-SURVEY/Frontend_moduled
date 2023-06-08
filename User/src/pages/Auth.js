@@ -26,7 +26,11 @@ const Auth = () => {
         // const res = await axios.post(`/api/oauth/token?code=${code}&provider=${provider}`);
         //06072200 수정완료 //로그인
         
-        const res = await axios.post(`/api/user/external/oauth/token?code=${code}&provider=${provider}`);
+        const res = await axios.post(`/api/user/external/oauth/token?code=${code}&provider=${provider}`
+        ,{
+          headers: {
+          Authorization: cookie,
+          }});
         //인가코드를 백엔드로 보내고 헤더에서 엑세스 토큰 받아옴
         const token = res.headers.authorization;
         sessionStorage.setItem('token',token)
@@ -58,6 +62,7 @@ const Auth = () => {
                   headers: {
                     Authorization: token,
                   },
+                  
                 }).then((response) => {//api의 응답을 제대로 받은경우 
                   console.log(response);
                   console.log(response.data);

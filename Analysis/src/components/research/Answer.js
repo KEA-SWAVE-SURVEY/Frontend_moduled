@@ -116,7 +116,10 @@ const [data , setData] = useState({
       try {
         // const response = await axios.get(`/api/research/2/${documentId}`, { timeout: 10000 });
         //06092200 수정완료 설문분석 문항 조회
-        const response = await axios.get(`/api/analyze/external/research/survey/load/${documentId}`, { timeout: 10000 });
+        const response = await axios.get(`/api/analyze/external/research/survey/load/${documentId}`, {
+            headers: {
+            Authorization: cookie,
+            }, timeout: 10000 });
         setData(response.data);
       } catch (error) {
         console.error(error);

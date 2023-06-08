@@ -66,10 +66,16 @@ const loadSurveyData = async () => {
 
   // };
   //06092200 수정완료 설문상세분석 조회
-const result  = await axios.get(`/api/document/external/manage/${documentId}`, { timeout: 10000 });
+const result  = await axios.get(`/api/document/external/manage/${documentId}`, {
+  headers: {
+  Authorization: cookie,
+  }, timeout: 10000 });
 // survey/external/response/{id}
 //06092200 수정완료 설문 응답 csv
-const resultCSV  = await axios.get(`/api/answer/external/response/${documentId}`, { timeout: 10000 });
+const resultCSV  = await axios.get(`/api/answer/external/response/${documentId}`, {
+  headers: {
+  Authorization: cookie,
+  }, timeout: 10000 });
 
 
 setSurveyList(result); 
@@ -220,7 +226,11 @@ axios.patch(`/api/document/external/manage/date/${documentId}`, dataToTransport,
   const [processData,setProcessData] = useState(tempdata);
 //수정 여기 머지? //06092200 수정완료
   const loadSurveys = async()=>{
-    const result = await axios.get(`/api/answer/external/response/${documentId}`);
+    const result = await axios.get(`/api/answer/external/response/${documentId}`,
+    {
+      headers: {
+      Authorization: cookie,
+      }});
     setProcessData(result)
   }
 

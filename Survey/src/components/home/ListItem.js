@@ -9,6 +9,7 @@ function ListItem(props) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const setSurveyList = useSetRecoilState(surveyListState)
     const setIsModify = useSetRecoilState(modifyState); 
+    const cookie = sessionStorage.getItem('token')
 
     const survey = props.survey;
     const index = props.index;
@@ -20,7 +21,11 @@ function ListItem(props) {
             //기존 /survey/external/load/${id}
             //수정 /api/external/survey-list/${id}수정완료
             //수정06072100
-            const result = await axios.get(`/api/document/external/survey-list/${id}`);
+            const result = await axios.get(`/api/document/external/survey-list/${id}`
+            ,{
+                headers: {
+                Authorization: cookie,
+                }});
             setSurveyList((prev) => {
                 return {
                     id: result.data.id,

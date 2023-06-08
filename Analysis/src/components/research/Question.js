@@ -25,7 +25,11 @@ function Question() {
     //    const result = await axios.get(`/api/load-survey/${documentId}`);
        //질문 애매한 수정 docu인지 user인지 일단은 docu
        //수정06072100
-       const result = await axios.get(`/api/document/external/survey-list/${documentId}`);
+       const result = await axios.get(`/api/document/external/survey-list/${documentId}`
+       ,{
+        headers: {
+        Authorization: cookie,
+        }});
     //    const result = {data:{
     //     "id": 1,
     //     "title": "설문 테스트",

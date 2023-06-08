@@ -10,6 +10,7 @@ function PrintSurveyGrid(props) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const setSurveyList = useSetRecoilState(surveyListState)
     const setIsModify = useSetRecoilState(modifyState); 
+    const cookie = sessionStorage.getItem('token')
 
     const survey = props.survey;
 
@@ -21,7 +22,11 @@ function PrintSurveyGrid(props) {
             //수정 /api/external/survey-list/{id}
             //`api/answer/external/load/${id}`
             //수정06072100
-            const result = await axios.get(`/api/document/external/survey-list/${id}`);
+            const result = await axios.get(`/api/document/external/survey-list/${id}`
+            ,{
+                headers: {
+                Authorization: cookie,
+                }});
             console.log(result)
             setSurveyList((prev) => {
                 //수정 리스트 모르겠어 -> 이거 맞아

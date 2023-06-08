@@ -16,6 +16,7 @@ function Dropdown(props) {
 
   const id = props.id;
   let encoded = base64_encode(id);
+  const cookie = sessionStorage.getItem('token')
 
 
 
@@ -38,7 +39,11 @@ function Dropdown(props) {
     loadSurveys();
         const loadSurveys = async()=>{
           //수정06072100
-            const result = await axios.get(`/api/document/external/survey-list/${id}`);
+            const result = await axios.get(`/api/document/external/survey-list/${id}`
+            ,{
+              headers: {
+              Authorization: cookie,
+              }});
 
             console.log(result)
             setSurveyList((prev) => {
@@ -92,7 +97,11 @@ function Dropdown(props) {
     e.preventDefault();
     e.stopPropagation();
     //06092200 수정완료 설문 삭제
-    axios.patch(`/api/user/external/delete/${id}`);
+    axios.patch(`/api/user/external/delete/${id}`
+    ,{
+      headers: {
+      Authorization: cookie,
+      }});
     window.location.reload()
   }
   return (

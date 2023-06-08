@@ -23,8 +23,8 @@ export const surveyListState = atom({
                 startDate:new Date(),
                 endDate: new Date(),
                 enable: true,
-                design:{
-                    font:"",
+                design:{//수정
+                    font:`"Calibri", "Roboto", sans-serif`,
                     fontSize:3,
                     backColor:'#ffffff'
                 },

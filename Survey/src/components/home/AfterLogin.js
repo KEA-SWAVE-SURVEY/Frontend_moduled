@@ -123,7 +123,11 @@ function AfterLogin(props) {
         //window.location.href =`http://172.16.210.80/api/external/template-load/${index+1}`
         //수정06072100
             const loadSurveys = async()=>{
-                const result = await axios.get(`/api/document/external/template-load/${index+1}`);
+                const result = await axios.get(`/api/document/external/template-load/${index+1}`
+                ,{
+                    headers: {
+                    Authorization: cookie,
+                    }});
                 console.log(result)// todo 확인완료 날짜추가 끝 수정필요>? 날짜 없음
                 setSurveyList((prev) => {
                     return {
