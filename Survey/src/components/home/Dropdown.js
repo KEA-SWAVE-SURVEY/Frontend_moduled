@@ -16,6 +16,7 @@ function Dropdown(props) {
 
   const id = props.id;
   let encoded = base64_encode(id);
+  const cookie = sessionStorage.getItem('token')
 
 
 
