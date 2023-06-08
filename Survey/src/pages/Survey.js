@@ -5,6 +5,8 @@ import ReactDragList from 'react-drag-list';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
+import { useNavigate } from "react-router-dom";
+
 import '../styles/SurveyStyle.css';
 import CreateSurvey from '../components/survey/create/CreateSurvey';
 import ViewSurvey from '../components/survey/view/ViewSurvey';
@@ -14,12 +16,43 @@ import Sidebar from '../components/survey/sidebar/Sidebar';
 import html2canvas from "html2canvas";
 import saveAs from "file-saver";
 import {setCookie,getCookie,removeCookie} from '../components/login/cookie'
- 
+
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import "firebase/compat/database";
+import "firebase/compat/storage"; 
+// Import the functions you need from the SDKs you need 
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyDvoih7Ruz_SNLaVdtpvtlD1I_yrfNpfWo",
+authDomain: "swave-ba582.firebaseapp.com",
+projectId: "swave-ba582",
+storageBucket: "swave-ba582.appspot.com",
+messagingSenderId: "196469817614",
+appId: "1:196469817614:web:531d20200d12e6953a175f"
+};
+
+try {
+    firebase.initializeApp(firebaseConfig)
+    } catch (err) {
+    // we skip the "already exists" message which is
+    // not an actual error when we're hot-reloading
+    if (!/already exists/.test(err.message)) {
+    console.error('Firebase initialization error raised', err.stack)
+  }}
+  
+
+const storage = firebase.storage();
 
 function Survey(props) {
     const isLogined = useRecoilValue(loginState);
     const isModify = useRecoilValue(modifyState);
     const location = useLocation();
+    const navigate = useNavigate();
 
     const [sidebarIsOpen, setSidebarIsOpen] = useState({ open: false, isSetting: false });
     const [sidebarSelected, setSidebarSelected] = useState(0);
