@@ -58,7 +58,9 @@ function ListItem(props) {
                 }
             });
             setIsModify((prev) => true);
-            navigate("/survey");
+            navigate("/survey",{
+                state: { ...true },
+              });
         }
         loadSurveys();
     }

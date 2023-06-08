@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { surveyListState, answerListState, loginState, modifyState,fontState, fontSizeState,backColorState } from '../contexts/atom';
 import ReactDragList from 'react-drag-list';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 import '../styles/SurveyStyle.css';
@@ -53,8 +54,8 @@ function Survey(props) {
     }, [surveyList?.questionRequest.length]);
     const surveyCookie = getCookie("survey");
     useEffect(() => {
-        console(isModify);
-        if (!isModify) {
+        const location = useLocation();
+        if (!location.state) {
             checkCookie()
             console.log(surveyCookie)
             if(!surveyCookie){
