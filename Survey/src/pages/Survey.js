@@ -505,6 +505,8 @@ function Survey(props) {
             }
         )
             .then((response) => {//api의 응답을 제대로 받은경우
+                
+            handleDownload(response.id); 
                 setSurveyList((prev) => {
                     return {
                         id: 0,
@@ -553,8 +555,7 @@ function Survey(props) {
                     }
                 });
                 console.log('Saved');
-                console.log( response.id)
-            handleDownload(response.id); 
+                console.log( response.id) 
                 if(surveyCookie){
                     removeCookie('survey')
                     }
