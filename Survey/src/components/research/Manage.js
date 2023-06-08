@@ -72,8 +72,8 @@ const result  = await axios.get(`/api/document/external/manage/${documentId}`, {
 const resultCSV  = await axios.get(`/api/answer/external/response/${documentId}`, { timeout: 10000 });
 
 
-setSurveyList(result); 
-setCsvList(resultCSV);
+setSurveyList(result.data ); 
+setCsvList(resultCSV.data);
 }; 
  
 useEffect(() => {
@@ -153,7 +153,19 @@ axios.patch(`/api/document/external/manage/date/${documentId}`, dataToTransport,
   const handleCopyClipBoard = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
-
+      function myFunction() {
+        var copyText = document.getElementById("myInput");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        navigator.clipboard
+          .writeText(copyText.value)
+          .then(() => {
+            alert("successfully copied");
+          })
+          .catch(() => {
+            alert("something went wrong");
+          });
+    }
     } catch (error) {
     }
   };
@@ -221,7 +233,7 @@ axios.patch(`/api/document/external/manage/date/${documentId}`, dataToTransport,
 //수정 여기 머지? //06092200 수정완료
   const loadSurveys = async()=>{
     const result = await axios.get(`/api/answer/external/response/${documentId}`);
-    setProcessData(result)
+    setProcessData(result.data);
   }
 
 const csvdata = processData.map((item) => {

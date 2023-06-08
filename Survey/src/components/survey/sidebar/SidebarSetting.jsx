@@ -66,7 +66,7 @@ function SidebarSetting(props){
   const toggleEnable = (e) => {
     console.log(enable)
     setEnableView(!enable?'설문 응답 받는 중':'설문 응답 받지 않는 중 ')
-    const prevEnable = enable;
+    const prevEnable = enable  === true ? false  :true
     setEnable(prev=>prev===true?false:true);
     
     setSurveyList((prev) => {
@@ -74,7 +74,7 @@ function SidebarSetting(props){
           id: prev.id,
           title: prev.title,
           description: prev.description,
-          type: prev.type,
+          type: prev=>prev===true?false:true,
           reliability: prev.reliability,
           
           startDate:prev.startDate,
