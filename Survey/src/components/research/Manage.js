@@ -300,21 +300,7 @@ console.log(csvdata)
 
           <CsvDownloadButton
     data={csvList}
-    filename="good_data.csv"
-    style={{ //pass other props, like styles
-      boxShadow:"inset 0px 1px 0px 0px #e184f3",
-      background:"linear-gradient(to bottom, #c123de 5%, #a20dbd 100%)",
-      backgroundColor:"#c123de",
-      borderRadius:"6px",
-      border:"1px solid #a511c0",
-      display:"inline-block",
-      cursor:"pointer","color":"#ffffff",
-      fontSize:"15px",
-      fontWeight:"bold",
-      padding:"6px 24px",
-      textDecoration:"none",
-      textShadow:"0px 1px 0px #9b14b3"
-      }}
+    filename="good_data.csv" 
       delimiter = ","
   >
     CSV로 저장하기
