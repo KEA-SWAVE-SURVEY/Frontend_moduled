@@ -53,6 +53,7 @@ function Survey(props) {
     }, [surveyList?.questionRequest.length]);
     const surveyCookie = getCookie("survey");
     useEffect(() => {
+        console(isModify);
         if (!isModify) {
             checkCookie()
             console.log(surveyCookie)
