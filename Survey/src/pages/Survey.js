@@ -125,11 +125,11 @@ function Survey(props) {
                         })
                     }
                 });
-                
+                console.log(surveyList.design.font,surveyList.design.fontSize,surveyList.design.backColor)
                 setBackColor(()=>surveyList.design.backColor)
                 setFontSize(()=>surveyList.design.fontSize)
                 setFont(()=>surveyList.design.font)
-                
+                console.log(font,fontSize,backColor)
             }
             
         }
