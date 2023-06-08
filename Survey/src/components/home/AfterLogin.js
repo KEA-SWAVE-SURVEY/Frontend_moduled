@@ -21,6 +21,7 @@ import alphabet from '../../assets/alphabet.png';
 import time from '../../assets/time.png';
 import HaveNoSurvey from './HaveNoSurvey';
 
+import { useNavigate } from "react-router-dom";
 import {getCookie} from '../login/cookie'
 
 function AfterLogin(props) {
