@@ -381,6 +381,8 @@ function Survey(props) {
           }); 
           const storageRef = storage.ref();
           const fileRef = storageRef.child(`tumbnail/${name}.jpg`);
+          console.log(fileRef)
+          console.log(name)
           const blob = await new Promise((resolve) => canvas.toBlob(resolve));
           fileRef.put(blob).then((snapshot) => {
             console.log('Image uploaded successfully');
@@ -391,6 +393,8 @@ function Survey(props) {
         } catch (error) {
           console.error('Error converting div to image:', error);
         }
+        
+        navigate(`/`); 
       };
 
     function onClickSaveButton(e) {
@@ -482,8 +486,7 @@ function Survey(props) {
                             ]
                         }
                     });
-                    console.log('Saved');
-                    navigate(`/`); 
+                    console.log('Saved'); 
                     if(surveyCookie){
                         removeCookie('survey')
                         }
