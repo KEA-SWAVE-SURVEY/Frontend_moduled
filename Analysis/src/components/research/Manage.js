@@ -66,7 +66,7 @@ const loadSurveyData = async () => {
 
   // };
   //06092200 수정완료 설문상세분석 조회
-const result  = await axios.get(`/api/document/external/manage/${documentId}`, {
+const result  = await axios.get(`/api/document/external/management/${documentId}`, {
   headers: {
   Authorization: cookie,
   }, timeout: 10000 });
@@ -106,7 +106,7 @@ const toggleBlock = () => {
     enable : cblock,
 }
   setSurveyList(dataToSync);
-  axios.patch(`/api/document/external/manage/enable/${documentId}`, dataToTransport,
+  axios.patch(`/api/document/external/management/enable/${documentId}`, dataToTransport,
     {
         headers: {
             'Application-Type': 'application/json',
@@ -143,7 +143,7 @@ console.log(dataToTransport.startDate < new Date()?'공개 중':'비공개 중')
 console.log(dataToTransport);
 console.log(new Date());
 setSurveyList(dataToSync);
-axios.patch(`/api/document/external/manage/date/${documentId}`, dataToTransport,
+axios.patch(`/api/document/external/management/date/${documentId}`, dataToTransport,
 {
     headers: {
         'Application-Type': 'application/json',
@@ -157,6 +157,7 @@ axios.patch(`/api/document/external/manage/date/${documentId}`, dataToTransport,
   let encoded = base64_encode(documentId)
 
   const handleCopyClipBoard = async (text) => {
+    console.log(text)
     try {
       await navigator.clipboard.writeText(text);
 
@@ -344,12 +345,12 @@ console.log(csvdata)
                 <div className={'box'} style={{ width: '50%', height: '50%', margin: '30%' }} >
 
                   <p className={'manageFont'}>응답 페이지 QR</p>
-                  <QRCode value={`http://172.16.210.22/Response/${encoded}`} size={'256'} style={{ width: '60%', height: '60%', margin: '2.5%' }} />
+                  <QRCode value={`http://172.16.210.80/Response/${encoded}`} size={'256'} style={{ width: '60%', height: '60%', margin: '2.5%' }} />
                 </div>
               </div>
               <div style={{ width: '50%' }}>
                 <p className={'manageMinorFont'}>URL 복사</p>
-                <button onClick={() => handleCopyClipBoard(`http://172.16.210.22/Response/${encoded}`)}>
+                <button onClick={() => handleCopyClipBoard(`http://172.16.210.80/Response/${encoded}`)}>
                   URL 복사하기
                 </button>
                 <div style={{ width: '100%', height: '4vh' }} />

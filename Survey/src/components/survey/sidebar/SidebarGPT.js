@@ -17,14 +17,14 @@ function SidebarGPT(props) {
     const [message, setMessage] = useState("");
     const [response, setReponse] = useState({loading : false , data : []});
     const [isRequested, setIsRequested] = useState(false);
-
+    const cookie = sessionStorage.getItem('token')
     const [surveyList, setSurveyList] = useRecoilState(surveyListState);
 
 
 
     function requestGpt(input) {
         const query = "해당 주제에 적절한 설문조사 7개를 1개의 JSON 코드로 작성해줘.\n\n[{type, question, choiceList},{type, question, choiceList}, ...]\n\ntype: 주관식, 객관식, 찬반식 (각 1개 이상)\n주관식: \"choiceList\":[]\n찬반식: \"choiceList\":[\"예\",\"아니오\"]\n\n다른 Object는 사용하지 마.\n다른 설명은 필요없어.";
-        //06072200 수정완료 chatgpt
+        //06072200 수정완료 chatgpt, ㅋㅋ
         axios.post('/api/document/external/chat-gpt/question',
             {
                 "question": input + query
@@ -32,6 +32,7 @@ function SidebarGPT(props) {
             {
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': cookie
                 }
             }
         )

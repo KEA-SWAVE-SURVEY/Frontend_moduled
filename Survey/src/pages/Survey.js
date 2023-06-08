@@ -565,7 +565,7 @@ function Survey(props) {
                             <div >
                                 <div className='create_survey'>
                                     <div className='problem_container'>
-                                    {font}
+                                    
                                             <input placeholder="설문 제목" value={surveyList?.title} onChange={(e) => onChangeTitleInput(e)} className='survey_input' style={{ fontSize: fontSize+'vw' ,fontFamily:font }}></input>
                                             <textarea placeholder="부연 설명을 입력해 주세요" value={surveyList?.description} onChange={(e) => onChangeTextArea(e) }style={{ fontSize: fontSize+`vw` ,fontFamily:font }} className='textarea'></textarea>
 

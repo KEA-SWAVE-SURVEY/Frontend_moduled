@@ -28,6 +28,7 @@ function PrintSurveyGrid(props) {
                 Authorization: cookie,
                 }});
             console.log(result)
+            console.log(cookie)
             setSurveyList((prev) => {
                 //수정 리스트 모르겠어 -> 이거 맞아
                 return {
