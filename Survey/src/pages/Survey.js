@@ -382,9 +382,9 @@ function Survey(props) {
         setSidebarIsOpen({ open: false, isSetting: false, isGPT: false });
     }
 
-    const handleDownload = async (name) => {
+    const handleDownload = async () => {
         if (!divRef.current) return;
-
+      
         try {
           const div = divRef.current;
           const canvas = await html2canvas(div, {
@@ -392,25 +392,30 @@ function Survey(props) {
             y: 0,        // 캡처할 부분의 y 좌표
               // 캡처할 부분의 가로 크기
             height: 400  // 캡처할 부분의 세로 크기
-          }); 
-          const storageRef = storage.ref();
-          const fileRef = storageRef.child(`tumbnail/testforrme.jpg`);
-          console.log(fileRef)
-          console.log(name)
-          const blob = await new Promise((resolve) => canvas.toBlob(resolve));
-          fileRef.put(blob).then((snapshot) => {
-            console.log('Image uploaded successfully');
-          }).catch((error) => {
-            console.error('Error uploading image:', error);
-          });       
-        
+          });
+          canvas.toBlob(async (blob) => {
+            if (blob !== null) {
+              const formData = new FormData();
+              formData.append('blobData', blob);
+              saveAs(blob, "result.png");
+            console.log('try to axios');
+       
+              try {
+                await axios.post('/processBlob', formData, {
+                  headers: {
+                    'Content-Type': 'application/octet-stream',
+                  },
+                });
+                console.log('Blob sent to backend successfully');
+              } catch (error) {
+                console.error('Error sending blob to backend:', error);
+              }
+            }
+          });
         } catch (error) {
           console.error('Error converting div to image:', error);
         }
-        
-        navigate(`/`); 
       };
-
 
     function onClickSaveButton(e) {
         e.preventDefault();
@@ -454,8 +459,6 @@ function Survey(props) {
                 }
             )
                 .then((response) => {//api의 응답을 제대로 받은경우
-                    
-                handleDownload(response);
                     setSurveyList((prev) => {
                         return {
                             id: 0,
@@ -512,7 +515,8 @@ function Survey(props) {
                 .catch((response) => {//종류불문 에러
                     console.log('Error');
                     console.log(dataToTransport);
-                }); 
+                });
+                handleDownload();
         } 
         axios.post(url, dataToTransport,
             {
