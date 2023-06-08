@@ -27,11 +27,7 @@ function AnswerSurvey() {
     const loadSurveys=async()=>{
         // const result = await axios.get(`/api/load-survey/${decoded}`); // decoded = id 복호화된 것
         //06092200 수정완료 설문 참여
-        const result = await axios.get(`/api/answer/external/load/${decoded}`
-        ,{
-            headers: {
-            Authorization: cookie,
-            }}); // decoded = id 복호화된 것
+        const result = await axios.get(`/api/answer/external/load/${decoded}`); // decoded = id 복호화된 것
         console.log(result)
         setSurveyList((prev) => {
             return {

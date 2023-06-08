@@ -24,11 +24,7 @@ export default function BeforeAnswer() {
     //http://localhost:8080/api/survey-participate/${id}
     //06092200 수정완료
     const loadSurveys=async()=>{ 
-        const result = await axios.get(`/api/answer/external/load/${decoded}`
-        ,{
-            headers: {
-            Authorization: cookie,
-            }});
+        const result = await axios.get(`/api/answer/external/load/${decoded}`);
         console.log(result)
         setSurveyList((prev) => {
             return {
