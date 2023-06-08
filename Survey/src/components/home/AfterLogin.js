@@ -120,7 +120,7 @@ function AfterLogin(props) {
         
         setIsModify((prev) => true);
         ////수정06072100 외부주소라 변경할 필요 없음
-        navigate(`http://172.16.210.80/template/Survey/${index+1}`)
+        navigate(`/template/Survey/${index+1}`)
         //window.location.href =`http://172.16.210.80/api/external/template-load/${index+1}`
         //수정06072100
             const loadSurveys = async()=>{
