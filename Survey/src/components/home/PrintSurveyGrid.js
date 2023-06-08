@@ -65,7 +65,6 @@ function PrintSurveyGrid(props) {
                 }
             });
             setIsModify((prev) => true); 
-            navi
             navigate("/survey");
         }
         loadSurveys();
