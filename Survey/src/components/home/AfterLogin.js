@@ -21,7 +21,7 @@ import alphabet from '../../assets/alphabet.png';
 import time from '../../assets/time.png';
 import HaveNoSurvey from './HaveNoSurvey';
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {getCookie} from '../login/cookie'
 
 function AfterLogin(props) {
@@ -33,7 +33,7 @@ function AfterLogin(props) {
 
     const setIsModify = useSetRecoilState(modifyState);
     
-    const [surveyList, setSurveyList] = useRecoilState(surveyListState);
+    const [surveyList, setSurveyList] = useState(undefined);
 
     const [isTemplateView, setIsTemplateView] = useState(false);
 
@@ -160,7 +160,9 @@ function AfterLogin(props) {
            
         }
         loadSurveys();
-        navigate(`/template/Survey/${index+1}`)
+        navigate(`/template/Survey/${index+1}`,{
+            state:{...surveyList}
+        })
     }
 
 

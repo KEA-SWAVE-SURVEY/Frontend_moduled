@@ -15,12 +15,14 @@ import {setCookie,getCookie,removeCookie} from '../components/login/cookie'
 
 import html2canvas from "html2canvas";
 import saveAs from "file-saver";
+import { useLocation } from 'react-router-dom';
 
 
 function TemplateSurvey(props) {
     const isLogined = useRecoilValue(loginState);
     //const isModify = useRecoilValue(modifyState);
 
+    const location = useLocation();
     const [sidebarIsOpen, setSidebarIsOpen] = useState({ open: false, isSetting: false });
     const [sidebarSelected, setSidebarSelected] = useState(0);
 
@@ -70,6 +72,7 @@ function TemplateSurvey(props) {
     const surveyCookie = getCookie("survey");
     
     useEffect(() => {
+        setSurveyList(location.state);
         /* if (!isModify) {
             checkCookie()
             console.log(surveyCookie)
