@@ -76,7 +76,7 @@ function ListItem(props) {
                 <div className={styles.textContainer}>{survey.title}</div>
                 <div className={styles.textContainer}>{survey.description}</div>
                 <div className={styles.textContainer}>{survey.date.startDate.slice(0,10) + " ~ " + survey.date.deadline.slice(0,10)}</div>
-                <ul className={styles.dropdown} style={isDropdownOpen ? { maxHeight: "100vh" } : { maxHeight: "1.5vw" }}>
+                <ul className={styles.dropdown} style={isDropdownOpen ? { maxHeight: "100vh" } : { maxHeight: "3vw" }}>
                     <img className={styles.setting_icon} src={settingIcon} alt="img" onClick={(e) => onClickSettingButton(e, survey.id)} />
                     {isDropdownOpen && <Dropdown id={survey.id}/>}
                 </ul>
