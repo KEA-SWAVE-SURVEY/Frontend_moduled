@@ -9,7 +9,6 @@ import {getCookie} from './login/cookie' //쿠키 가져옴 1/3
 import logo from "../assets/logo.png"
 import { useEffect,useState } from "react";
 
-
 import { useNavigate } from "react-router-dom";
 
 import MenuProfile from "./home/MenuProfile";
@@ -51,12 +50,14 @@ function Navbar(props) {
         setNavItem((prev)=> []); 
         
         navigate(`/login`); 
+
     }
 
     function onClickMypage(e){
         e.preventDefault(); 
         
         navigate(`/mypage`); 
+
     }
     useEffect(()=>{
         if(cookie){

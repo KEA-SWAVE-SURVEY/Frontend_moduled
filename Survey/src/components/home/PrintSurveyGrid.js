@@ -5,8 +5,10 @@ import Dropdown from './Dropdown';
 import { useSetRecoilState } from 'recoil';
 import { surveyListState, modifyState } from '../../contexts/atom';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 function PrintSurveyGrid(props) {
+    const navigate = useNavigate();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const setSurveyList = useSetRecoilState(surveyListState)
     const setIsModify = useSetRecoilState(modifyState); 
@@ -56,7 +58,7 @@ function PrintSurveyGrid(props) {
                 }
             });
             setIsModify((prev) => true); 
-            window.location.href = `http://172.16.210.80/survey`; 
+            navigate(`/survey`); 
         }
         loadSurveys();
     }

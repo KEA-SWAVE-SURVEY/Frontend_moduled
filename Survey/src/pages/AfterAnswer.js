@@ -1,14 +1,15 @@
-import React from 'react'
+import React from 'react' 
 
+ 
 import { useNavigate } from "react-router-dom";
+export default function AfterAnswer() { 
 
-export default function ErrorSurvey() {
-const navigate = useNavigate();
-
+  const navigate = useNavigate();
 function onClickMovetoMain(e) {
-    e.preventDefault();
-    //navigate('/');
-        navigate(`/`); 
+    e.preventDefault(); 
+    
+    navigate(`/`); 
+
   }
 
   return (
@@ -28,7 +29,7 @@ function onClickMovetoMain(e) {
     <br/>
     <br/>
     <div className='div_title'>
-    해당 설문의 응답기간이 아닙니다!
+    설문에 참여해주셔서 감사합니다.
     <br/>
     <br/>
     </div>

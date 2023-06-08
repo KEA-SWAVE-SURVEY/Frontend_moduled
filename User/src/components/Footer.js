@@ -5,16 +5,18 @@ import '../styles/FooterStyles.css'
 import {removeCookie} from './login/cookie'
 
 
+import { useNavigate } from "react-router-dom";
 //project
 
 
 
 const Footer = () =>{
      
+    const navigate = useNavigate();
     function onClickLogout() {
         //removeCookie('token') 
         sessionStorage.removeItem('token')
-        window.location.href = `http://172.16.210.80/`; 
+        navigate(`/`); 
     }
     return(
         <>

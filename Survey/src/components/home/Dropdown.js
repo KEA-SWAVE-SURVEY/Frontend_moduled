@@ -10,10 +10,12 @@ import { loginState, modifyState } from '../../contexts/atom';
 import { useRecoilState } from 'recoil';
 import { surveyListState , answerListState} from '../../contexts/atom';
 
-
+ 
+import { useNavigate } from "react-router-dom";
 function Dropdown(props) {
   /* 현재 기능 아예 없음 */
 
+  const navigate = useNavigate();
   const id = props.id;
   let encoded = base64_encode(id);
 
@@ -31,8 +33,9 @@ function Dropdown(props) {
 
 //todo 복사 미구현?
   function onClickCreateDuplicatedSurvey(e) {
-    e.preventDefault();
-    window.location.href = `http://172.16.210.80/template/Survey/`
+    e.preventDefault(); 
+    
+    navigate(`/template/survey/`); 
     //window.location.href =`http://172.16.210.80/api/external/template-load/${index+1}`
     setIsModify((prev) => true);
     loadSurveys();
@@ -82,8 +85,9 @@ function Dropdown(props) {
 
   function onClickResearch(e){
     e.preventDefault();
-    e.stopPropagation();
-    window.location.href = `http://172.16.210.80/research/${id}`;
+    e.stopPropagation(); 
+    
+    navigate(`/research/${id}`); 
   }
   //삭제 구현 복사 제거 수정 -> ip있어야 하나?
   //todo 확인완료 수정 22->80 싹다 수정 해야함 delete patch로 수정

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import axios from 'axios';
 
+import { useNavigate } from "react-router-dom";
 import PrintSurveyList from './PrintSurveyList';
 import PrintSurveyGrid from './PrintSurveyGrid';
 import { navbarItemState } from '../../contexts/selector';
@@ -25,6 +26,7 @@ import {getCookie} from '../login/cookie'
 
 function AfterLogin(props) {
     //const cookie = getCookie("token");
+    const navigate = useNavigate();
     const cookie = sessionStorage.getItem('token')
     const setNavItem = useSetRecoilState(navbarItemState);
     const isLogined = useRecoilValue(loginState);
@@ -108,7 +110,7 @@ function AfterLogin(props) {
     function onClickCreateSurvey(e) {
         e.preventDefault();
         setIsModify((prev) => false);
-        window.location.href = `http://172.16.210.80/survey`; 
+        navigate(`/survey`); 
     }
     
 //todo 확인완료 2000 0607여기까지
@@ -118,8 +120,9 @@ function AfterLogin(props) {
         
         setIsModify((prev) => true);
         loadSurveys();
-        ////수정06072100 외부주소라 변경할 필요 없음
-        window.location.href = `http://172.16.210.80/template/Survey/${index+1}`
+        ////수정06072100 외부주소라 변경할 필요 없음 
+        
+        navigate(`/template/survey/${index+1}`); 
         //window.location.href =`http://172.16.210.80/api/external/template-load/${index+1}`
         //수정06072100
             const loadSurveys = async()=>{

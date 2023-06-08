@@ -6,12 +6,14 @@ import logo from '../assets/white.png'
 
 import { useParams } from 'react-router-dom'; 
 
+import { useNavigate } from "react-router-dom";
 import {setCookie} from '../components/login/cookie'
 //auth에서 정보를 뿌릴까?
 const Auth = () => { 
   const [isLogined,setIsLogined] = useRecoilState(loginState);
   
   
+  const navigate = useNavigate();
   console.log("sdafafsadfsads");
   const id=useParams();
   const provider=id.provider;
@@ -50,7 +52,7 @@ const Auth = () => {
           };
         });
 
-        window.location.href = `http://172.16.210.80/`; 
+        navigate(`/`); 
           try {
                 //axios.get('/api/me',{
                 ///api/oauth/external/me 2306072200 수정완료
@@ -80,7 +82,7 @@ const Auth = () => {
 
        catch (e) {
         console.error(e);
-        window.location.href = `http://172.16.210.80/`; 
+        navigate(`/`); 
       }
     })();
   }, []);

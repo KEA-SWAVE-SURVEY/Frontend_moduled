@@ -4,7 +4,6 @@ import '../../styles/NavbarStyles.css';
 import {removeCookie} from '../login/cookie'
 
 import { useNavigate } from "react-router-dom";
-
 const MenuProfile = () => { 
     
     const navigate = useNavigate();

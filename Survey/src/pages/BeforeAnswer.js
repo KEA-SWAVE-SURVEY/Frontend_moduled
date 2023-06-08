@@ -65,7 +65,7 @@ export default function BeforeAnswer() {
 
     function onClickStart(e) {
         e.preventDefault(); 
-        navigate(`/survey/research/${decoded}`); 
+        navigate(`/survey/answer`); 
       }
 
   return (

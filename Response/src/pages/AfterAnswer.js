@@ -1,11 +1,13 @@
 import React from 'react' 
 
+import { useNavigate } from "react-router-dom";
 export default function AfterAnswer() { 
 
+  const navigate = useNavigate();
 function onClickMovetoMain(e) {
     e.preventDefault(); 
     
-    window.location.href = `http://172.16.210.80/`; 
+    navigate(`/`); 
   }
 
   return (

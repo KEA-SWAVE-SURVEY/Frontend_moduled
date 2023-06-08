@@ -7,15 +7,17 @@ import axios from 'axios';
 import '../styles/SurveyStyle.css';
 import CreateSurvey from '../components/survey/create/CreateSurvey';
 import ViewSurvey from '../components/survey/view/ViewSurvey';
-import Sidebar from '../components/survey/sidebar/Sidebar'; 
+import Sidebar from '../components/survey/sidebar/Sidebar';
 
 
 import html2canvas from "html2canvas";
 import saveAs from "file-saver";
 import {setCookie,getCookie,removeCookie} from '../components/login/cookie'
- 
+
+import { useNavigate } from "react-router-dom";
 
 function Survey(props) {
+    const navigate = useNavigate();
     const isLogined = useRecoilValue(loginState);
     const isModify = useRecoilValue(modifyState);
 
@@ -31,11 +33,11 @@ function Survey(props) {
     const [isPreview, setIsPreview] = useState(false);
 
     const scrollRef = useRef();
- 
+
     const divRef = useRef(null);
-    
+
     const topRef = useRef(null);
-    const today = new Date().toLocaleDateString(); 
+    const today = new Date().toLocaleDateString();
 
     const [size, setSize] = useState(`30px`);
 
@@ -47,7 +49,7 @@ function Survey(props) {
 
     }
 
-   
+
 
 
 
@@ -72,7 +74,7 @@ function Survey(props) {
                         reliability: 1,
                         startDate:new Date(),
                         endDate: new Date(),
-                        enable: true, 
+                        enable: true,
                         design:
                             {
                         font:"",
@@ -95,7 +97,7 @@ function Survey(props) {
                 setBackColor(()=>{'#ffffff'})
                 setFontSize(()=>3)
                 setFont(()=>{'`"Calibri", "Roboto", sans-serif`'})
-                 
+
             }
             else{
                 console.log(surveyCookie)
@@ -125,9 +127,9 @@ function Survey(props) {
                         })
                     }
                 });
-                
+
             }
-            
+
         }
     }, []);
 
@@ -141,10 +143,10 @@ function Survey(props) {
                     description: "",
                     type: 0,
                     reliability: 1,
-                    
+
                     startDate:new Date(),
                     endDate: new Date(),
-                    enable: false, 
+                    enable: false,
                     design:
                             {
                         font:"",
@@ -173,7 +175,7 @@ function Survey(props) {
                 description: prev.description,
                 type: prev.type,
                 reliability: prev.reliability,
-                
+
                 startDate:prev.startDate,
                 endDate: prev.endDate,
                 enable: prev.enable,
@@ -200,12 +202,12 @@ function Survey(props) {
                 description: prev.description,
                 type: prev.type,
                 reliability:prev.reliability,
-                
+
                 startDate:prev.startDate,
                 endDate: prev.endDate,
                 enable: prev.enable,
                 design:prev.design,
-                
+
                 questionRequest: [
                     ...prev.questionRequest,
                     {
@@ -236,8 +238,8 @@ function Survey(props) {
                 title: e.target.value,
                 description: prev.description,
                 type: prev.type,
-                reliability:prev.reliability, 
-                
+                reliability:prev.reliability,
+
                 startDate:prev.startDate,
                 endDate: prev.endDate,
                 enable: prev.enable,
@@ -251,7 +253,7 @@ function Survey(props) {
             path:"/",
             sameSite: "strict",
             expires: expirationTime
-    
+
           });
     }
 
@@ -265,7 +267,7 @@ function Survey(props) {
                 description: e.target.value,
                 type: prev.type,
                 reliability:prev.reliability,
-                
+
                 startDate:prev.startDate,
                 endDate: prev.endDate,
                 enable: prev.enable,
@@ -279,7 +281,7 @@ function Survey(props) {
             path:"/",
             sameSite: "strict",
             expires: expirationTime
-    
+
           });
 
     }
@@ -292,7 +294,7 @@ function Survey(props) {
             path:"/",
             sameSite: "strict",
             expires: expirationTime
-    
+
           });
         if (!isPreview) {
             surveyList.questionRequest.map((survey) => {
@@ -338,7 +340,7 @@ function Survey(props) {
 
     const handleDownload = async () => {
         if (!divRef.current) return;
-      
+
         try {
           const div = divRef.current;
           const canvas = await html2canvas(div, {
@@ -353,7 +355,7 @@ function Survey(props) {
               formData.append('blobData', blob);
               saveAs(blob, "result.png");
             console.log('try to axios');
-       
+
               try {
                 await axios.post('/processBlob', formData, {
                   headers: {
@@ -420,7 +422,7 @@ function Survey(props) {
                             description: "",
                             type: 0,
                             reliability:1, //notion상에서는 Boolean인데 이거 변경할지
-                             // design쪽 notion에는 없는데 일단 유지 
+                             // design쪽 notion에는 없는데 일단 유지
                             startDate:new Date(),
                             endDate: new Date(),
                             enable: true,
@@ -460,8 +462,8 @@ function Survey(props) {
                             ]
                         }
                     });
-                    console.log('Saved'); 
-                    window.location.href = `http://172.16.210.80/`; 
+                    console.log('Saved');
+                    navigate(`/`); 
                     if(surveyCookie){
                         removeCookie('survey')
                         }
@@ -471,7 +473,7 @@ function Survey(props) {
                     console.log(dataToTransport);
                 });
                 handleDownload();
-        } 
+        }
         axios.post(url, dataToTransport,
             {
                 headers: {
@@ -488,7 +490,7 @@ function Survey(props) {
                         description: "",
                         type: 0,
                         reliability:1, //notion상에서는 Boolean인데 이거 변경할지
-                         // design쪽 notion에는 없는데 일단 유지 
+                         // design쪽 notion에는 없는데 일단 유지
                         startDate:new Date(),
                         endDate: new Date(),
                         enable: true,
@@ -528,8 +530,8 @@ function Survey(props) {
                         ]
                     }
                 });
-                console.log('Saved'); 
-                window.location.href = `http://172.16.210.80/`; 
+                console.log('Saved');
+                navigate(`/`); 
                 if(surveyCookie){
                     removeCookie('survey')
                     }
@@ -543,22 +545,22 @@ function Survey(props) {
         function checkCookie(){
             if(surveyCookie){
                 if(window.confirm("이전 저장 내용을 불러오시겠습니까")){
-                    
+
                 }
                 else{removeCookie('survey')
-                window.location.replace("/survey")    
+                window.location.replace("/survey")
             }
 
             }
         }
 
     return (
-       
+
         <div style={{backgroundColor:backColor}}  >
             <div className="survey_area" style={!sidebarIsOpen.open ? { paddingRight: "0px" } : { paddingRight: "30vw" }}>
-                <div className="survey_container" ref={divRef}> 
+                <div className="survey_container" ref={divRef}>
                     <div ref ={topRef}> <p> </p></div>
-                    
+
 
                     <div ref={scrollRef}>
                         {!isPreview ? (

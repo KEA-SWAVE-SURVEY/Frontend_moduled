@@ -10,11 +10,13 @@ import logo from "../assets/logo.png"
 import { useEffect,useState } from "react";
 
 
+import { useNavigate } from "react-router-dom";
 import MenuProfile from "./home/MenuProfile";
 //넵바에서 나의 정보를 db에서 읽을 수 있게하기
 
 function Navbar(props) {
     
+    const navigate = useNavigate();
     const [selected, setSelected] = useRecoilState(navbarSelectedState);
     const [navItem, setNavItem] = useRecoilState(navbarItemState);
     const [isOpen,setIsOpen] = useState(false);
@@ -40,20 +42,20 @@ function Navbar(props) {
 
     function onClickTitle(e) {
         e.preventDefault(); 
-        window.location.href = `http://172.16.210.80/`; 
+        navigate(`/`); 
     }
 
     function onClickLogin(e){
         e.preventDefault();
         setNavItem((prev)=> []); 
         
-        window.location.href = `http://172.16.210.80/login`; 
+        navigate(`/login`); 
     }
 
     function onClickMypage(e){
         e.preventDefault(); 
         
-        window.location.href = `http://172.16.210.80/mypage`; 
+        navigate(`/mypage`); 
     }
     useEffect(()=>{
         if(cookie){

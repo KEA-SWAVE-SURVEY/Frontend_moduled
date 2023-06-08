@@ -7,10 +7,10 @@ import { useParams } from 'react-router-dom';
 
 import {decode as base64_decode} from 'base-64';
 
+import { useNavigate } from "react-router-dom";
 import '../styles/SurveyStyle.css';
 import ViewSurvey from '../components/survey/view/ViewSurvey';
-
-import { useNavigate } from "react-router-dom";
+ 
 function AnswerSurvey() {
     const navigate = useNavigate();
     const [surveyList, setSurveyList] = useRecoilState(surveyListState);
@@ -107,7 +107,8 @@ function AnswerSurvey() {
             console.log('정상')
         }else{
             //navigate('/survey/error')
-            navigate('/survey/error')
+        navigate(`/survey/error`); 
+
         }
 
     }
@@ -134,7 +135,8 @@ function AnswerSurvey() {
             });
         // na vigate('/survey/afteranswer');
         
-    navigate(`/response/afteranswer`); 
+        navigate(`/response/afteranswer`); 
+
     }
     //,fontSize: surveyList.design.fontSize+'vw' ,fontFamily:surveyList.design.font
         //style={{fontSize: surveyList.design.fontSize+'vw' ,fontFamily:surveyList.design.font}}

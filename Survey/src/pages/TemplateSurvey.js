@@ -17,7 +17,10 @@ import html2canvas from "html2canvas";
 import saveAs from "file-saver";
 
 
+import { useNavigate } from "react-router-dom";
+
 function TemplateSurvey(props) {
+    const navigate = useNavigate();
     const isLogined = useRecoilValue(loginState);
     //const isModify = useRecoilValue(modifyState);
 
@@ -394,7 +397,7 @@ function TemplateSurvey(props) {
                 });
                 console.log('Saved');
                 //navigate('/');
-                window.location.href = `http://172.16.210.80/`
+        navigate(`/`); 
                 if(surveyCookie){
                     removeCookie('survey')
                     }

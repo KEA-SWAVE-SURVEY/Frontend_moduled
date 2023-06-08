@@ -19,10 +19,12 @@ import alphabet from "../assets/alphabet.png";
 import grid from "../assets/grid.png";
 import HaveNoSurvey from '../components/home/HaveNoSurvey';
 
+import { useNavigate } from "react-router-dom";
 
 import {getCookie} from '../components/login/cookie'
 
 function MyPage() {
+  const navigate = useNavigate();
   const [isLogined,setIsLogined] = useRecoilState(loginState);
   //const cookie = getCookie("token");
   const cookie = sessionStorage.getItem('token')
@@ -142,7 +144,7 @@ function MyPage() {
           sessionStorage.removeItem('token')
           removeCookie('survey')
           window.location.reload()
-          window.location.href = `http://172.16.210.80/`; 
+        navigate(`/`); 
           console.log(cookie)
           axios.patch(`/api/user/external/deleteuser`, {
            

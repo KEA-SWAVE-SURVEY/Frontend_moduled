@@ -52,7 +52,7 @@ const Auth = () => {
         });
 
         navigate('/')
-        //window.location.href = `http://172.16.210.80/`; 
+        //navigate(/`; 
           try {
                 //axios.get('/api/me',{
                 ///api/oauth/external/me 2306072200 수정완료
@@ -83,7 +83,7 @@ const Auth = () => {
        catch (e) {
         console.error(e);
         navigate('/')
-        //window.location.href = `http://172.16.210.80/`; 
+        //navigate(/`; 
       }
     })();
   }, []);

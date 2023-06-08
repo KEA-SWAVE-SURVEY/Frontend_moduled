@@ -8,14 +8,17 @@ import {removeCookie} from './login/cookie'
 //project
 
 
+import { useNavigate } from "react-router-dom";
+
 
 const Footer = () =>{
      
+    const navigate = useNavigate();
     function onClickLogout() {
         
         sessionStorage.removeItem('token') 
         
-        window.location.href = `http://172.16.210.80/`; 
+        navigate(`/`); 
     }
     return(
         <>
