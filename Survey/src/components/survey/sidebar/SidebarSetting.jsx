@@ -18,7 +18,7 @@ function SidebarSetting(props){
   
   const [surveyList, setSurveyList] = useRecoilState(surveyListState);
   const [isTheme, setIsTheme] = useState(true);
-  const [viewRel, setViewRel] = useState('진정성 검사 미사용중'); 
+  const [viewRel, setViewRel] = useState('진정성 검사 사용중'); 
   const [fontOpen,setFontOpen] = useState(false)
   const [sizeOpen,setSizeOpen] = useState(false)
   const [colorOpen,setColorOpen] = useState(false)
@@ -43,7 +43,7 @@ function SidebarSetting(props){
   const toggleRel = (e) => {
     console.log(Rel)
     console.log(JSON.stringify(surveyList))
-    setViewRel(prev=>prev==='진정성 검사 사용중'?'진정성 검사 미사용중':'진정성 검사 사용중 ')
+    setViewRel(Rel===1?'진정성 검사 미사용중':'진정성 검사 사용중 ')
     const prel = Rel;
     setRel (prev=>prev===1?0:1);
     
@@ -66,7 +66,7 @@ function SidebarSetting(props){
   const toggleEnable = (e) => {
     console.log(enable)
     setEnableView(!enable?'설문 응답 받는 중':'설문 응답 받지 않는 중 ')
-    const prevEnable = enable;
+    const prevEnable = enable  === true ? false  :true
     setEnable(prev=>prev===true?false:true);
     
     setSurveyList((prev) => {
@@ -74,7 +74,7 @@ function SidebarSetting(props){
           id: prev.id,
           title: prev.title,
           description: prev.description,
-          type: prev.type,
+          type: prev=>prev===true?false:true,
           reliability: prev.reliability,
           
           startDate:prev.startDate,
