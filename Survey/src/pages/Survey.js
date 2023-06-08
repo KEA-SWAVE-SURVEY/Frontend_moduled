@@ -128,17 +128,19 @@ function Survey(props) {
                     console.log('error')
                 }
 
-                //쿠키 템플릿 보여주기
-                console.log('형 여기 안와?')
-                console.log(surveyList.description)
-                console.log(surveyList.design.font,surveyList.design.fontSize,surveyList.design.backColor)
-                setBackColor(()=>surveyList.design.backColor)
-                setFontSize(()=>surveyList.design.fontSize)
-                setFont(()=>surveyList.design.font)
-                console.log(font,fontSize,backColor)
+                
             }
             
         }
+        //쿠키 템플릿 보여주기
+        console.log('형 여기 안와?')
+        console.log(surveyList.description)
+        console.log(surveyList.design.font,surveyList.design.fontSize,surveyList.design.backColor)
+        setBackColor(()=>surveyList.design.backColor)
+        setFontSize(()=>surveyList.design.fontSize)
+        setFont(()=>surveyList.design.font)
+        console.log(font,fontSize,backColor)
+        
     }, []);
 
     /* useEffect(() => {
@@ -413,7 +415,7 @@ function Survey(props) {
         //todo 수정완료 수정은 put으로
         //수정06072100
         if (isModify){
-             url = `/api/docuemnt/external/update/${surveyList.id}`
+             url = `/api/document/external/update/${surveyList.id}`
              axios.put(url, dataToTransport,
                 {
                     headers: {

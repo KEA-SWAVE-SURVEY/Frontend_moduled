@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'; 
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState,useRecoilState } from 'recoil';
 import axios from 'axios';
 
 import PrintSurveyList from './PrintSurveyList';
 import PrintSurveyGrid from './PrintSurveyGrid';
 import { navbarItemState } from '../../contexts/selector';
 import SkeletonGrid from '../skeleton/SkeletonGrid';
-import { loginState, modifyState } from '../../contexts/atom';
+import { loginState, modifyState,surveyListState } from '../../contexts/atom';
 
 import '../../styles/HomeStyles.css'
 import spring from '../../assets/spring.JPG';
@@ -32,7 +32,8 @@ function AfterLogin(props) {
     const isLogined = useRecoilValue(loginState);
 
     const setIsModify = useSetRecoilState(modifyState);
-    const [surveyList, setSurveyList] = useState(undefined);
+    
+    const [surveyList, setSurveyList] = useRecoilState(surveyListState);
 
     const [isTemplateView, setIsTemplateView] = useState(false);
 
@@ -120,7 +121,7 @@ function AfterLogin(props) {
         
         setIsModify((prev) => true);
         ////수정06072100 외부주소라 변경할 필요 없음
-        navigate(`/template/Survey/${index+1}`)
+        
         //window.location.href =`http://172.16.210.80/api/external/template-load/${index+1}`
         //수정06072100
             const loadSurveys = async()=>{
@@ -159,6 +160,7 @@ function AfterLogin(props) {
            
         }
         loadSurveys();
+        navigate(`/template/Survey/${index+1}`)
     }
 
 
