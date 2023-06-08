@@ -23,11 +23,11 @@ export default function Manage() {
   const [surveyList, setSurveyList] = useState(null);
   const [csvList, setCsvList] = useState(null);
   const [answerList, setAnswerList] = useState(null);
-  const cookie = sessionStorage.getItem('token')
+
 
   const { documentId } = useParams();
   const [block, setBlock] = useState(0); //TO완료DO: 서버로부터 받아온걸로 미리 체크설정해두기, toggleBlock에 block 넣기 등
-  const [check,setCheck] = useState('공개 중')
+  const [check,setCheck] = useState('비공개 중')
 
 
 
@@ -52,13 +52,10 @@ useEffect(() => {
     setBlock(surveyList.enable);
     console.log(surveyList.enable);
     console.log(block);
-    
 
-    setCheck(block===true?'비공개 중':'공개 중')
+    setCheck(block===true?'공개 중':'비공개 중')
   }
 }, [surveyList]);
-console.log(surveyList)
-console.log(JSON.stringify(surveyList))
 const loadSurveyData = async () => {
   // const result = {
 
@@ -69,16 +66,10 @@ const loadSurveyData = async () => {
 
   // };
   //06092200 수정완료 설문상세분석 조회
-const result  = await axios.get(`/api/document/external/management/${documentId}`, {
-  headers: {
-  Authorization: cookie,
-  }, timeout: 10000 });
+const result  = await axios.get(`/api/document/external/manage/${documentId}`, { timeout: 10000 });
 // survey/external/response/{id}
 //06092200 수정완료 설문 응답 csv
-const resultCSV  = await axios.get(`/api/answer/external/response/${documentId}`, {
-  headers: {
-  Authorization: cookie,
-  }, timeout: 10000 });
+const resultCSV  = await axios.get(`/api/answer/external/response/${documentId}`, { timeout: 10000 });
 
 
 setSurveyList(result); 
@@ -96,7 +87,7 @@ const toggleBlock = () => {
 
   const cblock = block===true? false:true;
   console.log(cblock);
-  setCheck(prev=>prev==='공개 중'?'비공개 중':'공개 중');
+  setCheck(prev=>prev==='비공개 중'?'공개 중':'비공개 중');
     setBlock(cblock);
     const dataToTransport = {
       // id : surveyList.id,
@@ -109,7 +100,7 @@ const toggleBlock = () => {
     enable : cblock,
 }
   setSurveyList(dataToSync);
-  axios.patch(`/api/document/external/management/enable/${documentId}`, dataToTransport,
+  axios.patch(`/api/document/external/manage/enable/${documentId}`, dataToTransport,
     {
         headers: {
             'Application-Type': 'application/json',
@@ -146,7 +137,7 @@ console.log(dataToTransport.startDate < new Date()?'공개 중':'비공개 중')
 console.log(dataToTransport);
 console.log(new Date());
 setSurveyList(dataToSync);
-axios.patch(`/api/document/external/management/date/${documentId}`, dataToTransport,
+axios.patch(`/api/document/external/manage/date/${documentId}`, dataToTransport,
 {
     headers: {
         'Application-Type': 'application/json',
@@ -160,10 +151,21 @@ axios.patch(`/api/document/external/management/date/${documentId}`, dataToTransp
   let encoded = base64_encode(documentId)
 
   const handleCopyClipBoard = async (text) => {
-    console.log(text)
     try {
       await navigator.clipboard.writeText(text);
-
+      function myFunction() {
+        var copyText = document.getElementById("myInput");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        navigator.clipboard
+          .writeText(copyText.value)
+          .then(() => {
+            alert("successfully copied");
+          })
+          .catch(() => {
+            alert("something went wrong");
+          });
+    }
     } catch (error) {
     }
   };
@@ -230,12 +232,8 @@ axios.patch(`/api/document/external/management/date/${documentId}`, dataToTransp
   const [processData,setProcessData] = useState(tempdata);
 //수정 여기 머지? //06092200 수정완료
   const loadSurveys = async()=>{
-    const result = await axios.get(`/api/answer/external/response/${documentId}`,
-    {
-      headers: {
-      Authorization: cookie,
-      }});
-    setProcessData(result)
+    const result = await axios.get(`/api/answer/external/response/${documentId}`);
+    setProcessData(result.data);
   }
 
 const csvdata = processData.map((item) => {
@@ -314,21 +312,7 @@ console.log(csvdata)
 
           <CsvDownloadButton
     data={csvList}
-    filename="good_data.csv"
-    style={{ //pass other props, like styles
-      boxShadow:"inset 0px 1px 0px 0px #e184f3",
-      background:"linear-gradient(to bottom, #c123de 5%, #a20dbd 100%)",
-      backgroundColor:"#c123de",
-      borderRadius:"6px",
-      border:"1px solid #a511c0",
-      display:"inline-block",
-      cursor:"pointer","color":"#ffffff",
-      fontSize:"15px",
-      fontWeight:"bold",
-      padding:"6px 24px",
-      textDecoration:"none",
-      textShadow:"0px 1px 0px #9b14b3"
-      }}
+    filename="good_data.csv" 
       delimiter = ","
   >
     CSV로 저장하기
@@ -348,12 +332,12 @@ console.log(csvdata)
                 <div className={'box'} style={{ width: '50%', height: '50%', margin: '30%' }} >
 
                   <p className={'manageFont'}>응답 페이지 QR</p>
-                  <QRCode value={`http://172.16.210.80/Response/${encoded}`} size={'256'} style={{ width: '60%', height: '60%', margin: '2.5%' }} />
+                  <QRCode value={`http://172.16.210.22/Response/${encoded}`} size={'256'} style={{ width: '60%', height: '60%', margin: '2.5%' }} />
                 </div>
               </div>
               <div style={{ width: '50%' }}>
                 <p className={'manageMinorFont'}>URL 복사</p>
-                <button onClick={() => handleCopyClipBoard(`http://172.16.210.80/Response/${encoded}`)}>
+                <button onClick={() => handleCopyClipBoard(`http://172.16.210.22/Response/${encoded}`)}>
                   URL 복사하기
                 </button>
                 <div style={{ width: '100%', height: '4vh' }} />
