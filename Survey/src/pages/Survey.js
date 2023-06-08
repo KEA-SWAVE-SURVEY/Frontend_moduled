@@ -19,6 +19,7 @@ import {setCookie,getCookie,removeCookie} from '../components/login/cookie'
 function Survey(props) {
     const isLogined = useRecoilValue(loginState);
     const isModify = useRecoilValue(modifyState);
+    const location = useLocation();
 
     const [sidebarIsOpen, setSidebarIsOpen] = useState({ open: false, isSetting: false });
     const [sidebarSelected, setSidebarSelected] = useState(0);
@@ -48,13 +49,13 @@ function Survey(props) {
 
     }
 
+    const surveyCookie = getCookie("survey");
 
     useEffect(() => {
         scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
     }, [surveyList?.questionRequest.length]);
-    const surveyCookie = getCookie("survey");
+    
     useEffect(() => {
-        const location = useLocation();
         if (!location.state) {
             checkCookie()
             console.log(surveyCookie)
